@@ -11,26 +11,28 @@ import java.util.Date;
  * @author Administrator
  */
 public class AssignmentSubmission {
-    private String courseId;
-    private String title;
+    private CourseWork coursework;
+    private Student student;
     private String content;
     private Date submittedOn;
     private String grade; 
 
-    public AssignmentSubmission(String courseId, String title, String content, Date submittedOn){
-        this.courseId = courseId; 
-        this.title = title; 
+    public AssignmentSubmission(Student student,CourseWork courseWork, String content, Date submittedOn){
+        this.student = student;
+        this.coursework = courseWork;
         this.content = content; 
         this.submittedOn = submittedOn;
+        this.grade="Pending";
     }    
 
-    public String getCourseId() {
-        return courseId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public CourseWork getCoursework() {
+        return coursework;
     }
+
 
     public String getContent() {
         return content;
@@ -56,13 +58,5 @@ public class AssignmentSubmission {
         this.grade = grade;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
     
 }

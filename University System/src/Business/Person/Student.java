@@ -170,18 +170,39 @@ public class Student extends Person {
 
 
 // Coursework
-    public String submitAssignment(String courseId, String title, String content) {
-        if (courseId == null || title == null || content == null || courseId.isEmpty() || title.isEmpty()) {
-            return "Invalid assignment submission.";
+    public String submitAssignment(CourseWork cw, String content) {
+        // ✅ 1. 检查输入是否为空
+        if (cw == null || content == null || content.trim().isEmpty()) {
+            return "Missing input fields.";
         }
-        AssignmentSubmission s = new AssignmentSubmission(courseId, title, content, new Date());
-        submissions.add(s);
 
-        String msg = String.format("✅ Submitted assignment '%s' for %s at %s.", title, courseId, new Date());
-        System.out.println("[LOG] " + msg);
-        JOptionPane.showMessageDialog(null, msg, "Submission Success", JOptionPane.INFORMATION_MESSAGE);
+        // ✅ 2. 检查学生是否修读了该课程
+        boolean enrolled = false;
+        for (CourseOffering offering : enrolledOfferings) {
+            if (offering.getCourse().getCourseId().equalsIgnoreCase(cw.getCourse().getCourseId())) {
+                enrolled = true;
+                break;
+            }
+        }
+        if (!enrolled) {
+            return "You are not enrolled in course: " + cw.getCourse().getCourseId();
+        }
+
+        // ✅ 3. 检查是否已经提交过该作业
+        for (AssignmentSubmission sub : submissions) {
+            if (sub.getCoursework().getCourse().getCourseId().equalsIgnoreCase(cw.getCourse().getCourseId())
+                    && sub.getCoursework().getTitle().equalsIgnoreCase(cw.getTitle())) {
+                return "You have already submitted this assignment: " + cw.getTitle();
+            }
+        }
+
+        // ✅ 4. 创建新的提交记录
+        AssignmentSubmission newSubmission = new AssignmentSubmission(this,cw, content,new Date());
+
+        submissions.add(newSubmission);
         return "OK";
-    }
+    
+}
 
 //Profile
     public String updateProfile(String newName) {

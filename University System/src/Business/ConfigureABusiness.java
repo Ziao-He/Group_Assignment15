@@ -9,6 +9,8 @@ package Business;
 import Business.Course.Course;
 import Business.Course.CourseDirectory;
 import Business.Course.CourseOffering;
+import Business.Person.CourseWork;
+import Business.Person.CourseWorkDirectory;
 import Business.Person.Person;
 import Business.Person.PersonDirectory;
 import Business.Person.Student;
@@ -97,6 +99,14 @@ class ConfigureABusiness {
         
         sD.getStudent().enrollCourse(new CourseOffering(c1,"Lu qiang","Fall 2025",30));
         sD.getStudent().payTuition(-9000);
+        
+        //create course work
+        CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();
+        CourseWorkdirectory.addCourseWork(c1, "Lab 01");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 02");
+        
+        sD.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
+        
         
         return business;
 
