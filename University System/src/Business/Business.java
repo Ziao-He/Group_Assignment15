@@ -7,9 +7,10 @@ package Business;
 
 import Business.Course.CourseDirectory;
 import Business.Person.PersonDirectory;
+import Business.Person.StudentDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.FacultyDirectory;
-import Business.Profiles.StudentDirectory;
+import Business.Profiles.StudentProfileDirectory;
 
 import Business.UserAccounts.UserAccountDirectory;
 

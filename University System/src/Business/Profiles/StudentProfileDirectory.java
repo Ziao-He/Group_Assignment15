@@ -13,22 +13,22 @@ import java.util.ArrayList;
  *
  * @author kal bugrara
  */
-public class StudentDirectory {
+public class StudentProfileDirectory {
 
 
     ArrayList<StudentProfile> studentlist;
 
-    public StudentDirectory() {
+    public StudentProfileDirectory() {
 
      studentlist = new ArrayList();
 
     }
 
-    public StudentProfile newStudentProfile(Person p) {
-
-        StudentProfile sp = new StudentProfile(p);
-        studentlist.add(sp);
-        return sp;
+    public StudentProfile newStudentProfile(StudentProfile profile) {
+        if(profile !=null && studentlist.contains((profile))){
+            studentlist.add(profile);
+        }
+        return profile;
     }
 
     public StudentProfile findStudent(String id) {

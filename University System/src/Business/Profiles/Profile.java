@@ -12,7 +12,7 @@ import Business.Person.Person;
  * @author kal bugrara
  */
 public abstract class Profile {
-    Person person;
+     Person person;
      public Profile(Person p){
         person = p;
         

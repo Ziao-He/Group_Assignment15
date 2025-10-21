@@ -4,11 +4,13 @@
  */
 package Business.Person;
 
+import Business.Course.Course;
 import Business.Course.CourseGrade;
 import Business.Course.CourseOffering;
 import Paymenet.PaymentRecord;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -68,100 +70,135 @@ public class Student extends Person {
     public void setPayments(ArrayList<PaymentRecord> payments) {
         this.payments = payments;
     }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void setSubmissions(ArrayList<AssignmentSubmission> submissions) {
+        this.submissions = submissions;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public ArrayList<AssignmentSubmission> getSubmissions() {
+        return submissions;
+    }
     
-//    Enroll
-    public boolean enrollCourse(CourseOffering offering){
-        if (offering == null) return false;
-        int credits = offering.getCourse().getCredits();
-        if (getTotalCreditHours() + credits > 8) return false; 
-        if (enrolledOfferings.contains(offering)) return false;
+    public String enrollCourse(CourseOffering offering) {
+        if (offering == null || offering.getCourse() == null) return "Invalid course offering.";
+
+        Course course = offering.getCourse();
+        String courseId = course.getCourseId();
+        String semester = offering.getSemester();
+
+        for (CourseOffering o : enrolledOfferings) {
+            if (o.getCourse().getCourseId().equalsIgnoreCase(courseId)) {
+                return "Already enrolled in " + courseId;
+            }
+        }
+
+        int semesterCredits = 0;
+        for (CourseOffering o : enrolledOfferings) {
+            if (o.getSemester().equalsIgnoreCase(semester)) semesterCredits += o.getCourse().getCredits();
+        }
+        if (semesterCredits + course.getCredits() > 8) {
+            return "Exceed 8 credit limit in semester " + semester;
+        }
+
+        int earnedCredits = 0;
+        for (CourseGrade cg : transcript) {
+            if (cg.getGrade() != null && !cg.getGrade().equalsIgnoreCase("F")) earnedCredits += cg.getCourse().getCredits();
+        }
+        int totalCredits = earnedCredits + getTotalCreditHours() + course.getCredits();
+        if (totalCredits > 32) return "Total credits exceed 32 (degree limit).";
+
         enrolledOfferings.add(offering);
-        double tuition = offering.getTuitionForCourse();
-        this.balance += tuition;
-        payments.add(new PaymentRecord(new Date(), tuition, "Charge: Tuition for " + offering.getCourse().getCourseId(), "CHARGED"));
-        return true;
+        balance += offering.getTuitionForCourse();
+        payments.add(new PaymentRecord(new Date(), offering.getTuitionForCourse(),
+                "Tuition charge: " + courseId + " (" + semester + ")", "CHARGED"));
+
+        String msg = String.format("✅ Enrolled %s (%s). Tuition: %.2f, Balance: %.2f",
+                courseId, semester, offering.getTuitionForCourse(), balance);
+        System.out.println("[LOG] " + msg);
+        JOptionPane.showMessageDialog(null, msg, "Enroll Success", JOptionPane.INFORMATION_MESSAGE);
+        return "OK";
     }
 
-    public boolean dropCourse(CourseOffering offering){
-        if (!enrolledOfferings.contains(offering)) return false;
-        enrolledOfferings.remove(offering);
-        double tuition = offering.getTuitionForCourse();
-        this.balance -= tuition;
-        payments.add(new PaymentRecord(new Date(), -tuition, "Refund: " + offering.getCourse().getCourseId(), "REFUNDED"));
-        return true;
+// Drop
+    public String dropCourse(CourseOffering offering) {
+        if (offering == null || offering.getCourse() == null) return "Invalid course offering.";
+        Course course = offering.getCourse();
+        CourseOffering target = null;
+        for (CourseOffering o : enrolledOfferings) {
+            if (o.getCourse().getCourseId().equalsIgnoreCase(course.getCourseId())
+                    && o.getSemester().equalsIgnoreCase(offering.getSemester())) {
+                target = o;
+                break;
+            }
+        }
+        if (target == null) return "Not enrolled in " + course.getCourseId();
+
+        enrolledOfferings.remove(target);
+        balance -= target.getTuitionForCourse();
+        payments.add(new PaymentRecord(new Date(), -target.getTuitionForCourse(),
+                "Refund for " + course.getCourseId(), "REFUNDED"));
+
+        String msg = String.format("✅ Dropped %s (%s). Refund: %.2f. New balance: %.2f",
+                course.getCourseId(), target.getSemester(), target.getTuitionForCourse(), balance);
+        System.out.println("[LOG] " + msg);
+        JOptionPane.showMessageDialog(null, msg, "Drop Success", JOptionPane.INFORMATION_MESSAGE);
+        return "OK";
     }
 
-    public int getTotalCreditHours(){
+
+// Payment
+    public String payTuition(double amount) {
+        if (amount <= 0) return "Payment must be positive.";
+        if (balance <= 0) return "No outstanding balance to pay.";
+
+        balance -= amount;
+        payments.add(new PaymentRecord(new Date(), amount, "Tuition Payment", "PAID"));
+
+        String msg = String.format("✅ Paid $%.2f. Remaining balance: $%.2f", amount, balance);
+        System.out.println("[LOG] " + msg);
+        JOptionPane.showMessageDialog(null, msg, "Payment Success", JOptionPane.INFORMATION_MESSAGE);
+        return "OK";
+    }
+
+
+// Coursework
+    public String submitAssignment(String courseId, String title, String content) {
+        if (courseId == null || title == null || content == null || courseId.isEmpty() || title.isEmpty()) {
+            return "Invalid assignment submission.";
+        }
+        AssignmentSubmission s = new AssignmentSubmission(courseId, title, content, new Date());
+        submissions.add(s);
+
+        String msg = String.format("✅ Submitted assignment '%s' for %s at %s.", title, courseId, new Date());
+        System.out.println("[LOG] " + msg);
+        JOptionPane.showMessageDialog(null, msg, "Submission Success", JOptionPane.INFORMATION_MESSAGE);
+        return "OK";
+    }
+
+//Profile
+    public String updateProfile(String newName) {
+        if (newName == null || newName.isEmpty()) return "Name cannot be empty.";
+        String oldName = this.name;
+        this.name = newName;
+        String msg = String.format("✅ Updated profile: name '%s' → '%s'", oldName, newName);
+        System.out.println("[LOG] " + msg);
+        JOptionPane.showMessageDialog(null, msg, "Profile Updated", JOptionPane.INFORMATION_MESSAGE);
+        return "OK";
+    }
+
+    public int getTotalCreditHours() {
         int sum = 0;
         for (CourseOffering o : enrolledOfferings)
             sum += o.getCourse().getCredits();
         return sum;
-    }
-
-//    Payment
-    public double getBalance() { 
-        return balance; 
-    }
-
-    public double payTuition(double amount){
-        double paid = amount;
-        this.balance -= paid;
-        payments.add(new PaymentRecord(new Date(), paid, "Payment", "PAID"));
-        return paid;
-    }
-
-//    Transcript
-    public void addCourseGrade(CourseGrade cg){ transcript.add(cg); }
-
-    public double calculateTermGPA(String term){
-        double totalQuality = 0.0;
-        int totalCredits = 0;
-        for (CourseGrade cg : transcript){
-            if (term.equals(cg.getTerm()) && cg.getGrade() != null){
-                totalQuality += cg.getGradePoint() * cg.getCourse().getCredits();
-                totalCredits += cg.getCourse().getCredits();
-            }
-        }
-        return totalCredits == 0 ? 0.0 : totalQuality / totalCredits;
-    }
-
-    public double calculateOverallGPA(){
-        double totalQuality = 0.0;
-        int totalCredits = 0;
-        for (CourseGrade cg : transcript){
-            if (cg.getGrade() != null){
-                totalQuality += cg.getGradePoint() * cg.getCourse().getCredits();
-                totalCredits += cg.getCourse().getCredits();
-            }
-        }
-        return totalCredits == 0 ? 0.0 : totalQuality / totalCredits;
-    }
-
-    public String getAcademicStandingForTerm(String term){
-        double termGPA = calculateTermGPA(term);
-        double overallGPA = calculateOverallGPA();
-        if (overallGPA < 3.0) return "Academic Probation";
-        if (termGPA < 3.0) return "Academic Warning";
-        return "Good Standing";
-    }
-
-//    Graduation
-    public boolean readyToGraduate_MSIS(){
-        int earnedCredits = 0;
-        boolean hasCore = false;
-        for (CourseGrade cg : transcript){
-            if (cg.getGrade() != null && !cg.getGrade().equalsIgnoreCase("F")){
-                earnedCredits += cg.getCourse().getCredits();
-                if ("INFO 5100".equalsIgnoreCase(cg.getCourse().getCourseId())) hasCore = true;
-            }
-        }
-        return earnedCredits >= 32 && hasCore;
-    }
-
-//    Coursework
-    public void submitAssignment(String courseId, String title, String content){
-        AssignmentSubmission s = new AssignmentSubmission(courseId, title, content, new Date());
-        submissions.add(s);
     }
 
     @Override
@@ -169,3 +206,4 @@ public class Student extends Person {
         return studentId + " - " + name;
     }
 }
+

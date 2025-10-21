@@ -11,7 +11,9 @@
 package UserInterface.WorkAreas.StudentRole;
 
 import Business.Business;
+import Business.Person.Student;
 import Business.Profiles.StudentProfile;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -20,9 +22,10 @@ import javax.swing.JPanel;
  */
 public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
-    javax.swing.JPanel CardSequencePanel;
-    Business business;
-    StudentProfile student;
+    private javax.swing.JPanel CardSequencePanel;
+    private Business business;
+    private StudentProfile studentAccount;
+    private Student student;
 
     /**
      * Creates new form UnitRiskWorkArea
@@ -33,11 +36,13 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
     public StudentWorkAreaJPanel(Business b, StudentProfile spp, JPanel clp) {
 
-        business = b;
+        this.business = b;
         this.CardSequencePanel = clp;
-        student = spp;
+        this.studentAccount = spp;
+        this.student=(Student) spp.getPerson();
+        
         initComponents();
-
+        
     }
 
     /**
@@ -52,7 +57,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
 
@@ -100,17 +105,17 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton11.setBackground(new java.awt.Color(102, 153, 255));
-        jButton11.setFont(getFont());
-        jButton11.setForeground(new java.awt.Color(255, 255, 255));
-        jButton11.setText("Registration");
-        jButton11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton11.setMaximumSize(new java.awt.Dimension(200, 40));
-        jButton11.setMinimumSize(new java.awt.Dimension(20, 20));
-        jButton11.setPreferredSize(new java.awt.Dimension(240, 25));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setBackground(new java.awt.Color(102, 153, 255));
+        btnRegister.setFont(getFont());
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Registration");
+        btnRegister.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRegister.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnRegister.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnRegister.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btnRegisterActionPerformed(evt);
             }
         });
 
@@ -146,7 +151,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(590, Short.MAX_VALUE))
         );
@@ -158,7 +163,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,11 +192,12 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-
-        CardSequencePanel.removeAll();
-}//GEN-LAST:event_jButton11ActionPerformed
+        StudentCourseRegistrationJPanel panel= new StudentCourseRegistrationJPanel(business,studentAccount,CardSequencePanel);
+        CardSequencePanel.add("StudentCourseRegistrationJPanel",panel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);        
+}//GEN-LAST:event_btnRegisterActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
@@ -199,8 +205,8 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegister;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton9;

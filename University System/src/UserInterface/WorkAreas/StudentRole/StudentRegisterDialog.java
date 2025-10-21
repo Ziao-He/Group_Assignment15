@@ -6,7 +6,7 @@ package UserInterface.WorkAreas.StudentRole;
 
 import Business.Business;
 import Business.Person.Person;
-import Business.Profiles.StudentDirectory;
+import Business.Profiles.StudentProfileDirectory;
 import Business.Profiles.StudentProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
@@ -151,8 +151,8 @@ public class StudentRegisterDialog extends javax.swing.JDialog {
        }
        
        Person person = new Person(studentID);
-       StudentProfile studentprofile = new StudentProfile(person);
-       business.getUserAccountDirectory().newUserAccount(studentprofile, UserName, Password);
+//       StudentProfile studentprofile = new StudentProfile(person);
+//       business.getUserAccountDirectory().newUserAccount(studentprofile, UserName, Password);
        
        JOptionPane.showMessageDialog(null, "Register Successful", "Message", JOptionPane.INFORMATION_MESSAGE);
        

@@ -79,7 +79,12 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("User Name");
 
-        UserNameTextField.setText("admin");
+        UserNameTextField.setText("adam");
+        UserNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserNameTextFieldActionPerformed(evt);
+            }
+        });
 
         PasswordTextField.setText("****");
         PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +216,10 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
              dialog.setLocationRelativeTo(this);
              dialog.setVisible(true);
     }//GEN-LAST:event_btnRigsterLoginButtonActionPerformed
+
+    private void UserNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserNameTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

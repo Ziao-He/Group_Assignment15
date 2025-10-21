@@ -23,21 +23,26 @@ public class CourseDirectory {
 
 
 
-    public CourseOffering findOfferingById(String courseId) {
+    public ArrayList<CourseOffering> findOfferingById(String courseId) {
+        ArrayList<CourseOffering> res = new ArrayList<>();
+        String cleanFaculty = courseId.replaceAll("[\\p{P}\\p{S}]", "");
         for (CourseOffering o : offerList) {
-            if (o.getCourse().getCourseId().equalsIgnoreCase(courseId)) {
-                return o;
-            }
+                String cleanCourseFaculty = o.getCourse().getCourseId().replaceAll("[\\p{P}\\p{S}]", ""); 
+                if (cleanCourseFaculty != null && cleanCourseFaculty.toLowerCase().contains(cleanFaculty.toLowerCase())) {
+                res.add(o);
+                }
         }
-        return null;
+        return res;
     }
 
     public ArrayList<CourseOffering> findByFacultyName(String faculty) {
         ArrayList<CourseOffering> res = new ArrayList<>();
+        String cleanFaculty = faculty.replaceAll("[\\p{P}\\p{S}]", "");
         for (CourseOffering o : offerList) {
-            if (o.getFaculty() != null && o.getFaculty().toLowerCase().contains(faculty.toLowerCase())) {
+                String cleanCourseFaculty = o.getFaculty().replaceAll("[\\p{P}\\p{S}]", ""); 
+                if (cleanCourseFaculty != null && cleanCourseFaculty.toLowerCase().contains(cleanFaculty.toLowerCase())) {
                 res.add(o);
-            }
+                }
         }
         return res;
     }
