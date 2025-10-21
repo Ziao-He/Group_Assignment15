@@ -27,7 +27,7 @@ public class UserAccount {
     }
 
     public String getPersonId(){
-        return profile.getPerson().getPersonId();
+        return profile.getPerson().getPersonRole();
     }
     public String getUserLoginName(){
         return username;

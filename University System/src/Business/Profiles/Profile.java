@@ -26,7 +26,7 @@ public abstract class Profile {
      
 
         public boolean isMatch(String id) {
-        if (person.getPersonId().equals(id)) {
+        if (person.getPersonRole().equals(id)) {
             return true;
         }
         return false;

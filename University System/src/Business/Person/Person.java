@@ -11,30 +11,19 @@ package Business.Person;
  */
 public class Person {
 
-    String id;
-    String name;
-    int age;
+    String role;
 
+    public Person(String role) {
 
-    public Person(String id) {
-
-        this.id = id;
+        this.role= role;
     }
 
-    public String getName() {
-        return name;
+    public String getPersonRole() {
+        return role;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getPersonId() {
-        return id;
-    }
-
-    public boolean isMatch(String id) {
-        if (getPersonId().equals(id)) {
+    public boolean isMatch(String role) {
+        if (getPersonRole().equals(role)) {
             return true;
         }
         return false;
@@ -42,6 +31,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return getPersonId();
+        return getPersonRole();
     }
 }

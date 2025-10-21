@@ -30,7 +30,7 @@ public class StudentProfile extends Profile {
     }
 
     public boolean isMatch(String id) {
-        return person.getPersonId().equals(id);
+        return person.getPersonRole().equals(id);
     }
 
 }
