@@ -12,7 +12,7 @@ import Business.Course.Course;
  */
 public class CourseWork {
     private Course course;        
-    private String title; 
+    private String title;
     
     public CourseWork(Course course, String title) {
         this.course = course;

@@ -173,12 +173,10 @@ public class Student extends Person {
 
 // Coursework
     public String submitAssignment(CourseWork cw, String content) {
-        // ✅ 1. 检查输入是否为空
         if (cw == null || content == null || content.trim().isEmpty()) {
             return "Missing input fields.";
         }
 
-        // ✅ 2. 检查学生是否修读了该课程
         boolean enrolled = false;
         for (CourseOffering offering : enrolledOfferings) {
             if (offering.getCourse().getCourseId().equalsIgnoreCase(cw.getCourse().getCourseId())) {
@@ -190,7 +188,6 @@ public class Student extends Person {
             return "You are not enrolled in course: " + cw.getCourse().getCourseId();
         }
 
-        // ✅ 3. 检查是否已经提交过该作业
         for (AssignmentSubmission sub : submissions) {
             if (sub.getCoursework().getCourse().getCourseId().equalsIgnoreCase(cw.getCourse().getCourseId())
                     && sub.getCoursework().getTitle().equalsIgnoreCase(cw.getTitle())) {
@@ -198,7 +195,6 @@ public class Student extends Person {
             }
         }
 
-        // ✅ 4. 创建新的提交记录
         AssignmentSubmission newSubmission = new AssignmentSubmission(this,cw, content,new Date());
 
         submissions.add(newSubmission);
@@ -223,10 +219,36 @@ public class Student extends Person {
             sum += o.getCourse().getCredits();
         return sum;
     }
+    
+    public double calculateOverallGPA() {
+    double totalQualityPoints = 0.0;
+    int totalCredits = 0;
 
+    for (CourseGrade cg : transcript) {
+        if (cg.getGrade() != null ) {
+            totalQualityPoints += cg.getGradePoint() * cg.getCourse().getCredits();
+            totalCredits += cg.getCourse().getCredits();
+        }
+    }
+
+    return totalCredits == 0 ? 0.0 : totalQualityPoints / totalCredits;
+}
+    
+    public void addCourseGrade(Course course,String term,String grade){
+        if(course == null || term == null || grade == null){
+            System.out.println("ERRO GRADE INPUT FOR STUDENT");
+            return;
+        }
+        
+        CourseGrade cg = new CourseGrade(course,term,grade);
+        transcript.add(cg);
+        
+    }
     @Override
     public String toString() {
         return studentId + " - " + name;
     }
+    
+    
 }
 

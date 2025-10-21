@@ -9,7 +9,7 @@ package Business.Course;
  * @author Administrator
  */
 public class CourseGrade {
-     private Course course;
+    private Course course;
     private String term; 
     private String grade; 
 

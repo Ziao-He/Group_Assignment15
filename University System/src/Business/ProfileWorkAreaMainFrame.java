@@ -16,7 +16,7 @@ import Business.UserAccounts.UserAccountDirectory;
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentRegisterAreaJPanel;
-import UserInterface.WorkAreas.StudentRole.StudentRegisterDialog;
+import UserInterface.WorkAreas.StudentRole.StudentMangementDialog;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Dimension;

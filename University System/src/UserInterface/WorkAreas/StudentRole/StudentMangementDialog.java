@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Administrator
  */
-public class StudentRegisterDialog extends javax.swing.JDialog {
+public class StudentMangementDialog extends javax.swing.JDialog {
 
     private Business business;
     private StudentProfile studentAccount;
@@ -27,7 +27,7 @@ public class StudentRegisterDialog extends javax.swing.JDialog {
     /**
      * Creates new form StudentRegisterDialog
      */
-    public StudentRegisterDialog(java.awt.Frame parent, boolean modal,Business b,StudentProfile studentAccount,UserAccount useraccount) {
+    public StudentMangementDialog(java.awt.Frame parent, boolean modal,Business b,StudentProfile studentAccount,UserAccount useraccount) {
         super(parent, modal);
         this.business = b;
         this.studentAccount = studentAccount;

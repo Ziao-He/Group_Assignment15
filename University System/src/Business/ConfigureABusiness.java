@@ -107,6 +107,8 @@ class ConfigureABusiness {
         
         sD.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
         
+        //add CourseGrade
+        sD.getStudent().addCourseGrade(c1, "Fall 2025","B");
         
         return business;
 
