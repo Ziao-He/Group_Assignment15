@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 public class Student extends Person {
     private String studentId;
     private String name;
+    private String email;
+    private String Phone;        
     private double balance = 0.0; 
     private ArrayList<CourseOffering> enrolledOfferings = new ArrayList<>();
     private ArrayList<CourseGrade> transcript = new ArrayList<>();

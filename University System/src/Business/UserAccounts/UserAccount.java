@@ -18,6 +18,14 @@ public class UserAccount {
     
     Profile profile;
     String username;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     String password;
     
     public UserAccount (Profile profile, String un, String pw){
@@ -32,6 +40,10 @@ public class UserAccount {
     }
     public String getUserLoginName(){
         return username;
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 
         public boolean isMatch(String id){

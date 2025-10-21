@@ -60,7 +60,14 @@ public class UserAccountDirectory {
         return true;
     }
      
-     
+    public UserAccount findByProfile(Profile profile) {
+        for (UserAccount ua : useraccountlist) {
+            if (ua.getProfile() == profile) {  
+            return ua;
+        }
+    }
+    return null;
+}
      public ArrayList<UserAccount> getUserAccountList()
      {
          return useraccountlist;

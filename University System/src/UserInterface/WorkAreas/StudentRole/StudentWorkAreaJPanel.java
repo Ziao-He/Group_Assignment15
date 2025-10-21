@@ -13,8 +13,10 @@ package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
 import Business.Person.Student;
 import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -26,6 +28,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     private Business business;
     private StudentProfile studentAccount;
     private Student student;
+    private UserAccount useraccount;
 
     /**
      * Creates new form UnitRiskWorkArea
@@ -34,12 +37,13 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
      * @param clp
      */
 
-    public StudentWorkAreaJPanel(Business b, StudentProfile spp, JPanel clp) {
+    public StudentWorkAreaJPanel(Business b, StudentProfile spp, JPanel clp,UserAccount useraccount) {
 
         this.business = b;
         this.CardSequencePanel = clp;
         this.studentAccount = spp;
         this.student=(Student) spp.getPerson();
+        this.useraccount = useraccount;
         
         initComponents();
         
@@ -191,7 +195,9 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:  
-
+             StudentRegisterDialog dialog = new StudentRegisterDialog( (java.awt.Frame) SwingUtilities.getWindowAncestor(CardSequencePanel),true,business,studentAccount,useraccount);
+             dialog.setLocationRelativeTo(this);
+             dialog.setVisible(true);
 }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed

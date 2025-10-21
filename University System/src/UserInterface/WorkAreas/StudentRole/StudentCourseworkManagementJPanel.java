@@ -250,6 +250,7 @@ public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
 
     private void refreshCourseID() {
         cmbCourseID.removeAllItems();
+        cmbCourseID.addItem("Select Course");
         for (CourseOffering c : student.getEnrolledOfferings()) {
             cmbCourseID.addItem(c.getCourse().getCourseId());
         }

@@ -15,6 +15,7 @@ import Business.Course.Course;
 import Business.Course.CourseOffering;
 import Business.Person.Student;
 import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import java.awt.List;
 import static java.time.Clock.system;
@@ -50,6 +51,7 @@ public class StudentCourseRegistrationJPanel extends javax.swing.JPanel {
         this.CardSequencePanel = clp;
         this.studentAccount = spp;
         this.student=(Student) spp.getStudent();
+  
         
         initComponents();
         refreshSemester();

@@ -6,6 +6,7 @@ package UserInterface.WorkAreas.StudentRole;
 
 import Business.Business;
 import Business.Person.Person;
+import Business.Person.Student;
 import Business.Profiles.StudentProfileDirectory;
 import Business.Profiles.StudentProfile;
 import Business.UserAccounts.UserAccount;
@@ -18,18 +19,25 @@ import javax.swing.JOptionPane;
  */
 public class StudentRegisterDialog extends javax.swing.JDialog {
 
-    Business business;
+    private Business business;
+    private StudentProfile studentAccount;
+    private Student student;
+    private UserAccount useraccount;
  
     /**
      * Creates new form StudentRegisterDialog
      */
-    public StudentRegisterDialog(java.awt.Frame parent, boolean modal,Business b) {
+    public StudentRegisterDialog(java.awt.Frame parent, boolean modal,Business b,StudentProfile studentAccount,UserAccount useraccount) {
         super(parent, modal);
-        this.business =b;
+        this.business = b;
+        this.studentAccount = studentAccount;
+        this.student=(Student) studentAccount.getStudent();
+        this.useraccount = useraccount;
         
         initComponents();
-        
-        
+        tblStudentID.setText(studentAccount.getStudent().getStudentId());
+        lblRole.setText("Student");
+        feildStudentName.setText(studentAccount.getStudent().getName());
     }
 
     /**
@@ -46,87 +54,116 @@ public class StudentRegisterDialog extends javax.swing.JDialog {
         lblPassword = new javax.swing.JLabel();
         fieldUserName = new javax.swing.JTextField();
         fieldPassword = new javax.swing.JTextField();
-        btnRegister = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         lblStudentID = new javax.swing.JLabel();
-        feildStudentID = new javax.swing.JTextField();
+        feildStudentName = new javax.swing.JTextField();
+        tblStudentID = new javax.swing.JLabel();
+        lblStudentID1 = new javax.swing.JLabel();
+        lblRole = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lblTitle.setText(" Student Register");
 
-        lblUserName.setText("User Name");
+        lblUserName.setText("User Name:");
 
-        lblPassword.setText("Password");
+        lblPassword.setText("Password:");
 
-        btnRegister.setBackground(new java.awt.Color(102, 153, 255));
-        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegister.setText("Register");
-        btnRegister.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegister.setMaximumSize(new java.awt.Dimension(200, 40));
-        btnRegister.setMinimumSize(new java.awt.Dimension(20, 20));
-        btnRegister.setPreferredSize(new java.awt.Dimension(240, 25));
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setBackground(new java.awt.Color(102, 153, 255));
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setText("Save");
+        btnSave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSave.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnSave.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnSave.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        lblStudentID.setText("Student ID");
+        lblStudentID.setText("Student ID:");
+
+        tblStudentID.setText("student id");
+
+        lblStudentID1.setText("Role:");
+
+        lblRole.setText("Role");
+
+        jLabel2.setText("Student Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTitle)
+                .addGap(166, 166, 166))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPassword)
-                            .addComponent(lblStudentID))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(fieldUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(feildStudentID))))
-                .addContainerGap(154, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblStudentID)
+                                    .addComponent(lblStudentID1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(lblPassword))))
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(feildStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tblStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRole, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(19, 19, 19)
                 .addComponent(lblTitle)
-                .addGap(70, 70, 70)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblStudentID)
-                    .addComponent(feildStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(tblStudentID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUserName)
-                    .addComponent(fieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblStudentID1)
+                    .addComponent(lblRole))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword)
-                    .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(feildStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUserName))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword))
+                .addGap(73, 73, 73)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        String studentID = feildStudentID.getText();
+        String studentID = feildStudentName.getText();
         String UserName = fieldUserName.getText();
         String Password =fieldPassword.getText();
         
@@ -150,14 +187,14 @@ public class StudentRegisterDialog extends javax.swing.JDialog {
            return;
        }
        
-       Person person = new Person(studentID);
-//       StudentProfile studentprofile = new StudentProfile(person);
-//       business.getUserAccountDirectory().newUserAccount(studentprofile, UserName, Password);
+       student.setName(studentID);
        
-       JOptionPane.showMessageDialog(null, "Register Successful", "Message", JOptionPane.INFORMATION_MESSAGE);
+       useraccount.setUsername(UserName);
+       useraccount.setPassword(Password);
+       JOptionPane.showMessageDialog(null, " Successful", "Message", JOptionPane.INFORMATION_MESSAGE);
        
        this.dispose();
-    }//GEN-LAST:event_btnRegisterActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,13 +222,17 @@ public class StudentRegisterDialog extends javax.swing.JDialog {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegister;
-    private javax.swing.JTextField feildStudentID;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JTextField feildStudentName;
     private javax.swing.JTextField fieldPassword;
     private javax.swing.JTextField fieldUserName;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblStudentID;
+    private javax.swing.JLabel lblStudentID1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;
+    private javax.swing.JLabel tblStudentID;
     // End of variables declaration//GEN-END:variables
 }
