@@ -12,7 +12,7 @@ import Business.Person.Person;
  * @author kal bugrara
  */
 public abstract class Profile {
-    Person person;
+     Person person;
      public Profile(Person p){
         person = p;
         
@@ -26,7 +26,7 @@ public abstract class Profile {
      
 
         public boolean isMatch(String id) {
-        if (person.getPersonId().equals(id)) {
+        if (person.getPersonRole().equals(id)) {
             return true;
         }
         return false;

@@ -5,10 +5,13 @@
  */
 package Business;
 
+import Business.Course.CourseDirectory;
+import Business.Person.CourseWorkDirectory;
 import Business.Person.PersonDirectory;
+import Business.Person.StudentDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.FacultyDirectory;
-import Business.Profiles.StudentDirectory;
+import Business.Profiles.StudentProfileDirectory;
 
 import Business.UserAccounts.UserAccountDirectory;
 
@@ -20,11 +23,12 @@ public class Business {
 
     String name;
     PersonDirectory persondirectory; //all people profiles regardless of the role
-
+    CourseDirectory courseDirectory;
     EmployeeDirectory employeedirectory;
     UserAccountDirectory useraccountdirectory;
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
+    CourseWorkDirectory courseWorkDirectory;
     
 
 
@@ -36,7 +40,16 @@ public class Business {
         useraccountdirectory = new UserAccountDirectory();
         studentdirectory = new StudentDirectory();
         facultydirectory =new FacultyDirectory();
+        courseDirectory = new CourseDirectory();
+        courseWorkDirectory =new CourseWorkDirectory();
+    }
 
+    public CourseWorkDirectory getCourseWorkDirectory() {
+        return courseWorkDirectory;
+    }
+
+    public CourseDirectory getCourseDirectory() {
+        return courseDirectory;
     }
 
     public PersonDirectory getPersonDirectory() {
