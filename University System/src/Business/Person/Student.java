@@ -21,7 +21,7 @@ public class Student extends Person {
     private ArrayList<CourseOffering> enrolledOfferings = new ArrayList<>();
     private ArrayList<CourseGrade> transcript = new ArrayList<>();
     private ArrayList<PaymentRecord> payments = new ArrayList<>();
-//    private ArrayList<AssignmentSubmission> submissions = new ArrayList<>();
+    private ArrayList<AssignmentSubmission> submissions = new ArrayList<>();
 
     public Student(String studentId, String name, String role) {
         super(role);  
@@ -158,11 +158,11 @@ public class Student extends Person {
         return earnedCredits >= 32 && hasCore;
     }
 
-//    // ================= Coursework =================
-//    public void submitAssignment(String courseId, String title, String content){
-//        AssignmentSubmission s = new AssignmentSubmission(courseId, title, content, new Date());
-//        submissions.add(s);
-//    }
+//    Coursework
+    public void submitAssignment(String courseId, String title, String content){
+        AssignmentSubmission s = new AssignmentSubmission(courseId, title, content, new Date());
+        submissions.add(s);
+    }
 
     @Override
     public String toString() {
