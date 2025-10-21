@@ -15,9 +15,18 @@ public class Person {
     String name;
     int age;
 
+
     public Person(String id) {
 
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
     public String getPersonId() {
