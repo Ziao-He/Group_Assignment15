@@ -29,7 +29,7 @@ class ConfigureABusiness {
         Business business = new Business("Information Systems");
 
 // Create Persons
-      PersonDirectory persondirectory = business.getPersonDirectory();
+        PersonDirectory persondirectory = business.getPersonDirectory();
 // person representing sales organization        
         Person person001 = persondirectory.newPerson("John Smith");
         Person person002 = persondirectory.newPerson("Gina Montana");
