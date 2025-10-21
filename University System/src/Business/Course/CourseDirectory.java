@@ -11,18 +11,20 @@ import java.util.ArrayList;
  * @author Administrator
  */
 public class CourseDirectory {
-    private ArrayList<CourseOffering> offer;
+    private ArrayList<CourseOffering> offerList;
 
     public CourseDirectory() {
-        offer = new ArrayList<>();
+        offerList = new ArrayList<>();
     }
 
     public ArrayList<CourseOffering> getCourseOfferingList() {
-        return offer;
+        return offerList;
     }
 
+
+
     public CourseOffering findOfferingById(String courseId) {
-        for (CourseOffering o : offer) {
+        for (CourseOffering o : offerList) {
             if (o.getCourse().getCourseId().equalsIgnoreCase(courseId)) {
                 return o;
             }
@@ -32,7 +34,7 @@ public class CourseDirectory {
 
     public ArrayList<CourseOffering> findByFacultyName(String faculty) {
         ArrayList<CourseOffering> res = new ArrayList<>();
-        for (CourseOffering o : offer) {
+        for (CourseOffering o : offerList) {
             if (o.getFaculty() != null && o.getFaculty().toLowerCase().contains(faculty.toLowerCase())) {
                 res.add(o);
             }
@@ -42,7 +44,7 @@ public class CourseDirectory {
 
     public ArrayList<CourseOffering> findBySemester(String semester) {
         ArrayList<CourseOffering> res = new ArrayList<>();
-        for (CourseOffering o : offer) {
+        for (CourseOffering o : offerList) {
             if (o.getSemester() != null && o.getSemester().toLowerCase().contains(semester.toLowerCase())) {
                 res.add(o);
             }
@@ -51,7 +53,7 @@ public class CourseDirectory {
     }
 
     public void addOffering(CourseOffering o) {
-        offer.add(o);
+        offerList.add(o);
     }
 }   
 
