@@ -4,6 +4,7 @@
  */
 package Paymenet;
 
+import Business.Course.Course;
 import java.util.Date;
 
 /**
@@ -15,13 +16,22 @@ public class PaymentRecord {
     private double amout;
     private String description;
     private String status;
+    private String courseID;
+    
+    public PaymentRecord(Date date,double amount,String description,String status,Course course){
+        this.date = date;
+        this.amout = amount;
+        this.description = description;
+        this.status = status;
+        this.courseID = course.getCourseId();
+    }
     
     public PaymentRecord(Date date,double amount,String description,String status){
         this.date = date;
         this.amout = amount;
         this.description = description;
-        this.status = status;
-    }
+        this.status = status;;
+    }    
 
     public Date getDate() {
         return date;
@@ -29,6 +39,14 @@ public class PaymentRecord {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
     }
 
     public double getAmout() {

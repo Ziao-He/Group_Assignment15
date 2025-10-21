@@ -98,7 +98,7 @@ class ConfigureABusiness {
         coursedirectory.addOffering(o6);
         
         sD.getStudent().enrollCourse(new CourseOffering(c1,"Lu qiang","Fall 2025",30));
-        sD.getStudent().payTuition(-9000);
+//        sD.getStudent().payTuition(-9000);
         
         //create course work
         CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();

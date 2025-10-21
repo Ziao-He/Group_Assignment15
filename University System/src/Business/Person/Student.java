@@ -120,7 +120,7 @@ public class Student extends Person {
         enrolledOfferings.add(offering);
         balance += offering.getTuitionForCourse();
         payments.add(new PaymentRecord(new Date(), offering.getTuitionForCourse(),
-                "Tuition charge: " + courseId + " (" + semester + ")", "CHARGED"));
+                "Tuition charge: " + courseId + " (" + semester + ")", "CHARGED",course));
 
         String msg = String.format("✅ Enrolled %s (%s). Tuition: %.2f, Balance: %.2f",
                 courseId, semester, offering.getTuitionForCourse(), balance);
@@ -146,7 +146,7 @@ public class Student extends Person {
         enrolledOfferings.remove(target);
         balance -= target.getTuitionForCourse();
         payments.add(new PaymentRecord(new Date(), -target.getTuitionForCourse(),
-                "Refund for " + course.getCourseId(), "REFUNDED"));
+                "Refund for " + course.getCourseId(), "REFUNDED",course));
 
         String msg = String.format("✅ Dropped %s (%s). Refund: %.2f. New balance: %.2f",
                 course.getCourseId(), target.getSemester(), target.getTuitionForCourse(), balance);
@@ -170,6 +170,29 @@ public class Student extends Person {
         return "OK";
     }
 
+    public double getTotalPaidForCourse(Course course) {
+    double paid = 0.0;
+    for (PaymentRecord pr : payments) {
+        if (course.getCourseId().equals(pr.getCourseID()) && pr.getStatus().equals("PAID")) {
+            paid += pr.getAmout();
+        }
+    }
+    return paid;
+}
+
+    public double getTotalChargedForCourse(Course course) {
+        double charged = 0.0;
+        for (PaymentRecord pr : payments) {
+            if (course.getCourseId().equals(pr.getCourseID()) && pr.getStatus().equals("CHARGED")) {
+                charged += pr.getAmout();
+            }
+        }
+        return charged;
+    }
+
+    public boolean isCoursePaid(Course course) {
+        return getTotalPaidForCourse(course) >= getTotalChargedForCourse(course);
+    }
 
 // Coursework
     public String submitAssignment(CourseWork cw, String content) {
