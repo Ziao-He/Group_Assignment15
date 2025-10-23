@@ -4,6 +4,12 @@
  */
 package UserInterface.WorkAreas.FacultyRole;
 
+import Business.Business;
+import Business.UserAccounts.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author yujie-liang
@@ -13,9 +19,21 @@ public class ManageFacultyProfilesJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageFacultyProfilesJPanel
      */
-    public ManageFacultyProfilesJPanel() {
+    javax.swing.JPanel CardSequencePanel;
+    Business business;
+    UserAccount useraccount;
+    
+    public ManageFacultyProfilesJPanel(Business b, JPanel clp, UserAccount ua) {
         initComponents();
+        business = b;
+        this.CardSequencePanel = clp;
+        useraccount = ua;
+        initialization();
         setUneditableMode();
+    }
+    public void initialization(){
+        txtFacultyName.setText(useraccount.getProfile().getPerson().getPersonRole());
+        txtUsername.setText(useraccount.getUserLoginName());
     }
     
     public void setUneditableMode(){
@@ -52,6 +70,7 @@ public class ManageFacultyProfilesJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblTitle.setText("Faculty Profiles");
@@ -73,10 +92,28 @@ public class ManageFacultyProfilesJPanel extends javax.swing.JPanel {
 
         btnUpdate.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnSave.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btnSave.setText("Save");
         btnSave.setEnabled(false);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,7 +122,9 @@ public class ManageFacultyProfilesJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(148, 148, 148)
                         .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(252, 252, 252)
@@ -110,8 +149,10 @@ public class ManageFacultyProfilesJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(lblTitle)
-                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitle)
+                    .addComponent(btnBack))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFacultyName)
                     .addComponent(txtFacultyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,12 +168,46 @@ public class ManageFacultyProfilesJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnSave))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        setEditableMode();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        String facultyName = txtFacultyName.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        
+        if(facultyName.isBlank() || username.isBlank() || password.isBlank())
+        {
+            JOptionPane. showMessageDialog(null, "All fields are mandatory.") ;
+            // pause until the user closes the dialog.
+            return;
+        }
+
+        useraccount.getProfile().getPerson().setRole(facultyName);
+        useraccount.setUsername(username);
+        useraccount.setPassword(password);
+
+        JOptionPane. showMessageDialog(this,"Faculty Account successfully updated.", "Warning", JOptionPane.WARNING_MESSAGE);
+        setUneditableMode();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblFacultyName;

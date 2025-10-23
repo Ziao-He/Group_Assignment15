@@ -22,6 +22,11 @@ public class Person {
         return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
+
     public boolean isMatch(String role) {
         if (getPersonRole().equals(role)) {
             return true;
