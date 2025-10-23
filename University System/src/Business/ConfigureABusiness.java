@@ -98,7 +98,6 @@ class ConfigureABusiness {
         coursedirectory.addOffering(o6);
         
         sD.getStudent().enrollCourse(new CourseOffering(c1,"Lu qiang","Fall 2025",30));
-//        sD.getStudent().payTuition(-9000);
         
         //create course work
         CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();
@@ -109,6 +108,7 @@ class ConfigureABusiness {
         
         //add CourseGrade
         sD.getStudent().addCourseGrade(c1, "Fall 2025","B");
+        sD.getStudent().payTuition(1200);
         
         return business;
 

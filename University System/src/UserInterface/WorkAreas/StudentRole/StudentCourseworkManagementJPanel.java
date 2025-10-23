@@ -57,12 +57,14 @@ public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
         initComponents();
         refreshCourseID();
         
-    cmbCourseID.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-        String selectedCourseId = (String) cmbCourseID.getSelectedItem();
-        refreshCourseWork(selectedCourseId);
-    }
-});
+        cmbCourseID.addActionListener(new java.awt.event.ActionListener() {
+            
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            String selectedCourseId = (String) cmbCourseID.getSelectedItem();
+            refreshCourseWork(selectedCourseId);
+            }
+        });
+    
         populateCourseTable();
     }
 

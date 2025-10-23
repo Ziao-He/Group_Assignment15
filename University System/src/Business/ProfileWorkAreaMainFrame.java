@@ -38,7 +38,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         initComponents();
         business = ConfigureABusiness.initialize();
         this.setSize(1200, 700);
-
     }
 
     public void insert(JPanel jpanel) {
