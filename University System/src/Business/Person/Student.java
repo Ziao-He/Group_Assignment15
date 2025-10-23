@@ -257,6 +257,35 @@ public class Student extends Person {
     return totalCredits == 0 ? 0.0 : totalQualityPoints / totalCredits;
 }
     
+    public double calculateTermGPA(String term) {
+        double totalQualityPoints = 0.0;
+        int totalCredits = 0;
+
+        for (CourseGrade cg : transcript) {
+            if (term.equalsIgnoreCase(cg.getTerm()) && cg.getGrade() != null) {
+                double gradePoint = cg.getGradePoint();
+                int credits = cg.getCourse().getCredits();
+                totalQualityPoints += gradePoint * credits;
+                totalCredits += credits;
+                }
+            }
+
+            return totalCredits == 0 ? 0.0 : totalQualityPoints / totalCredits;
+    }
+
+    public String getAcademicStandingForTerm(String term) {
+        double termGPA = calculateTermGPA(term);
+        double overallGPA = calculateOverallGPA();
+
+        if (overallGPA < 3.0) {
+            return "Academic Probation";
+        } else if (termGPA < 3.0) {
+            return "Academic Warning";
+        } else {
+            return "Good Standing";
+        }
+    }
+    
     public void addCourseGrade(Course course,String term,String grade){
         if(course == null || term == null || grade == null){
             System.out.println("ERRO GRADE INPUT FOR STUDENT");
