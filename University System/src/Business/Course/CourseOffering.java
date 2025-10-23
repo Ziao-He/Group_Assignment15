@@ -14,7 +14,7 @@ public class CourseOffering {
     private Course course;
 //    private Faculty faculty;
     private FacultyProfile faculty;
-    private String semester;
+    Schedule schedule;
     private int capacity;
     private double tuitionPerCredit = 300.0; 
 
@@ -28,7 +28,7 @@ public class CourseOffering {
 
 
     public String getSemester() {
-        return semester;
+        return schedule.getSemester();
     }
 
     public int getCapacity() {
@@ -38,11 +38,12 @@ public class CourseOffering {
     public double getTuitionForCourse(){
         return course.getCredits()*tuitionPerCredit;
     }
-    
-    public CourseOffering(Course course, FacultyProfile faculty, String semester, int capacity){
+
+    public CourseOffering(Course course, FacultyProfile faculty, Schedule schedule, int capacity) {
         this.course = course;
         this.faculty = faculty;
-        this.semester = semester;
+        this.schedule = schedule;
         this.capacity = capacity;
     }
+    
 }
