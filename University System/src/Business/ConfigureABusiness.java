@@ -46,6 +46,11 @@ class ConfigureABusiness {
         Person person007 = persondirectory.newPerson("Laura Brown");
         Person person008 = persondirectory.newPerson("Jack While");
         Person person009 = persondirectory.newPerson("Fidelity"); //we use this as customer
+        
+        Person person010 = persondirectory.newPerson("Lin");
+        Person person011 = persondirectory.newPerson("Dr. Adams");
+        Person person012 = persondirectory.newPerson("Dr. Brown");
+        Person person013 = persondirectory.newPerson("Lu qiang");
 
 // Create Admins to manage the business
         EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
@@ -62,6 +67,11 @@ class ConfigureABusiness {
         // Create User accounts that link to specific profiles
         FacultyDirectory fadirectory = business.getFacultyDirectory(); 
         FacultyProfile faprofile0 =fadirectory.newFacultyDirectory(person002);
+        FacultyProfile faprofile1 =fadirectory.newFacultyDirectory(person010);
+        FacultyProfile faprofile2 =fadirectory.newFacultyDirectory(person011);
+        FacultyProfile faprofile3 =fadirectory.newFacultyDirectory(person012);
+        FacultyProfile faprofile4 =fadirectory.newFacultyDirectory(person013);
+        
         
  
 
@@ -82,12 +92,12 @@ class ConfigureABusiness {
         Course c5 = new Course("DS 5600", "Computer Science", 28);
 
         // add CourseOffering
-        CourseOffering o1 = new CourseOffering(c1, "Lin", "Fall 2025", 30);
-        CourseOffering o2 = new CourseOffering(c2, "Dr. Adams", "Fall 2025", 25);
-        CourseOffering o3 = new CourseOffering(c3, "Dr. Brown", "Spring 2025", 25);
-        CourseOffering o4 = new CourseOffering(c3, "Dr. Brown", "Fall 2025", 25);
-        CourseOffering o5 = new CourseOffering(c4, "Dr. Adams", "Fall 2025", 25);
-        CourseOffering o6 = new CourseOffering(c5, "Dr. Brown", "Fall 2025", 25);
+        CourseOffering o1 = new CourseOffering(c1, faprofile1, "Fall 2025", 30);
+        CourseOffering o2 = new CourseOffering(c2, faprofile2, "Fall 2025", 25);
+        CourseOffering o3 = new CourseOffering(c3, faprofile3, "Spring 2025", 25);
+        CourseOffering o4 = new CourseOffering(c3, faprofile3, "Fall 2025", 25);
+        CourseOffering o5 = new CourseOffering(c4, faprofile2, "Fall 2025", 25);
+        CourseOffering o6 = new CourseOffering(c5, faprofile3, "Fall 2025", 25);
         
         // add to business
         coursedirectory.addOffering(o1);
@@ -97,7 +107,7 @@ class ConfigureABusiness {
         coursedirectory.addOffering(o5);
         coursedirectory.addOffering(o6);
         
-        sD.getStudent().enrollCourse(new CourseOffering(c1,"Lu qiang","Fall 2025",30));
+        sD.getStudent().enrollCourse(new CourseOffering(c1,faprofile4,"Fall 2025",30));
         
         //create course work
         CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();

@@ -4,6 +4,8 @@
  */
 package Business.Course;
 
+import Business.Profiles.FacultyProfile;
+
 /**
  *
  * @author Administrator
@@ -11,7 +13,7 @@ package Business.Course;
 public class CourseOffering {
     private Course course;
 //    private Faculty faculty;
-    private String faculty;
+    private FacultyProfile faculty;
     private String semester;
     private int capacity;
     private double tuitionPerCredit = 300.0; 
@@ -20,9 +22,10 @@ public class CourseOffering {
         return course;
     }
 
-    public String getFaculty() {
+    public FacultyProfile getFaculty() {
         return faculty;
     }
+
 
     public String getSemester() {
         return semester;
@@ -36,7 +39,7 @@ public class CourseOffering {
         return course.getCredits()*tuitionPerCredit;
     }
     
-    public CourseOffering(Course course, String faculty, String semester, int capacity){
+    public CourseOffering(Course course, FacultyProfile faculty, String semester, int capacity){
         this.course = course;
         this.faculty = faculty;
         this.semester = semester;

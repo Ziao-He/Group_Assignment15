@@ -49,7 +49,9 @@ public class FacultyProfile extends Profile{
     public void setPhone(String Phone) {
         this.Phone = Phone;
     }
-    
+    public String getFacultyName() {
+        return this.getPerson().getPersonRole();
+    }
     
     @Override
     public String getRole() {
