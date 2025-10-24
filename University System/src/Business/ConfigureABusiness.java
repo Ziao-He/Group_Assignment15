@@ -21,6 +21,8 @@ import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.EmployeeProfile;
 import Business.Profiles.FacultyDirectory;
 import Business.Profiles.FacultyProfile;
+import Business.Profiles.RegistrarDirectory;
+import Business.Profiles.RegistrarProfile;
 import Business.Profiles.StudentProfileDirectory;
 import Business.Profiles.StudentProfile;
 
@@ -54,6 +56,7 @@ class ConfigureABusiness {
         Person person011 = persondirectory.newPerson("Dr. Adams");
         Person person012 = persondirectory.newPerson("Dr. Brown");
         Person person013 = persondirectory.newPerson("Lu qiang");
+        Person person014 = persondirectory.newPerson("Registrar Cryus");
 
 // Create Admins to manage the business
         AdminDirectory adminDirectory = business.getAdminDirectory();
@@ -118,8 +121,16 @@ class ConfigureABusiness {
         FacultyProfile faprofile2 =fadirectory.newFacultyDirectory(person011);
         FacultyProfile faprofile3 =fadirectory.newFacultyDirectory(person012);
         FacultyProfile faprofile4 =fadirectory.newFacultyDirectory(person013);
-        
-        
+        //添加Registrar
+        RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
+        RegistrarProfile registrarProfile = registrarDirectory.newRegistrarProfile(
+            person010, 
+            "REG001", 
+            "registrar@university.edu", 
+            "123-456-7890", 
+            "Mon-Fri 9:00-17:00", 
+            "Admin Building Room 101"
+        );
  
 
 
@@ -175,7 +186,8 @@ class ConfigureABusiness {
         //add CourseGrade
         sD1.getStudent().addCourseGrade(c1, "Fall 2025","B");
         sD1.getStudent().payTuition(1200);
-        
+        //添加Registrar账户
+        UserAccount uaRegistrar = uadirectory.newUserAccount(registrarProfile, "registrar", "registrar123");
         return business;
 
     }
