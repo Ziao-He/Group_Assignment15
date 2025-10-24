@@ -5,12 +5,18 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
-import Business.Course.CourseDirectory;
 import Business.Course.CourseOffering;
 import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -61,9 +67,9 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                     courseOffering = co;
 
             txtDescription.setText(courseOffering.getCourse().getDescription());
-            String schedule = courseOffering.getSchedule().getStartTime() + "-" + courseOffering.getSchedule().getEndTime();
-            schedule = schedule + "   " + courseOffering.getSchedule().getClassRoom();
-            txtSchedule.setText(schedule);
+            txtSchedule.setText(courseOffering.getSchedule().getStartTime());
+            txtSchedule2.setText(courseOffering.getSchedule().getEndTime());
+            txtClassRoom.setText(courseOffering.getSchedule().getClassRoom());
             txtCapacity.setText(Integer.toString(courseOffering.getCapacity()));
             txtSyllabus.setText(courseOffering.getCourse().getSyllabus());
             if(courseOffering.isEnrollmentStatus())
@@ -76,6 +82,8 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     public void SetViewMode(){
         txtDescription.setEditable(false);
         txtSchedule.setEditable(false);
+        txtSchedule2.setEditable(false);
+        txtClassRoom.setEditable(false);
         txtCapacity.setEditable(false);
         txtSyllabus.setEditable(false);
         
@@ -88,6 +96,8 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
      public void SetUpdateMode(){
         txtDescription.setEditable(true);
         txtSchedule.setEditable(true);
+        txtSchedule2.setEditable(true);
+        txtClassRoom.setEditable(true);
         txtCapacity.setEditable(true);
         txtSyllabus.setEditable(true);
         
@@ -123,6 +133,10 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtSchedule2 = new javax.swing.JTextField();
+        lblClassRoom = new javax.swing.JLabel();
+        txtClassRoom = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(800, 450));
         setMinimumSize(new java.awt.Dimension(800, 450));
@@ -165,6 +179,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
         btnUpload.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnUpload.setText("Upload");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
 
         lblStatus.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblStatus.setText("Enrollment Status");
@@ -181,6 +200,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
         btnSave.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnBack.setText("Back");
@@ -189,6 +213,16 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel1.setText("to");
+
+        txtSchedule2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
+        lblClassRoom.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblClassRoom.setText("ClassRoom");
+
+        txtClassRoom.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -207,17 +241,24 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                                 .addGap(141, 141, 141)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblDescription)
-                                    .addComponent(lblSchedule)
                                     .addComponent(lblCapacity)
                                     .addComponent(lblSysllabus)
-                                    .addComponent(lblStatus))
+                                    .addComponent(lblStatus)
+                                    .addComponent(lblSchedule)
+                                    .addComponent(lblClassRoom))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                                    .addComponent(txtSchedule)
                                     .addComponent(txtCapacity)
                                     .addComponent(jScrollPane2)
-                                    .addComponent(boxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(boxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSchedule2))
+                                    .addComponent(txtClassRoom)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(boxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,8 +285,14 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSchedule)
-                    .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtSchedule2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtClassRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblClassRoom))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCapacity)
                     .addComponent(txtCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,7 +309,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnSave))
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,6 +331,76 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         SetUpdateMode();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
+
+        int returnVal = fileChooser.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            
+            if (file.length() == 0){
+               JOptionPane.showMessageDialog(this, "empty file");
+                    return;
+            }
+            try {
+                    // Read the entire file content as a string
+                    byte[] bytes = Files.readAllBytes(file.toPath());
+                    String content = new String(bytes, StandardCharsets.UTF_8);
+
+                    // Determine whether the conversion has been successful to String
+                    if (content.isBlank()) {
+                        JOptionPane.showMessageDialog(null, "Valid content cannot be read");
+                    }else{
+                    JOptionPane.showMessageDialog(this, "successfully upload file");
+                    txtSyllabus.setText(content);}
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Error in reading the file：" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } 
+    }//GEN-LAST:event_btnUploadActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        if(facultyCourse != null){
+        String description = txtDescription.getText();
+        String scheduleStart = txtSchedule.getText();
+        String scheduleEnd = txtSchedule2.getText();
+        String classRoom = txtClassRoom.getText();
+        String capacity = txtCapacity.getText();
+        String syllabus = txtSyllabus.getText();
+        String status = (String) boxStatus.getSelectedItem();
+        
+        if(description.isBlank() || scheduleStart.isBlank() || scheduleEnd.isBlank() || classRoom.isBlank() || capacity.isBlank() || syllabus.isBlank())
+        {
+            JOptionPane. showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE) ;
+            // pause until the user closes the dialog.
+            return;
+        }else{
+            try{
+                courseOffering.getCourse().setDescription(description);
+                courseOffering.getSchedule().setStartTime(scheduleStart);
+                courseOffering.getSchedule().setEndTime(scheduleEnd);
+                courseOffering.getSchedule().setClassRoom(classRoom);
+                courseOffering.setCapacity(Integer.parseInt(capacity));
+                courseOffering.getCourse().setSyllabus(syllabus);
+                
+                if(status.equals("Open"))
+                    courseOffering.setEnrollmentStatus(true);
+                else
+                    courseOffering.setEnrollmentStatus(false);              
+            JOptionPane.showMessageDialog(this, "Course Information successfully Update", "Information", JOptionPane.INFORMATION_MESSAGE);
+            SetViewMode();
+            } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "please check the capcity input.","Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        }
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxCourse;
@@ -292,17 +409,21 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpload;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCapacity;
+    private javax.swing.JLabel lblClassRoom;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblSchedule;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblSysllabus;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtCapacity;
+    private javax.swing.JTextField txtClassRoom;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtSchedule;
+    private javax.swing.JTextField txtSchedule2;
     private javax.swing.JTextArea txtSyllabus;
     // End of variables declaration//GEN-END:variables
 }
