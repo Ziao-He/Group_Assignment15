@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
+package UserInterface.WorkAreas.AdminRole;
 
 import Business.Business;
 import Business.Person.Admin;
@@ -198,10 +198,10 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
             String successMsg = "All done.";
             
             Admin.showSuccess(this, successMsg);
-            
 
             // Reset form for next registration
             resetForm();
+            generateAndDisplayStudentID();
             
         } catch (Exception e) {
             Admin.showError(this, "Error registering student: " + e.getMessage());
