@@ -18,6 +18,8 @@ import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.EmployeeProfile;
 import Business.Profiles.FacultyDirectory;
 import Business.Profiles.FacultyProfile;
+import Business.Profiles.RegistrarDirectory;
+import Business.Profiles.RegistrarProfile;
 import Business.Profiles.StudentProfileDirectory;
 import Business.Profiles.StudentProfile;
 
@@ -46,6 +48,7 @@ class ConfigureABusiness {
         Person person007 = persondirectory.newPerson("Laura Brown");
         Person person008 = persondirectory.newPerson("Jack While");
         Person person009 = persondirectory.newPerson("Fidelity"); //we use this as customer
+        Person person010 = persondirectory.newPerson("Registrar Cryus");
 
 // Create Admins to manage the business
         EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
@@ -63,7 +66,15 @@ class ConfigureABusiness {
         FacultyDirectory fadirectory = business.getFacultyDirectory(); 
         FacultyProfile faprofile0 =fadirectory.newFacultyDirectory(person002);
         
- 
+        RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
+        RegistrarProfile registrarProfile = registrarDirectory.newRegistrarProfile(
+            person010, 
+            "REG001", 
+            "registrar@university.edu", 
+            "123-456-7890", 
+            "Mon-Fri 9:00-17:00", 
+            "Admin Building Room 101"
+        );
 
 
    
@@ -72,7 +83,7 @@ class ConfigureABusiness {
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); /// order products for one of the customers and performed by a sales person
         UserAccount ua4 = uadirectory.newUserAccount(sD, "adam", "****"); /// order products for one of the customers and performed by a sales person
         UserAccount fua =uadirectory.newUserAccount(faprofile0, "fua", "****");
-        
+        UserAccount uaRegistrar = uadirectory.newUserAccount(registrarProfile, "registrar", "****");
         CourseDirectory coursedirectory = business.getCourseDirectory();
     
         Course c1 = new Course("INFO 5100", "Application Engineering and Development", 4);
@@ -109,6 +120,7 @@ class ConfigureABusiness {
         //add CourseGrade
         sD.getStudent().addCourseGrade(c1, "Fall 2025","B");
         sD.getStudent().payTuition(1200);
+        
         
         return business;
 

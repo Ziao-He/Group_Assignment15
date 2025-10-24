@@ -11,8 +11,8 @@ import Business.Person.PersonDirectory;
 import Business.Person.StudentDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.FacultyDirectory;
+import Business.Profiles.RegistrarDirectory;
 import Business.Profiles.StudentProfileDirectory;
-
 import Business.UserAccounts.UserAccountDirectory;
 
 /**
@@ -29,7 +29,7 @@ public class Business {
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
     CourseWorkDirectory courseWorkDirectory;
-    
+    RegistrarDirectory registrardirectory;
 
 
     public Business(String n) {
@@ -72,4 +72,8 @@ public class Business {
     public FacultyDirectory getFacultyDirectory(){
         return facultydirectory;
     }
+    public RegistrarDirectory getRegistrarDirectory() {
+        return registrardirectory;
+    }
+    
 }
