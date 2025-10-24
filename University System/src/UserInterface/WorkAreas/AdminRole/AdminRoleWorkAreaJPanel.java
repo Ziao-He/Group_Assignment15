@@ -188,16 +188,19 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
 
-        AdminRegistrationJPanel aos = new AdminRegistrationJPanel(business, CardSequencePanel);
+        AdminRegistrationJPanel ars = new AdminRegistrationJPanel(business, CardSequencePanel);
 
-        CardSequencePanel.add("AdminRegistrationJPanel", aos);
+        CardSequencePanel.add("AdminRegistrationJPanel", ars);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        AdminManageStudentsJPanel ams = new AdminManageStudentsJPanel(business, CardSequencePanel);
 
+        CardSequencePanel.add("AdminManageStudentsJPanel", ams);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed

@@ -353,36 +353,16 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
      * Uses reflection if Student doesn't have setEmail/setPhone methods
      */
     private void setStudentContactInfo(Student student, String email, String phone) {
-        try {
-            // Try to set email field
-            java.lang.reflect.Field emailField = Student.class.getDeclaredField("email");
-            emailField.setAccessible(true);
-            emailField.set(student, email);
-            
-            // Try to set Phone field (note: capital P in field name)
-            java.lang.reflect.Field phoneField = Student.class.getDeclaredField("Phone");
-            phoneField.setAccessible(true);
-            phoneField.set(student, phone);
-            
-            
-        } catch (Exception e) {
-            System.err.println("Warning: Could not set email/phone for student");
-            System.err.println("Consider adding setEmail() and setPhone() methods to Student class");
-            e.printStackTrace();
-        }
+        student.setEmail(email);
+        student.setPhone(phone);
+        System.out.println("✅ Set email and phone for: " + student.getStudentId());
     }
     
     /**
      * Get student email using reflection
      */
     private String getStudentEmail(Student student) {
-        try {
-            java.lang.reflect.Field emailField = Student.class.getDeclaredField("email");
-            emailField.setAccessible(true);
-            return (String) emailField.get(student);
-        } catch (Exception e) {
-            return null;
-        }
+        return student.getEmail() != null ? student.getEmail() : "";
     }
     
     /**

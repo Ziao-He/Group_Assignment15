@@ -54,9 +54,6 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
             Object[] row = new Object[5];
             row[0] = ua;
- //           row[1] = ua.getStatus(); //complete this..
- //           row[2] = ua.getLastUpdated()
- //           row[3] = 
 
             ((DefaultTableModel) UserAccountTable.getModel()).addRow(row);
         }
