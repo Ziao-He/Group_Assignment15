@@ -29,10 +29,11 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
         this.business = b;
         this.cardSequencePanel = c;
         initComponents();
+        // Sync counter with existing data
+        syncCounterWithExistingData();
         
+        // Generate and display Student ID
         generateAndDisplayStudentID();
-        
-        // Make ID field non-editable (auto-generated)
         txtID.setEditable(false);
         txtID.setBackground(new java.awt.Color(240, 240, 240));
         
@@ -60,7 +61,7 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
         txtBalance = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
+        btnSaveStudent = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
 
         lblName.setText("Name:");
@@ -73,10 +74,10 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
 
         lblBalance.setText("Balance:");
 
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveStudent.setText("Save");
+        btnSaveStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnSaveStudentActionPerformed(evt);
             }
         });
 
@@ -95,7 +96,7 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnSave)
+                        .addComponent(btnSaveStudent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnReset))
                     .addGroup(layout.createSequentialGroup()
@@ -152,13 +153,13 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
                     .addComponent(txtBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
+                    .addComponent(btnSaveStudent)
                     .addComponent(btnReset))
                 .addGap(91, 91, 91))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void btnSaveStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveStudentActionPerformed
         // TODO add your handling code here:
         String studentID = txtID.getText().trim();
         String name = txtName.getText().trim();
@@ -172,7 +173,9 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
         
         // Check for duplicate Student ID
         if (isDuplicateStudentID(studentID)) {
-            Admin.showError(this, "Student ID already exists!\nGenerating new ID...");
+            Admin.showError(this, "Student ID already exists!\nPlease try again.");
+            // Re-sync counter and regenerate ID
+            syncCounterWithExistingData();
             generateAndDisplayStudentID();
             return;
         }
@@ -188,26 +191,30 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
             Student newStudent = new Student(studentID, name, "Student");
             
             // Set email and phone
-            setStudentContactInfo(newStudent, email, phone);
+            newStudent.setEmail(email);
+            newStudent.setPhone(phone);
             
             // Add to StudentDirectory
             StudentDirectory studentDir = business.getStudentDirectory();
             studentDir.addStudent(newStudent);
             
             // Success message
-            String successMsg = "All done.";
+            String successMsg = "Student registered successfully!";
             
             Admin.showSuccess(this, successMsg);
 
+            
+            // Increment counter only after successful save
+            studentCounter++;
+            
             // Reset form for next registration
             resetForm();
-            generateAndDisplayStudentID();
             
         } catch (Exception e) {
             Admin.showError(this, "Error registering student: " + e.getMessage());
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }//GEN-LAST:event_btnSaveStudentActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
@@ -217,7 +224,7 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSaveStudent;
     private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblID;
@@ -244,13 +251,6 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
      */
     private String generateStudentID() {
         String id = String.format("%04d", studentCounter);
-        studentCounter++;
-        
-        // Reset counter if it exceeds 9999
-        if (studentCounter > 9999) {
-            studentCounter = 1;
-        }
-        
         return id;
     }
     
@@ -374,7 +374,37 @@ public class AdminStudentJPanel extends javax.swing.JPanel {
         txtPhone.setText("");
         txtBalance.setText("0.0");
         
-        // Set focus to name field
+        // Generate new Student ID
+        generateAndDisplayStudentID();
+        
         txtName.requestFocus();
+    }
+    
+    /**
+     * Sync counter with existing student data
+     * Finds the maximum existing Student ID and sets counter to max + 1
+     */
+    private void syncCounterWithExistingData() {
+        StudentDirectory studentDir = business.getStudentDirectory();
+        int maxID = 0;
+        
+        for (Student student : studentDir.getStudentList()) {
+            if (student.getStudentId() != null) {
+                try {
+                    // Parse student ID to integer
+                    int id = Integer.parseInt(student.getStudentId());
+                    if (id > maxID) {
+                        maxID = id;
+                    }
+                } catch (NumberFormatException e) {
+                    // Ignore non-numeric IDs
+                }
+            }
+        }
+        
+        // Set counter to max + 1
+        if (maxID > 0) {
+            studentCounter = maxID + 1;
+        }
     }
 }

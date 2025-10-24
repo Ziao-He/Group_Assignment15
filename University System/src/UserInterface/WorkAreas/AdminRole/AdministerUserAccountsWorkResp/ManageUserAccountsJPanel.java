@@ -71,11 +71,20 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Back = new javax.swing.JButton();
-        Next = new javax.swing.JButton();
+        Create = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         UserAccountTable = new javax.swing.JTable();
+        Modify = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        View = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -87,16 +96,16 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 76, 32);
+        Back.setBounds(540, 20, 80, 23);
 
-        Next.setText("Next >>");
-        Next.addActionListener(new java.awt.event.ActionListener() {
+        Create.setText("Create");
+        Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextActionPerformed(evt);
+                CreateActionPerformed(evt);
             }
         });
-        add(Next);
-        Next.setBounds(500, 300, 80, 32);
+        add(Create);
+        Create.setBounds(30, 250, 80, 23);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("User Accounts");
@@ -106,17 +115,17 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
 
         UserAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "User Name", "Status", "Last Activity", "Last Updated"
+                "User Name", "Role"
             }
         ));
         UserAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,6 +137,36 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(30, 110, 550, 130);
+
+        Modify.setText("Modify");
+        add(Modify);
+        Modify.setBounds(200, 250, 72, 23);
+
+        Delete.setText("Delete");
+        add(Delete);
+        Delete.setBounds(280, 250, 78, 23);
+
+        View.setText("View");
+        add(View);
+        View.setBounds(120, 250, 72, 23);
+
+        jLabel3.setText("User Name:");
+        add(jLabel3);
+        jLabel3.setBounds(30, 290, 70, 17);
+
+        jLabel4.setText("Password:");
+        add(jLabel4);
+        jLabel4.setBounds(30, 320, 70, 17);
+
+        jLabel5.setText("Role:");
+        add(jLabel5);
+        jLabel5.setBounds(30, 350, 29, 17);
+        add(jTextField1);
+        jTextField1.setBounds(120, 350, 150, 23);
+        add(jTextField2);
+        jTextField2.setBounds(120, 320, 150, 23);
+        add(jTextField3);
+        jTextField3.setBounds(120, 290, 150, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -138,14 +177,14 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_BackActionPerformed
 
-    private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
+    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
         if(selecteduseraccount==null) return;
         AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
-    }//GEN-LAST:event_NextActionPerformed
+    }//GEN-LAST:event_CreateActionPerformed
 
     private void UserAccountTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserAccountTableMousePressed
         // Extracts the row (uaser account) in the table that is selected by the user
@@ -168,11 +207,20 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JButton Next;
+    private javax.swing.JButton Create;
+    private javax.swing.JButton Delete;
+    private javax.swing.JButton Modify;
     private javax.swing.JTable UserAccountTable;
+    private javax.swing.JButton View;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
 }

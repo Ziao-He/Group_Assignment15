@@ -26,7 +26,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSaveFaculty" min="-2" max="-2" attributes="0"/>
                   <Component id="txtID" min="-2" pref="170" max="-2" attributes="0"/>
                   <Component id="txtName" min="-2" pref="170" max="-2" attributes="0"/>
                   <Component id="txtEmail" min="-2" pref="170" max="-2" attributes="0"/>
@@ -60,7 +60,7 @@
                   <Component id="txtPhone" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="261" max="32767" attributes="0"/>
-              <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+              <Component id="btnSaveFaculty" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -95,12 +95,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPhone">
     </Component>
-    <Component class="javax.swing.JButton" name="btnSave">
+    <Component class="javax.swing.JButton" name="btnSaveFaculty">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveFacultyActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

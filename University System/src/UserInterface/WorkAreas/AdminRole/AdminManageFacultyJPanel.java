@@ -6,36 +6,38 @@ package UserInterface.WorkAreas.AdminRole;
 
 import Business.Business;
 import Business.Person.Admin;
-import Business.Person.Student;
 import Business.Person.StudentDirectory;
+import Business.Profiles.FacultyDirectory;
+import Business.Profiles.FacultyProfile;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-
 /**
- * Admin panel for managing students
- * Implements 3 search methods and CRUD operations
+ *
  * @author bob-h
  */
-public class AdminManageStudentsJPanel extends javax.swing.JPanel {
+public class AdminManageFacultyJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form Admin
+     * Admin panel for managing faculty
+     * Implements 3 search methods and CRUD operations
+     * Creates new form AdminManageFacultyJPanel
      */
     private Business business;
     private JPanel cardSequencePanel;
-    private Student selectedStudent;
-    public AdminManageStudentsJPanel(Business b, JPanel c) {
+    public AdminManageFacultyJPanel(Business b, JPanel c) {
         this.business = b;
         this.cardSequencePanel = c;
+        
         initComponents();
         
-        loadAllStudents();
+        // Load all faculty initially
+        loadAllFaculty();
         
+        // Make detail fields non-editable initially
         setDetailFieldsEditable(false);
-        
     }
 
     /**
@@ -47,33 +49,48 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSearchDepartment = new javax.swing.JButton();
+        lblEmail = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        lblDepartment = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStudent = new javax.swing.JTable();
+        txtDepartment = new javax.swing.JTextField();
+        btnView = new javax.swing.JButton();
         lblSearchName = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JButton();
         txtSearchName = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
         lblSearchID = new javax.swing.JLabel();
         txtSearchID = new javax.swing.JTextField();
         lblSearchDepartment = new javax.swing.JLabel();
         txtSearchDepartment = new javax.swing.JTextField();
         btnSearchName = new javax.swing.JButton();
         btnSearchID = new javax.swing.JButton();
-        btnSearchDepartment = new javax.swing.JButton();
-        lblEmail = new javax.swing.JLabel();
-        lblPhone = new javax.swing.JLabel();
-        lblBalance = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        txtBalance = new javax.swing.JTextField();
-        lblName = new javax.swing.JLabel();
-        lblID = new javax.swing.JLabel();
-        lblDepartment = new javax.swing.JLabel();
-        txtDepartment = new javax.swing.JTextField();
-        btnView = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+
+        btnSearchDepartment.setText("Search");
+        btnSearchDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchDepartmentActionPerformed(evt);
+            }
+        });
+
+        lblEmail.setText("Email:");
+
+        lblPhone.setText("Phone:");
+
+        lblName.setText("Name:");
+
+        lblID.setText("FacultyID:");
+
+        lblDepartment.setText("Department:");
 
         tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,16 +100,37 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Email", "Phone", "Balance", "Student ID"
+                "Faculty ID", "Name", "Email         ", "Department", "Phone"
             }
         ));
         jScrollPane1.setViewportView(tblStudent);
 
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+
         lblSearchName.setText("Search by Name:");
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         txtSearchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSearchNameActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -111,46 +149,6 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
         btnSearchID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchIDActionPerformed(evt);
-            }
-        });
-
-        btnSearchDepartment.setText("Search");
-        btnSearchDepartment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchDepartmentActionPerformed(evt);
-            }
-        });
-
-        lblEmail.setText("Email:");
-
-        lblPhone.setText("Phone:");
-
-        lblBalance.setText("Balance:");
-
-        lblName.setText("Name:");
-
-        lblID.setText("StudentID:");
-
-        lblDepartment.setText("Department:");
-
-        btnView.setText("View");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
-            }
-        });
-
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -190,7 +188,6 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
                                     .addComponent(lblID)
                                     .addComponent(lblEmail)
                                     .addComponent(lblPhone)
-                                    .addComponent(lblBalance)
                                     .addComponent(lblDepartment))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +195,6 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,13 +252,9 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBalance)
-                    .addComponent(txtBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDepartment)
                     .addComponent(txtDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnView)
@@ -271,6 +263,111 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSearchDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDepartmentActionPerformed
+        // TODO add your handling code here:
+        String searchTerm = txtSearchDepartment.getText().trim();
+        
+        if (Admin.isEmpty(searchTerm)) {
+            Admin.showWarning(this, "Please enter a department to search!");
+            return;
+        }
+        
+        List<FacultyProfile> results = searchFacultyByDepartment(searchTerm);
+        populateTable(results);
+        
+        
+        if (results.isEmpty()) {
+            Admin.showInfo(this, "No faculty found in department: " + searchTerm);
+        }
+    }//GEN-LAST:event_btnSearchDepartmentActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        FacultyProfile faculty = getSelectedFaculty();
+        
+        if (faculty == null) {
+            Admin.showWarning(this, "Please select a faculty member from the table first!");
+            return;
+        }
+        
+        // Display in detail fields
+        displayFacultyDetails(faculty);
+
+        // Also show info dialog
+        Admin.showInfo(this, "Details are shown.");
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        if (btnEdit.getText().equals("Edit")) {
+            // Enter edit mode
+            FacultyProfile faculty = getSelectedFaculty();
+            
+            if (faculty == null) {
+                Admin.showWarning(this, "Please select a faculty member from the table first!");
+                return;
+            }
+            
+            displayFacultyDetails(faculty);
+            setDetailFieldsEditable(true);
+            btnEdit.setText("Save");
+            btnView.setEnabled(false);
+            btnDelete.setEnabled(false);
+            
+        } 
+        else {
+            // Save mode
+            if (saveFacultyChanges()) {
+                setDetailFieldsEditable(false);
+                btnEdit.setText("Edit");
+                btnView.setEnabled(true);
+                btnDelete.setEnabled(true);
+                loadAllFaculty();
+                Admin.showSuccess(this, "Faculty information updated successfully!");
+            }
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void txtSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchNameActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        FacultyProfile faculty = getSelectedFaculty();
+        
+        if (faculty == null) {
+            Admin.showWarning(this, "Please select a faculty member from the table first!");
+            return;
+        }
+        
+        // Confirmation dialog
+        String confirmMsg = "This action cannot be undone!";
+        
+        if (!Admin.showConfirmation(this, confirmMsg)) {
+            System.out.println("❌ Delete cancelled");
+            return;
+        }
+        
+        try {
+            // Remove from FacultyDirectory
+            FacultyDirectory facultyDir = business.getFacultyDirectory();
+            facultyDir.getFacultylist().remove(faculty);
+            
+            Admin.showSuccess(this, "Faculty member deleted successfully!");
+            
+            // Clear detail fields
+            clearDetailFields();
+            
+            // Refresh table
+            loadAllFaculty();
+            
+        } catch (Exception e) {
+            Admin.showError(this, "Error deleting faculty: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNameActionPerformed
         // TODO add your handling code here:
@@ -281,11 +378,12 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
             return;
         }
         
-        List<Student> results = searchStudentsByName(searchTerm);
+        List<FacultyProfile> results = searchFacultyByName(searchTerm);
         populateTable(results);
         
+        
         if (results.isEmpty()) {
-            Admin.showInfo(this, "No students found with name: " + searchTerm);
+            Admin.showInfo(this, "No faculty found with name: " + searchTerm);
         }
     }//GEN-LAST:event_btnSearchNameActionPerformed
 
@@ -298,111 +396,14 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
             return;
         }
         
-        List<Student> results = searchStudentsByID(searchTerm);
+        List<FacultyProfile> results = searchFacultyByID(searchTerm);
         populateTable(results);
         
+        
         if (results.isEmpty()) {
-            Admin.showInfo(this, "No students found with ID: " + searchTerm);
+            Admin.showInfo(this, "No faculty found with ID: " + searchTerm);
         }
     }//GEN-LAST:event_btnSearchIDActionPerformed
-
-    private void btnSearchDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDepartmentActionPerformed
-        // TODO add your handling code here:
-        String searchTerm = txtSearchDepartment.getText().trim();
-        
-        if (Admin.isEmpty(searchTerm)) {
-            Admin.showWarning(this, "Please enter a department to search!");
-            return;
-        }
-        
-        List<Student> results = searchStudentsByDepartment(searchTerm);
-        populateTable(results);
-        
-        if (results.isEmpty()) {
-            Admin.showInfo(this, "No students found in department: " + searchTerm);
-        }
-    }//GEN-LAST:event_btnSearchDepartmentActionPerformed
-
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-        Student student = getSelectedStudent();
-        
-        if (student == null) {
-            Admin.showWarning(this, "Please select a student from the table first!");
-            return;
-        }
-        
-        // Display in detail fields
-        displayStudentDetails(student);
-        
-        // Also show info dialog
-        Admin.showInfo(this, "Details are shown.");
-    }//GEN-LAST:event_btnViewActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        if (btnEdit.getText().equals("Edit")) {
-            // Enter edit mode
-            Student student = getSelectedStudent();
-            
-            if (student == null) {
-                Admin.showWarning(this, "Please select a student from the table first!");
-                return;
-            }
-            
-            displayStudentDetails(student);
-            setDetailFieldsEditable(true);
-            btnEdit.setText("Save");
-            btnView.setEnabled(false);
-            btnDelete.setEnabled(false);
-            
-            System.out.println("✏️ Edit mode for: " + student.getStudentId());
-        } 
-        else {
-            // Save mode
-            if (saveStudentChanges()) {
-                setDetailFieldsEditable(false);
-                btnEdit.setText("Edit");
-                btnView.setEnabled(true);
-                btnDelete.setEnabled(true);
-                loadAllStudents();
-                Admin.showSuccess(this, "Student updated successfully!");
-            }
-        }
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        Student student = getSelectedStudent();
-        
-        if (student == null) {
-            Admin.showWarning(this, "Please select a student from the table first!");
-            return;
-        }
-        
-        // Confirmation
-        String msg = "Delete this student?";
-        
-        if (!Admin.showConfirmation(this, msg)) {
-            return;
-        }
-        
-        try {
-            StudentDirectory studentDir = business.getStudentDirectory();
-            studentDir.getStudentList().remove(student);
-            
-            Admin.showSuccess(this, "Student deleted successfully!");
-            clearDetailFields();
-            loadAllStudents();
-            
-        } catch (Exception e) {
-            Admin.showError(this, "Error: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void txtSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchNameActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -421,7 +422,6 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSearchName;
     private javax.swing.JButton btnView;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblDepartment;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblID;
@@ -431,7 +431,6 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblSearchID;
     private javax.swing.JLabel lblSearchName;
     private javax.swing.JTable tblStudent;
-    private javax.swing.JTextField txtBalance;
     private javax.swing.JTextField txtDepartment;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtID;
@@ -443,77 +442,92 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Load all students into the table
+     * Load all faculty into the table
      */
-    private void loadAllStudents() {
-        StudentDirectory studentDir = business.getStudentDirectory();
-        List<Student> allStudents = studentDir.getStudentList();
-        populateTable(allStudents);
+    private void loadAllFaculty() {
+        FacultyDirectory facultyDir = business.getFacultyDirectory();
+        List<FacultyProfile> allFaculty = facultyDir.getFacultylist();
+        populateTable(allFaculty);
     }
     
     /**
-     * Populate JTable with student list
+     * Populate JTable with faculty list
      */
-    private void populateTable(List<Student> students) {
+    private void populateTable(List<FacultyProfile> facultyList) {
         DefaultTableModel model = (DefaultTableModel) tblStudent.getModel();
         model.setRowCount(0);  // Clear existing rows
         
-        for (Student student : students) {
+        for (FacultyProfile faculty : facultyList) {
             Object[] row = new Object[5];
-            row[0] = student.getName();
-            row[1] = getStudentEmail(student);
-            row[2] = getStudentPhone(student);
-            row[3] = student.getBalance();
-            row[4] = student.getStudentId();
+            row[0] = faculty.getFacultyId();
+            row[1] = faculty.getFacultyName();
+            row[2] = faculty.getEmail();
+            row[3] = faculty.getDepartment() != null ? faculty.getDepartment() : "";
+            row[4] = faculty.getPhone();
             
             model.addRow(row);
         }
     }
     
     /**
-     * Get selected student from table
-     * Returns null if no row selected
+     * Get selected faculty from table
      */
-    private Student getSelectedStudent() {
+    private FacultyProfile getSelectedFaculty() {
         int selectedRow = tblStudent.getSelectedRow();
         
         if (selectedRow < 0) {
             return null;
         }
         
-        // Get student ID from selected row (column 4)
-        String studentID = (String) tblStudent.getValueAt(selectedRow, 4);
+        // Get faculty ID from selected row (column 0)
+        String facultyID = (String) tblStudent.getValueAt(selectedRow, 0);
         
-        // Find student by ID
-        return findStudentByID(studentID);
+        // Find faculty by ID
+        return findFacultyByID(facultyID);
     }
     
     /**
-     * Display student details in the detail fields
+     * Find faculty by ID
      */
-    private void displayStudentDetails(Student student) {
-        if (student == null) {
+    private FacultyProfile findFacultyByID(String facultyID) {
+        if (Admin.isEmpty(facultyID)) {
+            return null;
+        }
+        
+        FacultyDirectory facultyDir = business.getFacultyDirectory();
+        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
+            if (faculty.getFacultyId() != null && 
+                faculty.getFacultyId().equals(facultyID)) {
+                return faculty;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Display faculty details in the detail fields
+     */
+    private void displayFacultyDetails(FacultyProfile faculty) {
+        if (faculty == null) {
             clearDetailFields();
             return;
         }
         
-        txtName.setText(student.getName());
-        txtID.setText(student.getStudentId());
-        txtEmail.setText(getStudentEmail(student));
-        txtPhone.setText(getStudentPhone(student));
-        txtBalance.setText(String.valueOf(student.getBalance()));
-        txtDepartment.setText(getStudentDepartment(student));
+        txtID.setText(faculty.getFacultyId());
+        txtName.setText(faculty.getFacultyName());
+        txtEmail.setText(faculty.getEmail() != null ? faculty.getEmail() : "");
+        txtPhone.setText(faculty.getPhone() != null ? faculty.getPhone() : "");
+        txtDepartment.setText(faculty.getDepartment() != null ? faculty.getDepartment() : "");
     }
     
     /**
      * Clear detail fields
      */
     private void clearDetailFields() {
-        txtName.setText("");
         txtID.setText("");
+        txtName.setText("");
         txtEmail.setText("");
         txtPhone.setText("");
-        txtBalance.setText("");
         txtDepartment.setText("");
     }
     
@@ -521,22 +535,24 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
      * Set detail fields editable or not
      */
     private void setDetailFieldsEditable(boolean editable) {
-        txtName.setEditable(editable);
+        // Name is read-only (comes from Person)
+        txtName.setEditable(false);
+        txtName.setBackground(new java.awt.Color(240, 240, 240));
+        
+        // ID is always read-only
+        txtID.setEditable(false);
+        txtID.setBackground(new java.awt.Color(240, 240, 240));
+        
+        // Email, Phone, Department can be edited
         txtEmail.setEditable(editable);
         txtPhone.setEditable(editable);
         txtDepartment.setEditable(editable);
         
-        // ID and Balance are never editable
-        txtID.setEditable(false);
-        txtBalance.setEditable(false);
-        
         if (!editable) {
-            txtName.setBackground(new java.awt.Color(240, 240, 240));
             txtEmail.setBackground(new java.awt.Color(240, 240, 240));
             txtPhone.setBackground(new java.awt.Color(240, 240, 240));
             txtDepartment.setBackground(new java.awt.Color(240, 240, 240));
         } else {
-            txtName.setBackground(java.awt.Color.WHITE);
             txtEmail.setBackground(java.awt.Color.WHITE);
             txtPhone.setBackground(java.awt.Color.WHITE);
             txtDepartment.setBackground(java.awt.Color.WHITE);
@@ -544,66 +560,19 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     }
     
     /**
-     * Find student by ID
+     * SEARCH METHOD 1: Search faculty by name
      */
-    private Student findStudentByID(String studentID) {
-        StudentDirectory studentDir = business.getStudentDirectory();
-        for (Student student : studentDir.getStudentList()) {
-            if (student.getStudentId().equals(studentID)) {
-                return student;
-            }
-        }
-        return null;
-    }
-    
-    /**
-     * Get student email (handles null)
-     */
-    private String getStudentEmail(Student student) {
-        return student.getEmail() != null ? student.getEmail() : "";
-    }
-    
-    /**
-     * Get student phone (handles null)
-     */
-    private String getStudentPhone(Student student) {
-        return student.getPhone() != null ? student.getPhone() : "";
-    }
-    
-    /**
-     * Get student department (handles null)
-     */
-    private String getStudentDepartment(Student student) {
-        return student.getDepartment() != null ? student.getDepartment() : "";
-    }
-    
-    /**
-     * Set student email using reflection
-     */
-    private void setStudentEmail(Student student, String email) {
-        student.setEmail(email);
-    }
-    
-    /**
-     * Set student phone using reflection
-     */
-    private void setStudentPhone(Student student, String phone) {
-        student.setPhone(phone);
-    }
-    
-    /**
-     * SEARCH METHOD 1: Search students by name
-     */
-    private List<Student> searchStudentsByName(String name) {
-        List<Student> results = new ArrayList<>();
+    private List<FacultyProfile> searchFacultyByName(String name) {
+        List<FacultyProfile> results = new ArrayList<>();
         if (Admin.isEmpty(name)) return results;
         
         String searchTerm = name.toLowerCase().trim();
-        StudentDirectory studentDir = business.getStudentDirectory();
+        FacultyDirectory facultyDir = business.getFacultyDirectory();
         
-        for (Student student : studentDir.getStudentList()) {
-            if (student.getName().toLowerCase().contains(searchTerm)) {
-                results.add(student);
+        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
+            String facultyName = faculty.getFacultyName().toLowerCase();
+            if (facultyName.contains(searchTerm)) {
+                results.add(faculty);
             }
         }
         
@@ -611,18 +580,19 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     }
     
     /**
-     * SEARCH METHOD 2: Search students by ID
+     * SEARCH METHOD 2: Search faculty by ID
      */
-    private List<Student> searchStudentsByID(String id) {
-        List<Student> results = new ArrayList<>();
+    private List<FacultyProfile> searchFacultyByID(String id) {
+        List<FacultyProfile> results = new ArrayList<>();
         if (Admin.isEmpty(id)) return results;
         
         String searchTerm = id.trim();
-        StudentDirectory studentDir = business.getStudentDirectory();
+        FacultyDirectory facultyDir = business.getFacultyDirectory();
         
-        for (Student student : studentDir.getStudentList()) {
-            if (student.getStudentId().contains(searchTerm)) {
-                results.add(student);
+        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
+            if (faculty.getFacultyId() != null && 
+                faculty.getFacultyId().contains(searchTerm)) {
+                results.add(faculty);
             }
         }
         
@@ -630,19 +600,19 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     }
     
     /**
-     * SEARCH METHOD 3: Search students by department
+     * SEARCH METHOD 3: Search faculty by department
      */
-    private List<Student> searchStudentsByDepartment(String department) {
-        List<Student> results = new ArrayList<>();
+    private List<FacultyProfile> searchFacultyByDepartment(String department) {
+        List<FacultyProfile> results = new ArrayList<>();
         if (Admin.isEmpty(department)) return results;
         
         String searchTerm = department.toLowerCase().trim();
-        StudentDirectory studentDir = business.getStudentDirectory();
+        FacultyDirectory facultyDir = business.getFacultyDirectory();
         
-        for (Student student : studentDir.getStudentList()) {
-            String studentDept = getStudentDepartment(student).toLowerCase();
-            if (studentDept.contains(searchTerm)) {
-                results.add(student);
+        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
+            String facultyDept = faculty.getDepartment();
+            if (facultyDept != null && facultyDept.toLowerCase().contains(searchTerm)) {
+                results.add(faculty);
             }
         }
         
@@ -650,72 +620,75 @@ public class AdminManageStudentsJPanel extends javax.swing.JPanel {
     }
     
     /**
-     * Save student changes
+     * Save faculty changes
      */
-    private boolean saveStudentChanges() {
-        Student student = getSelectedStudent();
+    private boolean saveFacultyChanges() {
+        FacultyProfile faculty = getSelectedFaculty();
         
-        if (student == null) {
-            Admin.showError(this, "No student selected!");
+        if (faculty == null) {
+            Admin.showError(this, "No faculty selected!");
             return false;
         }
         
-        String newName = txtName.getText().trim();
         String newEmail = txtEmail.getText().trim();
         String newPhone = txtPhone.getText().trim();
         String newDepartment = txtDepartment.getText().trim();
         
-        // Validate
-        if (!Admin.isValidName(newName)) {
-            Admin.showError(this, "Invalid name format!");
-            return false;
-        }
-        
+        // Validate email
         if (!Admin.isValidEmail(newEmail)) {
             Admin.showError(this, "Invalid email format!");
             return false;
         }
         
+        // Validate phone
         if (!Admin.isValidPhone(newPhone)) {
-            Admin.showError(this, "Invalid phone number!");
+            Admin.showError(this, "Invalid phone number! Must be 10 digits.");
             return false;
         }
         
-        // Check email conflict
-        if (!newEmail.equalsIgnoreCase(getStudentEmail(student))) {
-            if (isEmailUsedByOther(newEmail, student.getStudentId())) {
-                Admin.showError(this, "Email already used by another student!");
+        // Check email conflict with other faculty
+        if (!newEmail.equalsIgnoreCase(faculty.getEmail())) {
+            if (isEmailUsedByOther(newEmail, faculty.getFacultyId())) {
+                Admin.showError(this, "Email already used by another faculty member!");
                 return false;
             }
         }
         
         try {
-            student.setName(newName);
-            setStudentEmail(student, newEmail);
-            setStudentPhone(student, newPhone);
-            student.setDepartment(newDepartment);
+            // Update faculty information
+            faculty.setEmail(newEmail);
+            faculty.setPhone(newPhone);
+            faculty.setDepartment(newDepartment);
             
             return true;
+            
         } catch (Exception e) {
-            Admin.showError(this, "Error: " + e.getMessage());
+            Admin.showError(this, "Error saving changes: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
     
     /**
-     * Check if email is used by another student
+     * Check if email is used by another faculty member
      */
-    private boolean isEmailUsedByOther(String email, String currentStudentID) {
-        if (Admin.isEmpty(email)) return false;
+    private boolean isEmailUsedByOther(String email, String currentFacultyID) {
+        if (Admin.isEmpty(email)) {
+            return false;
+        }
         
-        String emailLower = email.toLowerCase();
-        for (Student s : business.getStudentDirectory().getStudentList()) {
-            if (!s.getStudentId().equals(currentStudentID)) {
-                if (getStudentEmail(s).toLowerCase().equals(emailLower)) {
+        String emailLower = email.toLowerCase().trim();
+        FacultyDirectory facultyDir = business.getFacultyDirectory();
+        
+        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
+            if (!faculty.getFacultyId().equals(currentFacultyID)) {
+                String facultyEmail = faculty.getEmail();
+                if (facultyEmail != null && facultyEmail.toLowerCase().equals(emailLower)) {
                     return true;
                 }
             }
         }
+        
         return false;
     }
 }
