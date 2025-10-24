@@ -12,7 +12,6 @@ package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
 import Business.UserAccounts.UserAccount;
-import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -152,12 +151,14 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageCourseIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCourseIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
+        //CardSequencePanel.removeAll();
 
-        ManagePersonsJPanel aos = new ManagePersonsJPanel(business, CardSequencePanel);
+        ManageCourseJPanel mc = new ManageCourseJPanel(business, CardSequencePanel,useraccount);
 
-        CardSequencePanel.add("Manage Persons", aos);
+        CardSequencePanel.add("Manage Course", mc);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        
+        
 
     }//GEN-LAST:event_btnManageCourseIdentifyResourceAssetsActionPerformed
 

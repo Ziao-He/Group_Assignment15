@@ -35,8 +35,17 @@ public class CourseOffering {
         return capacity;
     }
     
+    
     public double getTuitionForCourse(){
         return course.getCredits()*tuitionPerCredit;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public boolean isEnrollmentStatus() {
+        return enrollmentStatus;
     }
 
     public CourseOffering(Course course, FacultyProfile faculty, Schedule schedule, int capacity) {
