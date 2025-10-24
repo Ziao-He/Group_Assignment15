@@ -64,12 +64,33 @@ class ConfigureABusiness {
         
 //        StudentProfileDirectory studentdirectory = business.getStudentDirectory();
 //        StudentProfile studentprofile0 = studentdirectory.newStudentProfile(person003);
-        Student s1 = new Student("0001","Lin Yiyang","Student");
+        Student s1 = new Student("0001", "Lin Yiyang", "Student");
+        s1.setEmail("lin.yiyang@northeastern.edu");
+        s1.setPhone("617-555-1001");
+        s1.setDepartment("Information Systems");
         business.getStudentDirectory().addStudent(s1);
-        
-        StudentProfile sD =new StudentProfile(s1,s1);
+
+        StudentProfile sD1 = new StudentProfile(s1, s1);
         StudentProfileDirectory sPD = business.getStudentProfileDirectory();
-        sPD.newStudentProfile(sD);
+        sPD.newStudentProfile(sD1);
+        
+        Student s2 = new Student("0002", "Emma Johnson", "Student");
+        s2.setEmail("emma.johnson@northeastern.edu");
+        s2.setPhone("617-555-1002");
+        s2.setDepartment("Computer Science");
+        business.getStudentDirectory().addStudent(s2);
+
+        StudentProfile sD2 = new StudentProfile(s2, s2);
+        sPD.newStudentProfile(sD2);
+        
+        Student s3 = new Student("0003", "Michael Chen", "Student");
+        s3.setEmail("michael.chen@northeastern.edu");
+        s3.setPhone("617-555-1003");
+        s3.setDepartment("Data Science");
+        business.getStudentDirectory().addStudent(s3);
+
+        StudentProfile sD3 = new StudentProfile(s3, s3);
+        sPD.newStudentProfile(sD3);
         
 
         // Create User accounts that link to specific profiles
@@ -88,7 +109,7 @@ class ConfigureABusiness {
 // Create User accounts that link to specific profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); /// order products for one of the customers and performed by a sales person
-        UserAccount ua4 = uadirectory.newUserAccount(sD, "adam", "****"); /// order products for one of the customers and performed by a sales person
+        UserAccount ua4 = uadirectory.newUserAccount(sD1, "adam", "****"); /// order products for one of the customers and performed by a sales person
         UserAccount fua =uadirectory.newUserAccount(faprofile0, "fua", "****");
         
         CourseDirectory coursedirectory = business.getCourseDirectory();
@@ -124,21 +145,20 @@ class ConfigureABusiness {
         coursedirectory.addOffering(o5);
         coursedirectory.addOffering(o6);
         
-        sD.getStudent().enrollCourse(new CourseOffering(c1,faprofile4,sch7,30));
+        sD1.getStudent().enrollCourse(new CourseOffering(c1,faprofile4,sch7,30));
         
         //create course work
         CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();
         CourseWorkdirectory.addCourseWork(c1, "Lab 01");
         CourseWorkdirectory.addCourseWork(c1, "Lab 02");
         
-        sD.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
+        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
         
         //add CourseGrade
-        sD.getStudent().addCourseGrade(c1, "Fall 2025","B");
-        sD.getStudent().payTuition(1200);
+        sD1.getStudent().addCourseGrade(c1, "Fall 2025","B");
+        sD1.getStudent().payTuition(1200);
         
         return business;
 
     }
-
 }

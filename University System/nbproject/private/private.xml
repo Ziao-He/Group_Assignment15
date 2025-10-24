@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdministerUserAccountsWorkResp/AdminRegistrationJPanel.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdministerUserAccountsWorkResp/AdminStudentJPanel.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/FacultyProfile.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdministerUserAccountsWorkResp/AdminFacultyJPanel.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/StudentProfile.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdministerUserAccountsWorkResp/ManageUserAccountsJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminRoleWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/UserAccounts/UserAccount.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdministerUserAccountsWorkResp/AdminUserAccount.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/UserAccounts/UserAccountDirectory.java</file>
         </group>
     </open-files>
 </project-private>
