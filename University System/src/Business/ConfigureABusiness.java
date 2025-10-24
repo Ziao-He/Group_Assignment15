@@ -92,6 +92,24 @@ class ConfigureABusiness {
         StudentProfile sD3 = new StudentProfile(s3, s3);
         sPD.newStudentProfile(sD3);
         
+        Student s4 = new Student("0004", "Sarah Williams", "Student");
+        s4.setEmail("sarah.williams@northeastern.edu");
+        s4.setPhone("617-555-1004");
+        s4.setDepartment("Information Systems");
+        business.getStudentDirectory().addStudent(s4);
+
+        StudentProfile sD4 = new StudentProfile(s4, s4);
+        sPD.newStudentProfile(sD4);
+        
+        Student s5 = new Student("0005", "David Martinez", "Student");
+        s5.setEmail("david.martinez@northeastern.edu");
+        s5.setPhone("617-555-1005");
+        s5.setDepartment("Computer Science");
+        business.getStudentDirectory().addStudent(s5);
+
+        StudentProfile sD5 = new StudentProfile(s5, s5);
+        sPD.newStudentProfile(sD5);
+        
 
         // Create User accounts that link to specific profiles
         FacultyDirectory fadirectory = business.getFacultyDirectory(); 
