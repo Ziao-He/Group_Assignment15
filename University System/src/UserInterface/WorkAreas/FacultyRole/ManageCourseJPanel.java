@@ -25,6 +25,8 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     javax.swing.JPanel CardSequencePanel;
     Business business;
     UserAccount useraccount;
+    ArrayList<CourseOffering> facultyCourse;
+    CourseOffering courseOffering;
 
     /**
      * Creates new form UnitRiskWorkArea
@@ -36,10 +38,63 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         this.CardSequencePanel = clp;
         useraccount = ua;
         initComponents();
+        initialization();
+        refresh();
+        SetViewMode();
     }
     public void initialization(){
-        ArrayList<CourseOffering> facultyCourse = business.getCourseDirectory().findByFacultyName(useraccount.getProfile().getRole());
+        // find which course faculty teach
+        facultyCourse = business.getCourseDirectory().findByFacultyName(useraccount.getPersonId());
         
+        // show the course on boxCourse
+        boxCourse.removeAllItems();
+        if(facultyCourse != null)
+            for(CourseOffering co : facultyCourse)
+                boxCourse.addItem(co.getCourse().getName());
+    }
+    public void refresh(){
+        if(facultyCourse != null){
+            String courseName = (String) boxCourse.getSelectedItem();
+
+            for(CourseOffering co : facultyCourse)
+                if(co.getCourse().getName().equals(courseName))
+                    courseOffering = co;
+
+            txtDescription.setText(courseOffering.getCourse().getDescription());
+            String schedule = courseOffering.getSchedule().getStartTime() + "-" + courseOffering.getSchedule().getEndTime();
+            schedule = schedule + "   " + courseOffering.getSchedule().getClassRoom();
+            txtSchedule.setText(schedule);
+            txtCapacity.setText(Integer.toString(courseOffering.getCapacity()));
+            txtSyllabus.setText(courseOffering.getCourse().getSyllabus());
+            if(courseOffering.isEnrollmentStatus())
+                boxStatus.setSelectedItem("Open");
+            else
+                boxStatus.setSelectedItem("Close");}
+        
+
+    }
+    public void SetViewMode(){
+        txtDescription.setEditable(false);
+        txtSchedule.setEditable(false);
+        txtCapacity.setEditable(false);
+        txtSyllabus.setEditable(false);
+        
+        boxStatus.setEnabled(false);
+        btnUpload.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+    }
+    
+     public void SetUpdateMode(){
+        txtDescription.setEditable(true);
+        txtSchedule.setEditable(true);
+        txtCapacity.setEditable(true);
+        txtSyllabus.setEditable(true);
+        
+        boxStatus.setEnabled(true);
+        btnUpload.setEnabled(true);
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,6 +131,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         lblTitle.setText("Course Management");
 
         boxCourse.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        boxCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCourseActionPerformed(evt);
+            }
+        });
 
         lblDescription.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblDescription.setText("Description");
@@ -113,6 +173,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
         btnUpdate.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnSave.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnSave.setText("Save");
@@ -207,6 +272,17 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void boxCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCourseActionPerformed
+        // TODO add your handling code here:
+        refresh();
+        SetViewMode();
+    }//GEN-LAST:event_boxCourseActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        SetUpdateMode();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

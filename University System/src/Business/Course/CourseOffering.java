@@ -48,11 +48,21 @@ public class CourseOffering {
         return enrollmentStatus;
     }
 
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setEnrollmentStatus(boolean enrollmentStatus) {
+        this.enrollmentStatus = enrollmentStatus;
+    }
+
+    
     public CourseOffering(Course course, FacultyProfile faculty, Schedule schedule, int capacity) {
         this.course = course;
         this.faculty = faculty;
         this.schedule = schedule;
         this.capacity = capacity;
     }
+    
     
 }

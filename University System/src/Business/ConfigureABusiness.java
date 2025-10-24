@@ -84,6 +84,8 @@ class ConfigureABusiness {
         UserAccount ua4 = uadirectory.newUserAccount(sD, "adam", "****"); /// order products for one of the customers and performed by a sales person
         UserAccount fua =uadirectory.newUserAccount(faprofile0, "fua", "****");
         
+        UserAccount f =uadirectory.newUserAccount(faprofile2, "f", "****");
+        
         CourseDirectory coursedirectory = business.getCourseDirectory();
     
         Course c1 = new Course("INFO 5100", "Application Engineering and Development", 4);
