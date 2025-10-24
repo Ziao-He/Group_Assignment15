@@ -39,7 +39,7 @@ public class CourseDirectory {
         ArrayList<CourseOffering> res = new ArrayList<>();
         String cleanFaculty = faculty.replaceAll("[\\p{P}\\p{S}]", "");
         for (CourseOffering o : offerList) {
-                String cleanCourseFaculty = o.getFaculty().replaceAll("[\\p{P}\\p{S}]", ""); 
+                String cleanCourseFaculty = o.getFaculty().getFacultyName().replaceAll("[\\p{P}\\p{S}]", ""); 
                 if (cleanCourseFaculty != null && cleanCourseFaculty.toLowerCase().contains(cleanFaculty.toLowerCase())) {
                 res.add(o);
                 }
