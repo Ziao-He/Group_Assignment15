@@ -31,6 +31,7 @@ public class Business {
     FacultyDirectory facultydirectory;
     CourseWorkDirectory courseWorkDirectory;
     AdminDirectory adminDirectory; 
+    StudentProfileDirectory studentProfileDirectory;
     
 
 
@@ -45,6 +46,7 @@ public class Business {
         courseDirectory = new CourseDirectory();
         courseWorkDirectory =new CourseWorkDirectory();
         adminDirectory = new AdminDirectory();
+        studentProfileDirectory = new StudentProfileDirectory();
     }
 
     public CourseWorkDirectory getCourseWorkDirectory() {
@@ -78,5 +80,9 @@ public class Business {
     
     public AdminDirectory getAdminDirectory() {
         return adminDirectory;
+    }
+    
+    public StudentProfileDirectory getStudentProfileDirectory(){
+        return studentProfileDirectory;
     }
 }

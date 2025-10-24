@@ -238,8 +238,7 @@ public class Admin extends Person {
      * Update admin profile information
      * Only updates non-empty fields
      */
-    public boolean updateProfile(String firstName, String lastName, 
-                                String email, String phone) {
+    public boolean updateProfile(String firstName, String lastName,String email, String phone) {
         boolean updated = false;
         
         if (!isEmpty(firstName) && isValidName(firstName)) {

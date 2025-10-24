@@ -5,6 +5,8 @@
  */
 package Business.Profiles;
 
+import Business.Person.Admin;
+import Business.Person.AdminDirectory;
 import Business.Person.Person;
 
 /**
@@ -13,16 +15,43 @@ import Business.Person.Person;
  */
 public class EmployeeProfile extends Profile {
 
-
-
-    public EmployeeProfile(Person p) {
-
-        super(p); 
-
+    Person user; 
+    Admin admin; 
+    
+    /**
+     * Constructor with Person and Admin
+     * Follows StudentProfile pattern
+     */
+    public EmployeeProfile(Person p, Admin a) {
+        super(p);           // Pass Person to parent Profile class
+        this.user = p;
+        this.admin = a;
     }
+    
+    public EmployeeProfile(Person p) {
+        super(p);
+        this.user = p;
+        this.admin = null;  // No associated Admin
+    }
+    
+    public Person getPerson() {
+        return user;
+    }
+    
+    public Admin getAdmin() {
+        return admin;
+    }
+    
+    public void setPerson(Person person) {
+        this.user = person;
+    }
+    
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+    
     @Override
     public String getRole(){
         return  "Admin";
     }
-
 }
