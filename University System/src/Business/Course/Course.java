@@ -12,6 +12,7 @@ public class Course {
     private String courseId;
     private String name;
     private int credits;
+    private String syllabus;
 
     public Course(String courseId, String name, int credits){
         this.courseId = courseId;
@@ -42,4 +43,9 @@ public class Course {
     public void setCredits(int credits) {
         this.credits = credits;
     }
+
+    public void setSyllabus(String syllabus) {
+        this.syllabus = syllabus;
+    }
+    
 }

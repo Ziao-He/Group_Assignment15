@@ -12,11 +12,11 @@ import Business.Profiles.FacultyProfile;
  */
 public class CourseOffering {
     private Course course;
-//    private Faculty faculty;
     private FacultyProfile faculty;
-    Schedule schedule;
+    private Schedule schedule;
     private int capacity;
     private double tuitionPerCredit = 300.0; 
+    private boolean enrollmentStatus = true;
 
     public Course getCourse() {
         return course;
