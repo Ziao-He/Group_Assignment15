@@ -118,8 +118,8 @@ public class AdminDirectory {
             String lastName = admin.getLastName().toLowerCase();
             
             if (fullName.contains(searchTerm) || 
-                firstName.contains(searchTerm) || 
-                lastName.contains(searchTerm)) {
+                (firstName.contains(searchTerm) && 
+                lastName.contains(searchTerm))) {
                 results.add(admin);
             }
         }
