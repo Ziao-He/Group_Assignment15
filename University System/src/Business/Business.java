@@ -9,6 +9,7 @@ import Business.Course.CourseDirectory;
 import Business.Person.CourseWorkDirectory;
 import Business.Person.PersonDirectory;
 import Business.Person.StudentDirectory;
+import Business.Person.AdminDirectory; 
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.FacultyDirectory;
 import Business.Profiles.StudentProfileDirectory;
@@ -29,6 +30,7 @@ public class Business {
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
     CourseWorkDirectory courseWorkDirectory;
+    AdminDirectory adminDirectory; 
     
 
 
@@ -42,6 +44,7 @@ public class Business {
         facultydirectory =new FacultyDirectory();
         courseDirectory = new CourseDirectory();
         courseWorkDirectory =new CourseWorkDirectory();
+        adminDirectory = new AdminDirectory();
     }
 
     public CourseWorkDirectory getCourseWorkDirectory() {
@@ -71,5 +74,9 @@ public class Business {
     
     public FacultyDirectory getFacultyDirectory(){
         return facultydirectory;
+    }
+    
+    public AdminDirectory getAdminDirectory() {
+        return adminDirectory;
     }
 }
