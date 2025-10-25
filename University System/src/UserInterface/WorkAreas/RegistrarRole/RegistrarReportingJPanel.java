@@ -4,17 +4,37 @@
  */
 package UserInterface.WorkAreas.RegistrarRole;
 
+import Business.Business;
+import Business.Course.CourseOffering;
+import Business.Person.Student;
+import Business.UserAccounts.UserAccount;
+import java.awt.CardLayout;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 心火牧神塞勒斯
  */
 public class RegistrarReportingJPanel extends javax.swing.JPanel {
 
+    Business business;
+    UserAccount useraccount;
+    javax.swing.JPanel CardSequencePanel;
     /**
      * Creates new form RegistrarReportingJPanel
      */
-    public RegistrarReportingJPanel() {
+    public RegistrarReportingJPanel(Business b, JPanel clp, UserAccount ua) {
+        this.business = b;
+        this.CardSequencePanel = clp;
+        this.useraccount = ua;
         initComponents();
+        setupSemesterComboBox();
     }
 
     /**
@@ -26,21 +46,218 @@ public class RegistrarReportingJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnBack = new javax.swing.JButton();
+        btnShowReport = new javax.swing.JButton();
+        lblSemester = new javax.swing.JLabel();
+        jcbSemester = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblReport = new javax.swing.JTable();
+
         setBackground(new java.awt.Color(204, 255, 255));
+
+        btnBack.setText("<<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnShowReport.setText("Show the Report");
+        btnShowReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowReportActionPerformed(evt);
+            }
+        });
+
+        lblSemester.setText("Semester");
+
+        jcbSemester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tblReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Department", "Enrollment", "Avg GPA", "Good Standing", "Academic Warning", "Academic Probation"
+            }
+        ));
+        jScrollPane1.setViewportView(tblReport);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1136, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBack)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(51, 51, 51)
+                                .addComponent(btnShowReport, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1084, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 742, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSemester)
+                    .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShowReport))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(227, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnShowReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowReportActionPerformed
+        // TODO add your handling code here:
+            try {
+            String selectedSemester = (String) jcbSemester.getSelectedItem();
+            if (selectedSemester == null || selectedSemester.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "请选择学期", "错误", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            generateInstitutionalReport(selectedSemester);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "生成报告失败: " + ex.getMessage(), 
+                "错误", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnShowReportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnShowReport;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> jcbSemester;
+    private javax.swing.JLabel lblSemester;
+    private javax.swing.JTable tblReport;
     // End of variables declaration//GEN-END:variables
+
+    private void setupSemesterComboBox() {
+        jcbSemester.removeAllItems();
+    
+        // 从所有CourseOffering中提取不重复的学期
+        Set<String> semesters = new HashSet<>();
+
+        for (CourseOffering offering : business.getCourseDirectory().getCourseOfferingList()) {
+            String semester = offering.getSemester();
+            if (semester != null && !semester.trim().isEmpty()) {
+                semesters.add(semester);
+            }
+        }
+
+        // 添加到ComboBox
+        for (String semester : semesters) {
+            jcbSemester.addItem(semester);
+        }
+
+        // 如果没有学期数据，添加一个默认选项
+        if (jcbSemester.getItemCount() == 0) {
+            jcbSemester.addItem("Fall 2025");
+        }
+
+        // 设置默认选中第一个
+        if (jcbSemester.getItemCount() > 0) {
+            jcbSemester.setSelectedIndex(0);
+        }
+    }
+
+    private void generateInstitutionalReport(String selectedSemester) {
+        DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
+        model.setRowCount(0); // 清空表格
+
+        // 按院系统计
+        Map<String, DepartmentStats> statsMap = new HashMap<>();
+
+        // 初始化院系
+        statsMap.put("Information Systems", new DepartmentStats());
+        statsMap.put("Data Science", new DepartmentStats());
+        statsMap.put("Computer Science", new DepartmentStats());
+
+        // 遍历所有学生
+        for (Student student : business.getStudentDirectory().getStudentList()) {
+            String department = student.getDepartment();
+            if (department == null || !statsMap.containsKey(department)) {
+                continue; // 跳过没有院系或未知院系的学生
+            }
+
+            DepartmentStats stats = statsMap.get(department);
+
+            // 统计注册人数
+            stats.enrollmentCount++;
+
+            // 计算GPA
+            double gpa = student.calculateOverallGPA();
+            stats.totalGPA += gpa;
+
+            // 统计学业状态
+            String standing = student.getAcademicStandingForTerm(selectedSemester);
+            switch (standing) {
+                case "Good Standing":
+                    stats.goodStandingCount++;
+                    break;
+                case "Academic Warning":
+                    stats.academicWarningCount++;
+                    break;
+                case "Academic Probation":
+                    stats.academicProbationCount++;
+                    break;
+            }
+        }
+
+        // 填充表格数据
+        for (Map.Entry<String, DepartmentStats> entry : statsMap.entrySet()) {
+            String department = entry.getKey();
+            DepartmentStats stats = entry.getValue();
+
+            // 计算平均GPA
+            double avgGPA = stats.enrollmentCount > 0 ? stats.totalGPA / stats.enrollmentCount : 0.0;
+
+            Object[] row = {
+                department,
+                stats.enrollmentCount,
+                String.format("%.2f", avgGPA),
+                stats.goodStandingCount,
+                stats.academicWarningCount,
+                stats.academicProbationCount
+            };
+            model.addRow(row);
+        }
+
+        JOptionPane.showMessageDialog(this, 
+            selectedSemester + " 学期机构报告生成完成", 
+            "成功", JOptionPane.INFORMATION_MESSAGE);
+    
+    }
+    
+    private class DepartmentStats {
+        int enrollmentCount = 0;
+        double totalGPA = 0.0;
+        int goodStandingCount = 0;
+        int academicWarningCount = 0;
+        int academicProbationCount = 0;
+    }
 }

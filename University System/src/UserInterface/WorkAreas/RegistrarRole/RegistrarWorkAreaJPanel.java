@@ -181,7 +181,9 @@ public class RegistrarWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        
+        RegistrarReportingJPanel panel= new RegistrarReportingJPanel(business,CardSequencePanel,useraccount);
+        CardSequencePanel.add("RegistrarReportingJPanel",panel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel); 
     }//GEN-LAST:event_btnReportActionPerformed
 
 
