@@ -147,11 +147,11 @@ class ConfigureABusiness {
         sD.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(1), "This is Lab 02 report");
         
         //add CourseGrade
-        sD.getStudent().addCourseGrade(c1, "Fall 2025","B");
+        sD.getStudent().addCourseGrade(c1, "Fall 2025","B",3.1);
         sD.getStudent().payTuition(1200);
         
-        sD2.getStudent().addCourseGrade(c1, "Fall 2025","A");
-        sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+");
+        sD2.getStudent().addCourseGrade(c1, "Fall 2025","A",3.8);
+        sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+",3.5);
         
         return business;
 
