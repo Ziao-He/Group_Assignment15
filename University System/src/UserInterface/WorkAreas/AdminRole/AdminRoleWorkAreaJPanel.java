@@ -11,8 +11,6 @@
 package UserInterface.WorkAreas.AdminRole;
 
 import Business.Business;
-import Business.UserAccounts.UserAccount;
-import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.AdminUserAccount;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageUserAccountsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
 
@@ -26,17 +24,15 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     javax.swing.JPanel CardSequencePanel;
     Business business;
-    UserAccount currentUserAccount; 
 
     /**
      * Creates new form UnitRiskWorkArea
      */
 
-    public AdminRoleWorkAreaJPanel(Business b, UserAccount ua,JPanel clp) {
+    public AdminRoleWorkAreaJPanel(Business b, JPanel clp) {
 
         business = b;
         this.CardSequencePanel = clp;
-        this.currentUserAccount = ua;
         initComponents();
 
     }
@@ -208,10 +204,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
-        AdminUserAccount ams = new AdminUserAccount(business, currentUserAccount,CardSequencePanel);
-
-        CardSequencePanel.add("AdminUserAccount", ams);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

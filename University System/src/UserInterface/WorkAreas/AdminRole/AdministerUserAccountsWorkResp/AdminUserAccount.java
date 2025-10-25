@@ -5,9 +5,6 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
-import Business.Business;
-import Business.Person.Admin;
-import Business.Profiles.EmployeeProfile;
 import Business.UserAccounts.UserAccount;
 import javax.swing.JPanel;
 
@@ -21,28 +18,16 @@ public class AdminUserAccount extends javax.swing.JPanel {
     /**
      * Creates new form ManageSuppliersJPanel
      */
-    private Business business;
-    private JPanel cardSequencePanel;
-    private UserAccount currentUserAccount;
-    private Admin currentAdmin;
-    private boolean isEditMode = false;
-    
-    public AdminUserAccount(Business  b, UserAccount ua,JPanel jp) {
-        this.business = b;
-        this.cardSequencePanel = jp;
-        this.currentUserAccount = ua;
+    JPanel CardSequencePanel;
+
+    UserAccount selecteduseraccount;
+
+    public AdminUserAccount(UserAccount sua, JPanel jp) {
+
+        CardSequencePanel = jp;
+        selecteduseraccount= sua;
         initComponents();
         //display user details here
-        
-        getCurrentAdmin();
-        
-        // Display admin information
-        if (currentAdmin != null) {
-            displayAdminInfo();
-            setFieldsEditable(false);
-        } else {
-            Admin.showError(this, "Cannot load admin information!");
-        }
 
     }
 
@@ -55,301 +40,58 @@ public class AdminUserAccount extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Update = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         Back = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        txtDepartment = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtLast = new javax.swing.JTextField();
-        txtFirst = new javax.swing.JTextField();
-        txtRole = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        Back1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
 
-        Update.setText("Update>>");
-        Update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateActionPerformed(evt);
-            }
-        });
-        add(Update);
-        Update.setBounds(480, 290, 100, 23);
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Administer User Account");
-        add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 28);
-
-        Back.setText("<< Back");
+        Back.setText("Update>>");
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
             }
         });
         add(Back);
-        Back.setBounds(40, 290, 100, 23);
+        Back.setBounds(480, 290, 100, 32);
 
-        jLabel1.setText("Email :");
-        add(jLabel1);
-        jLabel1.setBounds(160, 130, 90, 17);
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel2.setText("Administer User Account");
+        add(jLabel2);
+        jLabel2.setBounds(21, 20, 550, 29);
 
-        jLabel3.setText("Admin ID:");
-        add(jLabel3);
-        jLabel3.setBounds(161, 50, 90, 17);
-
-        jLabel4.setText("Role:");
-        add(jLabel4);
-        jLabel4.setBounds(160, 70, 90, 17);
-
-        jLabel5.setText("First Name:");
-        add(jLabel5);
-        jLabel5.setBounds(160, 90, 90, 17);
-
-        jLabel6.setText("Phone :");
-        add(jLabel6);
-        jLabel6.setBounds(160, 150, 90, 17);
-
-        jLabel7.setText("Last Name:");
-        add(jLabel7);
-        jLabel7.setBounds(160, 110, 90, 17);
-
-        jLabel8.setText("Department:");
-        add(jLabel8);
-        jLabel8.setBounds(160, 170, 90, 17);
-        add(txtID);
-        txtID.setBounds(250, 50, 130, 23);
-
-        txtDepartment.addActionListener(new java.awt.event.ActionListener() {
+        Back1.setText("<< Back");
+        Back1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDepartmentActionPerformed(evt);
+                Back1ActionPerformed(evt);
             }
         });
-        add(txtDepartment);
-        txtDepartment.setBounds(250, 170, 130, 23);
-        add(txtPhone);
-        txtPhone.setBounds(250, 150, 130, 23);
-        add(txtEmail);
-        txtEmail.setBounds(250, 130, 130, 23);
-        add(txtLast);
-        txtLast.setBounds(250, 110, 130, 23);
-
-        txtFirst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFirstActionPerformed(evt);
-            }
-        });
-        add(txtFirst);
-        txtFirst.setBounds(250, 90, 130, 23);
-        add(txtRole);
-        txtRole.setBounds(250, 70, 130, 23);
+        add(Back1);
+        Back1.setBounds(40, 290, 100, 32);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
-        // TODO add your handling code here:
-        if (!isEditMode) {
-            // Enter edit mode
-            isEditMode = true;
-            setFieldsEditable(true);
-            Update.setText("Save");
-            Back.setEnabled(false);
-            
-            System.out.println("✏️ Edit mode");
-        } 
-        else {
-            // Save changes
-            if (saveAdminChanges()) {
-                isEditMode = false;
-                setFieldsEditable(false);
-                Update.setText("Update>>");
-                Back.setEnabled(true);
-                Admin.showSuccess(this, "Profile updated!");
-                displayAdminInfo();
-            }
-        }
-
-    }//GEN-LAST:event_UpdateActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
-        if (isEditMode) {
-            Admin.showWarning(this, "Please save or discard changes first!");
-            return;
-        }
-        
-        cardSequencePanel.remove(this);
-        ((java.awt.CardLayout) cardSequencePanel.getLayout()).next(cardSequencePanel);
 
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_BackActionPerformed
 
-    private void txtFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstActionPerformed
+    private void Back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFirstActionPerformed
+         CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
-    private void txtDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDepartmentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDepartmentActionPerformed
+
+    }//GEN-LAST:event_Back1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JButton Update;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton Back1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtDepartment;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFirst;
-    private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtLast;
-    private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtRole;
     // End of variables declaration//GEN-END:variables
-        
-    /**
-     * Get current logged-in admin
-     */
-    private void getCurrentAdmin() {
-        try {
-            EmployeeProfile empProfile = (EmployeeProfile) currentUserAccount.getAssociatedPersonProfile();
-            currentAdmin = empProfile.getAdmin();
-            
-            if (currentAdmin != null) {
-                
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * Display admin information
-     */
-    private void displayAdminInfo() {
-        if (currentAdmin == null) return;
-        
-        txtID.setText(currentAdmin.getAdminID());
-        txtRole.setText("Admin");
-        txtFirst.setText(currentAdmin.getFirstName());
-        txtLast.setText(currentAdmin.getLastName());
-        txtEmail.setText(currentAdmin.getEmail());
-        txtPhone.setText(currentAdmin.getPhone());
-        txtDepartment.setText(currentAdmin.getDepartment());
-    }
-    
-    /**
-     * Set fields editable
-     */
-    private void setFieldsEditable(boolean editable) {
-        // ID and Role always read-only
-        txtID.setEditable(false);
-        txtID.setBackground(new java.awt.Color(240, 240, 240));
-        txtRole.setEditable(false);
-        txtRole.setBackground(new java.awt.Color(240, 240, 240));
-        
-        // Editable fields
-        txtFirst.setEditable(editable);
-        txtLast.setEditable(editable);
-        txtEmail.setEditable(editable);
-        txtPhone.setEditable(editable);
-        txtDepartment.setEditable(editable);
-        
-        if (!editable) {
-            txtFirst.setBackground(new java.awt.Color(240, 240, 240));
-            txtLast.setBackground(new java.awt.Color(240, 240, 240));
-            txtEmail.setBackground(new java.awt.Color(240, 240, 240));
-            txtPhone.setBackground(new java.awt.Color(240, 240, 240));
-            txtDepartment.setBackground(new java.awt.Color(240, 240, 240));
-        } else {
-            txtFirst.setBackground(java.awt.Color.WHITE);
-            txtLast.setBackground(java.awt.Color.WHITE);
-            txtEmail.setBackground(java.awt.Color.WHITE);
-            txtPhone.setBackground(java.awt.Color.WHITE);
-            txtDepartment.setBackground(java.awt.Color.WHITE);
-        }
-    }
-    
-    /**
-     * Save changes
-     */
-    private boolean saveAdminChanges() {
-        if (currentAdmin == null) return false;
-        
-        String newFirstName = txtFirst.getText().trim();
-        String newLastName = txtLast.getText().trim();
-        String newEmail = txtEmail.getText().trim();
-        String newPhone = txtPhone.getText().trim();
-        String newDepartment = txtDepartment.getText().trim();
-        
-        // Validate
-        if (!Admin.isValidName(newFirstName)) {
-            Admin.showError(this, "Invalid first name!");
-            return false;
-        }
-        
-        if (!Admin.isValidName(newLastName)) {
-            Admin.showError(this, "Invalid last name!");
-            return false;
-        }
-        
-        if (!Admin.isValidEmail(newEmail)) {
-            Admin.showError(this, "Invalid email!");
-            return false;
-        }
-        
-        if (!Admin.isValidPhone(newPhone)) {
-            Admin.showError(this, "Invalid phone!");
-            return false;
-        }
-        
-        // Check email conflict
-        if (!newEmail.equalsIgnoreCase(currentAdmin.getEmail())) {
-            if (isEmailUsedByOther(newEmail)) {
-                Admin.showError(this, "Email already used!");
-                return false;
-            }
-        }
-        
-        try {
-            currentAdmin.setFirstName(newFirstName);
-            currentAdmin.setLastName(newLastName);
-            currentAdmin.setEmail(newEmail);
-            currentAdmin.setPhone(newPhone);
-            currentAdmin.setDepartment(newDepartment);
-            
-            return true;
-        } catch (Exception e) {
-            Admin.showError(this, "Error: " + e.getMessage());
-            return false;
-        }
-    }
-    
-    private boolean isEmailUsedByOther(String email) {
-        String emailLower = email.toLowerCase();
-        for (Admin admin : business.getAdminDirectory().getAdminList()) {
-            if (!admin.getAdminID().equals(currentAdmin.getAdminID())) {
-                if (admin.getEmail().toLowerCase().equals(emailLower)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
-    
+
 }

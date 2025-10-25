@@ -16,8 +16,8 @@ import Business.Profiles.Profile;
  */
 public class UserAccount {
     
-    public Profile profile;
-    public String username;
+    Profile profile;
+    String username;
 
     public void setUsername(String username) {
         this.username = username;
@@ -26,7 +26,7 @@ public class UserAccount {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String password;
+    String password;
     
     public UserAccount (Profile profile, String un, String pw){
         username = un;
