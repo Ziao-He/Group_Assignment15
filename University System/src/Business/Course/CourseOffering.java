@@ -17,13 +17,23 @@ public class CourseOffering {
     private int capacity;
     private double tuitionPerCredit = 300.0; 
     private boolean enrollmentStatus = true;
+    
 
     public Course getCourse() {
         return course;
     }
 
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    
     public FacultyProfile getFaculty() {
         return faculty;
+    }
+    
+    public Schedule getSchedule() {
+        return schedule;
     }
 
 
@@ -44,6 +54,10 @@ public class CourseOffering {
         this.faculty = faculty;
         this.schedule = schedule;
         this.capacity = capacity;
+    }
+
+    public void setFaculty(FacultyProfile faculty) {
+        this.faculty = faculty;
     }
     
 }
