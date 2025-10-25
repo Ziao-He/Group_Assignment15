@@ -141,6 +141,7 @@ class ConfigureABusiness {
         faprofile4.setEmail("lu.qiang@northeastern.edu");
         faprofile4.setPhone("617-555-2005");
         faprofile4.setDepartment("Computer Science");
+<<<<<<< Updated upstream
 
         //添加Registrar
         RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
@@ -152,6 +153,10 @@ class ConfigureABusiness {
             "Mon-Fri 9:00-17:00", 
             "Admin Building Room 101"
         );
+=======
+        
+        
+>>>>>>> Stashed changes
  
 
 

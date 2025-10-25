@@ -73,12 +73,21 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         Modify = new javax.swing.JButton();
         Delete = new javax.swing.JButton();
         View = new javax.swing.JButton();
+<<<<<<< Updated upstream
         lblName = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         lblRole = new javax.swing.JLabel();
         txtRole = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
+=======
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+>>>>>>> Stashed changes
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -133,24 +142,31 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jScrollPane1.setBounds(30, 110, 550, 130);
 
         Modify.setText("Modify");
+<<<<<<< Updated upstream
         Modify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModifyActionPerformed(evt);
             }
         });
+=======
+>>>>>>> Stashed changes
         add(Modify);
         Modify.setBounds(200, 250, 72, 23);
 
         Delete.setText("Delete");
+<<<<<<< Updated upstream
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteActionPerformed(evt);
             }
         });
+=======
+>>>>>>> Stashed changes
         add(Delete);
         Delete.setBounds(280, 250, 78, 23);
 
         View.setText("View");
+<<<<<<< Updated upstream
         View.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ViewActionPerformed(evt);
@@ -176,6 +192,28 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         txtPassword.setBounds(120, 320, 150, 23);
         add(txtName);
         txtName.setBounds(120, 290, 150, 23);
+=======
+        add(View);
+        View.setBounds(120, 250, 72, 23);
+
+        jLabel3.setText("User Name:");
+        add(jLabel3);
+        jLabel3.setBounds(30, 290, 70, 17);
+
+        jLabel4.setText("Password:");
+        add(jLabel4);
+        jLabel4.setBounds(30, 320, 70, 17);
+
+        jLabel5.setText("Role:");
+        add(jLabel5);
+        jLabel5.setBounds(30, 350, 29, 17);
+        add(jTextField1);
+        jTextField1.setBounds(120, 350, 150, 23);
+        add(jTextField2);
+        jTextField2.setBounds(120, 320, 150, 23);
+        add(jTextField3);
+        jTextField3.setBounds(120, 290, 150, 23);
+>>>>>>> Stashed changes
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -188,6 +226,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         if (!isCreateMode) {
             // Enter create mode
             isCreateMode = true;
@@ -212,6 +251,13 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
                 loadAllUserAccounts();
             }
         }
+=======
+        if(selecteduseraccount==null) return;
+        AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel);
+        CardSequencePanel.add(mppd);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+
+>>>>>>> Stashed changes
     }//GEN-LAST:event_CreateActionPerformed
 
     private void UserAccountTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserAccountTableMousePressed
@@ -318,13 +364,22 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton View;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+<<<<<<< Updated upstream
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRole;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtRole;
+=======
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+>>>>>>> Stashed changes
     // End of variables declaration//GEN-END:variables
 
     /**
