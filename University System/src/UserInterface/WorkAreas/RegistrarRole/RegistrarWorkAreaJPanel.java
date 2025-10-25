@@ -174,12 +174,16 @@ public class RegistrarWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnTuitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTuitionActionPerformed
         // TODO add your handling code here:
-        
+        RegistrarTuitionJPanel panel= new RegistrarTuitionJPanel(business,CardSequencePanel,useraccount);
+        CardSequencePanel.add("RegistrarTuitionJPanel",panel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);          
     }//GEN-LAST:event_btnTuitionActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        
+        RegistrarReportingJPanel panel= new RegistrarReportingJPanel(business,CardSequencePanel,useraccount);
+        CardSequencePanel.add("RegistrarReportingJPanel",panel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel); 
     }//GEN-LAST:event_btnReportActionPerformed
 
 

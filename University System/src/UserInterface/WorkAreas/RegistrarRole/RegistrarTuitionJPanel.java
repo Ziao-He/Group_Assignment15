@@ -4,17 +4,37 @@
  */
 package UserInterface.WorkAreas.RegistrarRole;
 
+import Business.Business;
+import Business.Course.CourseOffering;
+import Business.Person.Student;
+import Business.UserAccounts.UserAccount;
+import Paymenet.PaymentRecord;
+import java.awt.CardLayout;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 心火牧神塞勒斯
  */
 public class RegistrarTuitionJPanel extends javax.swing.JPanel {
 
+    Business business;
+    UserAccount useraccount;
+    javax.swing.JPanel CardSequencePanel;
     /**
      * Creates new form RegistrarTuitionJPanel
      */
-    public RegistrarTuitionJPanel() {
+    public RegistrarTuitionJPanel(Business b, JPanel clp, UserAccount ua) {
+        this.business = b;
+        this.CardSequencePanel = clp;
+        this.useraccount = ua;
         initComponents();
+        loadStudentBalanceTable();
+        setupSemesterComboBox();
     }
 
     /**
@@ -26,19 +46,251 @@ public class RegistrarTuitionJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStudentBalance = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jcbSemester = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblReport = new javax.swing.JTable();
+        btnShowReport = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(204, 255, 255));
+
+        tblStudentBalance.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "StudentI D", "Student Name", "Balance"
+            }
+        ));
+        jScrollPane1.setViewportView(tblStudentBalance);
+
+        btnBack.setText("<<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Semester");
+
+        jcbSemester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tblReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Total Tuition", "Unpaid Tuition", "Information Systems", "Data Science", "Computer Science"
+            }
+        ));
+        jScrollPane2.setViewportView(tblReport);
+
+        btnShowReport.setText("Show the Report");
+        btnShowReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowReportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBack))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(51, 51, 51)
+                                .addComponent(btnShowReport, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2))))
+                .addContainerGap(361, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jcbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShowReport))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnShowReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowReportActionPerformed
+        // TODO add your handling code here:
+        try {
+            String selectedSemester = (String) jcbSemester.getSelectedItem();
+            if (selectedSemester == null || selectedSemester.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "请选择学期", "错误", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            generateFinancialReport(selectedSemester);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "生成报告失败: " + ex.getMessage(), 
+                "错误", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnShowReportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnShowReport;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> jcbSemester;
+    private javax.swing.JTable tblReport;
+    private javax.swing.JTable tblStudentBalance;
     // End of variables declaration//GEN-END:variables
+
+    private void loadStudentBalanceTable() {
+        DefaultTableModel model = (DefaultTableModel) tblStudentBalance.getModel();
+        model.setRowCount(0); // 清空现有数据
+
+        // 遍历所有学生
+        for (Student student : business.getStudentDirectory().getStudentList()) {
+            Object[] row = new Object[3];
+            row[0] = student.getStudentId();      // 学生ID
+            row[1] = student.getName();           // 学生姓名
+            row[2] = student.getBalance();        // 账户余额
+
+            model.addRow(row);
+        }
+    }
+
+    private void setupSemesterComboBox() {
+        jcbSemester.removeAllItems();
+    
+        // 从所有CourseOffering中提取不重复的学期
+        Set<String> semesters = new HashSet<>();
+
+        for (CourseOffering offering : business.getCourseDirectory().getCourseOfferingList()) {
+            String semester = offering.getSemester();
+            if (semester != null && !semester.trim().isEmpty()) {
+                semesters.add(semester);
+            }
+        }
+
+        // 添加到ComboBox
+        for (String semester : semesters) {
+            jcbSemester.addItem(semester);
+        }
+
+        // 如果没有学期数据，添加一个默认选项
+        if (jcbSemester.getItemCount() == 0) {
+            jcbSemester.addItem("Fall 2025");
+        }
+
+        // 设置默认选中第一个
+        if (jcbSemester.getItemCount() > 0) {
+            jcbSemester.setSelectedIndex(0);
+        }
+    }
+
+    private void generateFinancialReport(String selectedSemester) {
+        DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
+        model.setRowCount(0); // 清空表格
+
+        // 初始化统计变量
+        double totalTuition = 0.0;
+        double totalPaid = 0.0;
+        double infoSystemsRevenue = 0.0;
+        double dataScienceRevenue = 0.0;
+        double computerScienceRevenue = 0.0;
+
+        // 遍历所有学生
+        for (Student student : business.getStudentDirectory().getStudentList()) {
+            // 遍历学生的支付记录
+            for (PaymentRecord payment : student.getPayments()) {
+                // 通过courseID找到对应的CourseOffering
+                CourseOffering offering = findCourseOfferingByCourseId(payment.getCourseID());
+                if (offering != null && offering.getSemester().equals(selectedSemester)) {
+
+                    // 统计总应收学费 (CHARGED状态)
+                    if ("CHARGED".equals(payment.getStatus())) {
+                        totalTuition += payment.getAmout();
+                    }
+
+                    // 统计实收学费 (PAID状态)
+                    if ("PAID".equals(payment.getStatus())) {
+                        totalPaid += payment.getAmout();
+
+                        // 按部门统计收入
+                        String department = student.getDepartment();
+                        if (department != null) {
+                            switch (department.toLowerCase()) {
+                                case "information systems":
+                                    infoSystemsRevenue += payment.getAmout();
+                                    break;
+                                case "data science":
+                                    dataScienceRevenue += payment.getAmout();
+                                    break;
+                                case "computer science":
+                                    computerScienceRevenue += payment.getAmout();
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        double unpaidTuition = totalTuition - totalPaid;
+
+        // 添加数据到表格
+        Object[] row = {
+            String.format("$%.2f", totalTuition),
+            String.format("$%.2f", unpaidTuition),
+            String.format("$%.2f", infoSystemsRevenue),
+            String.format("$%.2f", dataScienceRevenue),
+            String.format("$%.2f", computerScienceRevenue)
+        };
+        model.addRow(row);
+
+        JOptionPane.showMessageDialog(this, 
+            selectedSemester + " 学期财务报告生成完成", 
+            "成功", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private CourseOffering findCourseOfferingByCourseId(String courseID) {
+        for (CourseOffering offering : business.getCourseDirectory().getCourseOfferingList()) {
+            if (offering.getCourse().getCourseId().equals(courseID)) {
+                return offering;
+            }
+        }
+        return null;
+    }
 }

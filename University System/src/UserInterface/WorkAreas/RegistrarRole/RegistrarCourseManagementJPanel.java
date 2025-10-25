@@ -71,6 +71,8 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         lblCredits = new javax.swing.JLabel();
         txtCredits = new javax.swing.JTextField();
+        lblCapacity = new javax.swing.JLabel();
+        txtCapacity = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -135,6 +137,8 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
 
         lblCredits.setText("Credits");
 
+        lblCapacity.setText("Capacity");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,11 +182,13 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTeacher)
-                            .addComponent(lblCredits))
+                            .addComponent(lblCredits)
+                            .addComponent(lblCapacity))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbTeacher, 0, 120, Short.MAX_VALUE)
-                            .addComponent(txtCredits))
+                            .addComponent(txtCredits)
+                            .addComponent(txtCapacity))
                         .addGap(92, 92, 92))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +228,9 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEndTime)
-                            .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCapacity)
+                            .addComponent(txtCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
@@ -260,8 +268,16 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
         Course course = findCourseById(courseId);
         if (course != null) {
             txtCredits.setText(String.valueOf(course.getCredits()));
+            
         } else {
             txtCredits.setText(""); // 如果找不到，留空
+        }
+        // 通过课程ID找到对应的CourseOffering对象获取Capacity
+        CourseOffering offering = findCourseOfferingById(courseId);
+        if (offering != null) {
+            txtCapacity.setText(String.valueOf(offering.getCapacity())); // 从CourseOffering获取Capacity
+        } else {
+            txtCapacity.setText(""); // 如果找不到，留空
         }
 
         // 将表格数据填充到表单
@@ -291,6 +307,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
             String endTime = txtEndTime.getText();
             String teacherId = (String) jcbTeacher.getSelectedItem();
             int credits = Integer.parseInt(txtCredits.getText());
+            int capacity =Integer.parseInt(txtCapacity.getText());
             // 验证必填字段
             if (courseId.isEmpty() || courseName.isEmpty() || semester.isEmpty() || 
                 classroom.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || teacherId == null) {
@@ -300,9 +317,9 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
 
             // 根据模式执行不同的保存逻辑
             if (isCreateMode) {
-                createNewCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherId,credits);
+                createNewCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherId,credits,capacity);
             } else if (isUpdateMode) {
-                updateExistingCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherId,credits);
+                updateExistingCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherId,credits,capacity);
             }
 
             // 保存完成后切换回查看模式
@@ -334,6 +351,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbTeacher;
+    private javax.swing.JLabel lblCapacity;
     private javax.swing.JLabel lblClassroom;
     private javax.swing.JLabel lblCourseID;
     private javax.swing.JLabel lblCourseName;
@@ -343,6 +361,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblStartTime;
     private javax.swing.JLabel lblTeacher;
     private javax.swing.JTable tblCourse;
+    private javax.swing.JTextField txtCapacity;
     private javax.swing.JTextField txtClassroom;
     private javax.swing.JTextField txtCourseID;
     private javax.swing.JTextField txtCourseName;
@@ -424,6 +443,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
        btnUpdate.setEnabled(true);
        btnCreate.setEnabled(true);
        txtCredits.setEnabled(false);
+       txtCapacity.setEnabled(false);
     }
 
     private void setUpdateMode() {
@@ -438,6 +458,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
        btnUpdate.setEnabled(false);
        btnCreate.setEnabled(false);
        txtCredits.setEnabled(true);
+       txtCapacity.setEnabled(true);
     }
     
     private void setCreateMode() {
@@ -451,9 +472,10 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
        txtClassroom.setEnabled(true);
        btnCreate.setEnabled(false);
        txtCredits.setEnabled(true);
+       txtCapacity.setEnabled(true);
     }
 
-    private void createNewCourseOffering(String courseId, String courseName, String semester, String classroom, String startTime, String endTime, String teacherId,int credits) {
+    private void createNewCourseOffering(String courseId, String courseName, String semester, String classroom, String startTime, String endTime, String teacherId,int credits,int capacity) {
         try {
             // 1. 创建Course对象
             Course newCourse = new Course(courseId, courseName, credits); 
@@ -468,7 +490,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
             Schedule schedule = new Schedule(semester, startTime, endTime, classroom);
 
             // 4. 创建CourseOffering对象
-            CourseOffering newOffering = new CourseOffering(newCourse, faculty, schedule, 30); // 假设容量30
+            CourseOffering newOffering = new CourseOffering(newCourse, faculty, schedule, capacity); // 假设容量30
 
             // 5. 添加到目录
             business.getCourseDirectory().addOffering(newOffering);
@@ -480,10 +502,11 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
         }
     }
 
-    private void updateExistingCourseOffering(String courseId, String courseName, String semester, String classroom, String startTime, String endTime, String teacherId,int credits) {
+    private void updateExistingCourseOffering(String courseId, String courseName, String semester, String classroom, String startTime, String endTime, String teacherId,int credits,int capacity) {
         try {
         // 1. 查找要更新的CourseOffering
             CourseOffering offeringToUpdate = findCourseOfferingById(courseId);
+           
             if (offeringToUpdate == null) {
                 throw new Exception("找不到要更新的课程");
             }
@@ -498,6 +521,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
             offeringToUpdate.getCourse().setCourseId(courseId);
             offeringToUpdate.getCourse().setName(courseName);
             offeringToUpdate.getCourse().setCredits(credits);
+            offeringToUpdate.setCapacity(capacity); 
             // 4. 更新Schedule信息
             Schedule schedule = offeringToUpdate.getSchedule();
             schedule.setSemester(semester);
