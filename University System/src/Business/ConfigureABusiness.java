@@ -137,7 +137,11 @@ class ConfigureABusiness {
         faprofile3.setPhone("617-555-2004");
         faprofile3.setDepartment("Information Systems");
         FacultyProfile faprofile4 =fadirectory.newFacultyDirectory(person013);
-<<<<<<< Updated upstream
+        faprofile4.setFacultyId("0005");
+        faprofile4.setEmail("lu.qiang@northeastern.edu");
+        faprofile4.setPhone("617-555-2005");
+        faprofile4.setDepartment("Computer Science");
+
         //添加Registrar
         RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
         RegistrarProfile registrarProfile = registrarDirectory.newRegistrarProfile(
@@ -148,14 +152,6 @@ class ConfigureABusiness {
             "Mon-Fri 9:00-17:00", 
             "Admin Building Room 101"
         );
-=======
-        faprofile4.setFacultyId("0005");
-        faprofile4.setEmail("lu.qiang@northeastern.edu");
-        faprofile4.setPhone("617-555-2005");
-        faprofile4.setDepartment("Computer Science");
-        
-        
->>>>>>> Stashed changes
  
 
 
