@@ -4,6 +4,21 @@
  */
 package UserInterface.WorkAreas.FacultyRole;
 
+import Business.Business;
+import Business.Course.CourseGrade;
+import Business.Course.CourseOffering;
+import Business.Person.Student;
+import Business.Person.StudentDirectory;
+import Business.UserAccounts.UserAccount;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JPanel;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author yujie-liang
@@ -13,9 +28,85 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
     /**
      * Creates new form StudentManagementJPanel
      */
-    public StudentManagementJPanel() {
+    
+    javax.swing.JPanel CardSequencePanel;
+    Business business;
+    UserAccount useraccount;
+    ArrayList<CourseOffering> facultyCourse;
+    CourseOffering courseOffering;
+    ArrayList<Student> studentDirectory;
+
+    public StudentManagementJPanel(Business b, JPanel clp, UserAccount ua) {
+
+        business = b;
+        this.CardSequencePanel = clp;
+        useraccount = ua;
         initComponents();
+        initialization();
+        refreshTable();
     }
+    public void initialization(){
+        // find which course faculty teach
+        facultyCourse = business.getCourseDirectory().findByFacultyName(useraccount.getPersonId());
+        
+        // show the course on boxCourse
+        boxCourse.removeAllItems();
+        if(facultyCourse != null)
+            for(CourseOffering co : facultyCourse)
+                boxCourse.addItem(co.getCourse().getName());
+    }
+    
+    public void refreshTable(){
+        if(facultyCourse != null){
+            String courseName = (String) boxCourse.getSelectedItem();
+
+            for(CourseOffering co : facultyCourse)
+                if(co.getCourse().getName().equals(courseName))
+                    courseOffering = co;
+            
+            //find enroll the student who enroll this course
+            studentDirectory = business.getStudentDirectory().findEnrollStudent(courseOffering);
+            
+            // refresh Table Student
+            if(studentDirectory != null){
+                DefaultTableModel model =(DefaultTableModel) tblStudent.getModel();
+                model.setRowCount(0);
+                for(Student s : studentDirectory){
+                    Object row[]= new Object[1];   
+                    row[0] = s;
+                    model.addRow(row);
+               } 
+                
+                DefaultTableModel model2 =(DefaultTableModel) tblGPA.getModel();
+                model2.setRowCount(0);
+                double TotalGrade = 0;
+                for(Student s : studentDirectory){
+                    for(CourseGrade cg : s.getTranscript())
+                    {   double grade = cg.getGradeByCourse(courseOffering.getCourse());
+                        if(grade >= 0){
+                        Object row[]= new Object[2];   
+                        row[0] = Double.toString(grade);
+                        row[1] = s.getName();
+                        model2.addRow(row);}
+                        TotalGrade = TotalGrade + grade;
+                    }
+               } 
+               TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGPA.getModel());
+               tblGPA.setRowSorter(sorter);
+//               sorter.toggleSortOrder(1); 
+//               sorter.setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
+
+               
+               double ClassGPA = Math.round(TotalGrade/studentDirectory.size() * 100.0)/100.0;
+               txtClassGPA.setText(Double.toString(ClassGPA));
+            }
+        
+        
+        
+        
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +135,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
         btnGrade = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblGPA = new javax.swing.JTable();
         lblClassGPA = new javax.swing.JLabel();
         txtClassGPA = new javax.swing.JTextField();
 
@@ -87,7 +178,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
 
         btnView.setText("View");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblGPA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -98,7 +189,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                 "Grade", "Student"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblGPA);
 
         lblClassGPA.setText("Class GPA");
 
@@ -200,13 +291,13 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAssignment;
     private javax.swing.JLabel lblClassGPA;
     private javax.swing.JLabel lblContent;
     private javax.swing.JLabel lblGrade;
     private javax.swing.JLabel lblProgressReport;
     private javax.swing.JLabel lblTranscript;
+    private javax.swing.JTable tblGPA;
     private javax.swing.JTable tblStudent;
     private javax.swing.JTextField txtClassGPA;
     private javax.swing.JTextArea txtContent;

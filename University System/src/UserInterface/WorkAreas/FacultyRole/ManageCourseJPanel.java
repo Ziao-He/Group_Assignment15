@@ -34,10 +34,6 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     ArrayList<CourseOffering> facultyCourse;
     CourseOffering courseOffering;
 
-    /**
-     * Creates new form UnitRiskWorkArea
-     */
-
     public ManageCourseJPanel(Business b, JPanel clp, UserAccount ua) {
 
         business = b;

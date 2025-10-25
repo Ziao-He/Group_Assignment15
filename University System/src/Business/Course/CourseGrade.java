@@ -57,4 +57,10 @@ public class CourseGrade {
             default: return 0.0; 
         }
     }
+    
+    public double getGradeByCourse(Course c){
+        if(c.getName().equals(this.course.getName()))
+            return getGradePoint();
+        return -1;
+    }
 }

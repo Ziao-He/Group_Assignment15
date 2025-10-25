@@ -71,7 +71,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         btnManageStudentProfiles.setBackground(new java.awt.Color(102, 153, 255));
         btnManageStudentProfiles.setFont(getFont());
         btnManageStudentProfiles.setForeground(new java.awt.Color(255, 255, 255));
-        btnManageStudentProfiles.setText("Manage Students Profiles");
+        btnManageStudentProfiles.setText("Manage Students");
         btnManageStudentProfiles.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnManageStudentProfiles.setMaximumSize(new java.awt.Dimension(200, 40));
         btnManageStudentProfiles.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -152,20 +152,18 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     private void btnManageCourseIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCourseIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
         //CardSequencePanel.removeAll();
-
         ManageCourseJPanel mc = new ManageCourseJPanel(business, CardSequencePanel,useraccount);
 
         CardSequencePanel.add("Manage Course", mc);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        
-        
-
     }//GEN-LAST:event_btnManageCourseIdentifyResourceAssetsActionPerformed
 
     private void btnManageStudentProfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentProfilesActionPerformed
         // TODO add your handling code here:
-        
-  
+        StudentManagementJPanel sm = new StudentManagementJPanel(business, CardSequencePanel,useraccount);
+
+        CardSequencePanel.add("Manage Student", sm);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnManageStudentProfilesActionPerformed
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed

@@ -296,6 +296,7 @@ public class Student extends Person {
         transcript.add(cg);
         
     }
+    
     @Override
     public String toString() {
         return studentId + " - " + name;

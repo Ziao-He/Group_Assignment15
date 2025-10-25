@@ -62,7 +62,19 @@ class ConfigureABusiness {
         Student s1 = new Student("0001","Lin Yiyang","Student");
         business.getStudentDirectory().addStudent(s1);
         
+        Student s2 = new Student("0002","Liang Yujie","Student");
+        business.getStudentDirectory().addStudent(s2);
+        
+        Student s3 = new Student("0003","He Ziao","Student");
+        business.getStudentDirectory().addStudent(s3);
+        
+        Student s4 = new Student("0004","Li Liyun","Student");
+        business.getStudentDirectory().addStudent(s4);
+        
         StudentProfile sD =new StudentProfile(s1,s1);
+        StudentProfile sD2 =new StudentProfile(s2,s2);
+        StudentProfile sD3 =new StudentProfile(s3,s3);
+        StudentProfile sD4 =new StudentProfile(s4,s4);
         
 
         // Create User accounts that link to specific profiles
@@ -82,9 +94,9 @@ class ConfigureABusiness {
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); /// order products for one of the customers and performed by a sales person
         UserAccount ua4 = uadirectory.newUserAccount(sD, "adam", "****"); /// order products for one of the customers and performed by a sales person
-        UserAccount fua =uadirectory.newUserAccount(faprofile0, "fua", "****");
+        UserAccount fua =uadirectory.newUserAccount(faprofile3, "fua", "****");
         
-        UserAccount f =uadirectory.newUserAccount(faprofile2, "f", "****");
+        UserAccount f =uadirectory.newUserAccount(faprofile1, "f", "****");
         
         CourseDirectory coursedirectory = business.getCourseDirectory();
     
@@ -119,7 +131,12 @@ class ConfigureABusiness {
         coursedirectory.addOffering(o5);
         coursedirectory.addOffering(o6);
         
-        sD.getStudent().enrollCourse(new CourseOffering(c1,faprofile4,sch7,30));
+        sD.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
+        sD2.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
+        sD3.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
+        
+        sD4.getStudent().enrollCourse(new CourseOffering(c3,faprofile3,sch3,25));
+
         
         //create course work
         CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();
@@ -127,10 +144,14 @@ class ConfigureABusiness {
         CourseWorkdirectory.addCourseWork(c1, "Lab 02");
         
         sD.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
+        sD.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(1), "This is Lab 02 report");
         
         //add CourseGrade
         sD.getStudent().addCourseGrade(c1, "Fall 2025","B");
         sD.getStudent().payTuition(1200);
+        
+        sD2.getStudent().addCourseGrade(c1, "Fall 2025","A");
+        sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+");
         
         return business;
 
