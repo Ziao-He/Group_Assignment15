@@ -6,35 +6,33 @@ package UserInterface.WorkAreas.AdminRole;
 
 import Business.Business;
 import Business.Person.Admin;
-import Business.Person.StudentDirectory;
-import Business.Profiles.FacultyDirectory;
-import Business.Profiles.FacultyProfile;
+import Business.Profiles.RegistrarDirectory;
+import Business.Profiles.RegistrarProfile;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author bob-h
  */
-public class AdminManageFacultyJPanel extends javax.swing.JPanel {
+public class AdminManageRegisterJPanel extends javax.swing.JPanel {
 
     /**
-     * Admin panel for managing faculty
-     * Implements 3 search methods and CRUD operations
-     * Creates new form AdminManageFacultyJPanel
+     * Creates new form AdminManageRegisterJPanel
      */
     private Business business;
     private JPanel cardSequencePanel;
-    public AdminManageFacultyJPanel(Business b, JPanel c) {
+    public AdminManageRegisterJPanel(Business b, JPanel c) {
         this.business = b;
         this.cardSequencePanel = c;
         
         initComponents();
         
-        // Load all faculty initially
-        loadAllFaculty();
+        // Load all registrars
+        loadAllRegistrars();
         
         // Make detail fields non-editable initially
         setDetailFieldsEditable(false);
@@ -49,50 +47,41 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnSearchDepartment = new javax.swing.JButton();
+        lblID = new javax.swing.JLabel();
+        txtSearchID = new javax.swing.JTextField();
+        lblHours = new javax.swing.JLabel();
+        lblSearchEmail = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblRegister = new javax.swing.JTable();
+        txtSearchEmail = new javax.swing.JTextField();
+        btnSearchName = new javax.swing.JButton();
+        txtHour = new javax.swing.JTextField();
+        btnSearchID = new javax.swing.JButton();
+        btnView = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        lblSearchName = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JButton();
+        btnSearchEmail = new javax.swing.JButton();
+        txtSearchName = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
         lblPhone = new javax.swing.JLabel();
+        lblSearchID = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
-        lblID = new javax.swing.JLabel();
-        lblDepartment = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblStudent = new javax.swing.JTable();
-        txtDepartment = new javax.swing.JTextField();
-        btnView = new javax.swing.JButton();
-        lblSearchName = new javax.swing.JLabel();
-        btnEdit = new javax.swing.JButton();
-        txtSearchName = new javax.swing.JTextField();
-        btnDelete = new javax.swing.JButton();
-        lblSearchID = new javax.swing.JLabel();
-        txtSearchID = new javax.swing.JTextField();
-        lblSearchDepartment = new javax.swing.JLabel();
-        txtSearchDepartment = new javax.swing.JTextField();
-        btnSearchName = new javax.swing.JButton();
-        btnSearchID = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
+        lblLoc = new javax.swing.JLabel();
+        txtLoc = new javax.swing.JTextField();
 
-        btnSearchDepartment.setText("Search");
-        btnSearchDepartment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchDepartmentActionPerformed(evt);
-            }
-        });
+        lblID.setText("Registrar ID:");
 
-        lblEmail.setText("Email:");
+        lblHours.setText("Office Hours:");
 
-        lblPhone.setText("Phone:");
+        lblSearchEmail.setText("Search by Email:");
 
-        lblName.setText("Name:");
-
-        lblID.setText("FacultyID:");
-
-        lblDepartment.setText("Department:");
-
-        tblStudent.setModel(new javax.swing.table.DefaultTableModel(
+        tblRegister.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -100,43 +89,10 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Faculty ID", "Name", "Email         ", "Department", "Phone"
+                "Register ID", "Name", "Email         ", "Location", "Phone"
             }
         ));
-        jScrollPane1.setViewportView(tblStudent);
-
-        btnView.setText("View");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
-            }
-        });
-
-        lblSearchName.setText("Search by Name:");
-
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-
-        txtSearchName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchNameActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        lblSearchID.setText("Search by ID:");
-
-        lblSearchDepartment.setText("Search by Department:");
+        jScrollPane1.setViewportView(tblRegister);
 
         btnSearchName.setText("Search");
         btnSearchName.addActionListener(new java.awt.event.ActionListener() {
@@ -152,12 +108,58 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+
         btnBack.setText(">> Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
+
+        lblSearchName.setText("Search by Name:");
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnSearchEmail.setText("Search");
+        btnSearchEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchEmailActionPerformed(evt);
+            }
+        });
+
+        txtSearchName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchNameActionPerformed(evt);
+            }
+        });
+
+        lblEmail.setText("Email:");
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        lblPhone.setText("Phone:");
+
+        lblSearchID.setText("Search by ID:");
+
+        lblName.setText("Name:");
+
+        lblLoc.setText("Office Loc:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -178,9 +180,9 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
                                     .addComponent(txtSearchID, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                                     .addComponent(txtSearchName)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSearchDepartment)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                .addComponent(txtSearchDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblSearchEmail)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                                .addComponent(txtSearchEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -188,20 +190,22 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
                                     .addComponent(lblID)
                                     .addComponent(lblEmail)
                                     .addComponent(lblPhone)
-                                    .addComponent(lblDepartment))
+                                    .addComponent(lblHours)
+                                    .addComponent(lblLoc))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtHour, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnSearchID)
-                                    .addComponent(btnSearchDepartment))
+                                    .addComponent(btnSearchEmail))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSearchName)
@@ -231,9 +235,9 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
                     .addComponent(btnSearchID))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearchDepartment)
-                    .addComponent(txtSearchDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSearchDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSearchEmail)
+                    .addComponent(txtSearchEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSearchEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
@@ -252,9 +256,13 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDepartment)
-                    .addComponent(txtDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(lblHours)
+                    .addComponent(txtHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLoc)
+                    .addComponent(txtLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnView)
@@ -264,125 +272,20 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSearchDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchDepartmentActionPerformed
-        // TODO add your handling code here:
-        String searchTerm = txtSearchDepartment.getText().trim();
-        
-        if (Admin.isEmpty(searchTerm)) {
-            Admin.showWarning(this, "Please enter a department to search!");
-            return;
-        }
-        
-        List<FacultyProfile> results = searchFacultyByDepartment(searchTerm);
-        populateTable(results);
-        
-        
-        if (results.isEmpty()) {
-            Admin.showInfo(this, "No faculty found in department: " + searchTerm);
-        }
-    }//GEN-LAST:event_btnSearchDepartmentActionPerformed
-
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-        FacultyProfile faculty = getSelectedFaculty();
-        
-        if (faculty == null) {
-            Admin.showWarning(this, "Please select a faculty member from the table first!");
-            return;
-        }
-        
-        // Display in detail fields
-        displayFacultyDetails(faculty);
-
-        // Also show info dialog
-        Admin.showInfo(this, "Details are shown.");
-    }//GEN-LAST:event_btnViewActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        if (btnEdit.getText().equals("Edit")) {
-            // Enter edit mode
-            FacultyProfile faculty = getSelectedFaculty();
-            
-            if (faculty == null) {
-                Admin.showWarning(this, "Please select a faculty member from the table first!");
-                return;
-            }
-            
-            displayFacultyDetails(faculty);
-            setDetailFieldsEditable(true);
-            btnEdit.setText("Save");
-            btnView.setEnabled(false);
-            btnDelete.setEnabled(false);
-            
-        } 
-        else {
-            // Save mode
-            if (saveFacultyChanges()) {
-                setDetailFieldsEditable(false);
-                btnEdit.setText("Edit");
-                btnView.setEnabled(true);
-                btnDelete.setEnabled(true);
-                loadAllFaculty();
-                Admin.showSuccess(this, "Faculty information updated successfully!");
-            }
-        }
-    }//GEN-LAST:event_btnEditActionPerformed
-
-    private void txtSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchNameActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        FacultyProfile faculty = getSelectedFaculty();
-        
-        if (faculty == null) {
-            Admin.showWarning(this, "Please select a faculty member from the table first!");
-            return;
-        }
-        
-        // Confirmation dialog
-        String confirmMsg = "This action cannot be undone!";
-        
-        if (!Admin.showConfirmation(this, confirmMsg)) {
-            return;
-        }
-        
-        try {
-            // Remove from FacultyDirectory
-            FacultyDirectory facultyDir = business.getFacultyDirectory();
-            facultyDir.getFacultylist().remove(faculty);
-            
-            Admin.showSuccess(this, "Faculty member deleted successfully!");
-            
-            // Clear detail fields
-            clearDetailFields();
-            
-            // Refresh table
-            loadAllFaculty();
-            
-        } catch (Exception e) {
-            Admin.showError(this, "Error deleting faculty: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
     private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNameActionPerformed
         // TODO add your handling code here:
         String searchTerm = txtSearchName.getText().trim();
         
         if (Admin.isEmpty(searchTerm)) {
-            Admin.showWarning(this, "Please enter a name to search!");
+            Admin.showWarning(this, "Please enter a name!");
             return;
         }
         
-        List<FacultyProfile> results = searchFacultyByName(searchTerm);
+        List<RegistrarProfile> results = searchRegistrarsByName(searchTerm);
         populateTable(results);
         
-        
         if (results.isEmpty()) {
-            Admin.showInfo(this, "No faculty found with name: " + searchTerm);
+            Admin.showInfo(this, "No registrars found with name: " + searchTerm);
         }
     }//GEN-LAST:event_btnSearchNameActionPerformed
 
@@ -391,18 +294,30 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
         String searchTerm = txtSearchID.getText().trim();
         
         if (Admin.isEmpty(searchTerm)) {
-            Admin.showWarning(this, "Please enter an ID to search!");
+            Admin.showWarning(this, "Please enter an ID!");
             return;
         }
         
-        List<FacultyProfile> results = searchFacultyByID(searchTerm);
+        List<RegistrarProfile> results = searchRegistrarsByID(searchTerm);
         populateTable(results);
         
-        
         if (results.isEmpty()) {
-            Admin.showInfo(this, "No faculty found with ID: " + searchTerm);
+            Admin.showInfo(this, "No registrars found with ID: " + searchTerm);
         }
     }//GEN-LAST:event_btnSearchIDActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        RegistrarProfile registrar = getSelectedRegistrar();
+        
+        if (registrar == null) {
+            Admin.showWarning(this, "Please select a registrar!");
+            return;
+        }
+        
+        displayRegistrarDetails(registrar);
+        
+    }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -411,112 +326,190 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
         layout.previous(cardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        if (btnEdit.getText().equals("Edit")) {
+            RegistrarProfile registrar = getSelectedRegistrar();
+            
+            if (registrar == null) {
+                Admin.showWarning(this, "Please select a registrar!");
+                return;
+            }
+            
+            displayRegistrarDetails(registrar);
+            setDetailFieldsEditable(true);
+            btnEdit.setText("Save");
+            btnView.setEnabled(false);
+            btnDelete.setEnabled(false);
+            
+        } 
+        else {
+            if (saveRegistrarChanges()) {
+                setDetailFieldsEditable(false);
+                btnEdit.setText("Edit");
+                btnView.setEnabled(true);
+                btnDelete.setEnabled(true);
+                loadAllRegistrars();
+                Admin.showSuccess(this, "Registrar updated!");
+            }
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnSearchEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmailActionPerformed
+        // TODO add your handling code here:
+        String searchTerm = txtSearchEmail.getText().trim();
+        
+        if (Admin.isEmpty(searchTerm)) {
+            Admin.showWarning(this, "Please enter an email!");
+            return;
+        }
+        
+        List<RegistrarProfile> results = searchRegistrarsByEmail(searchTerm);
+        populateTable(results);
+        
+        if (results.isEmpty()) {
+            Admin.showInfo(this, "No registrars found with email: " + searchTerm);
+        }
+    }//GEN-LAST:event_btnSearchEmailActionPerformed
+
+    private void txtSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchNameActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        RegistrarProfile registrar = getSelectedRegistrar();
+        
+        if (registrar == null) {
+            Admin.showWarning(this, "Please select a registrar!");
+            return;
+        }
+        
+        String msg = "Delete this registrar?\n\nCannot be undone!";
+        
+        if (!Admin.showConfirmation(this, msg)) {
+            return;
+        }
+        
+        try {
+            business.getRegistrarDirectory().getRegistrarList().remove(registrar);
+            
+            Admin.showSuccess(this, "Registrar deleted!");
+            clearDetailFields();
+            loadAllRegistrars();
+
+        } catch (Exception e) {
+            Admin.showError(this, "Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnSearchDepartment;
+    private javax.swing.JButton btnSearchEmail;
     private javax.swing.JButton btnSearchID;
     private javax.swing.JButton btnSearchName;
     private javax.swing.JButton btnView;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDepartment;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblHours;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblLoc;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPhone;
-    private javax.swing.JLabel lblSearchDepartment;
+    private javax.swing.JLabel lblSearchEmail;
     private javax.swing.JLabel lblSearchID;
     private javax.swing.JLabel lblSearchName;
-    private javax.swing.JTable tblStudent;
-    private javax.swing.JTextField txtDepartment;
+    private javax.swing.JTable tblRegister;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtHour;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtLoc;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtSearchDepartment;
+    private javax.swing.JTextField txtSearchEmail;
     private javax.swing.JTextField txtSearchID;
     private javax.swing.JTextField txtSearchName;
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Load all faculty into the table
+     * Load all registrars into table
      */
-    private void loadAllFaculty() {
-        FacultyDirectory facultyDir = business.getFacultyDirectory();
-        List<FacultyProfile> allFaculty = facultyDir.getFacultylist();
-        populateTable(allFaculty);
+    private void loadAllRegistrars() {
+        RegistrarDirectory regDir = business.getRegistrarDirectory();
+        List<RegistrarProfile> allRegistrars = regDir.getRegistrarList();
+        populateTable(allRegistrars);
     }
     
     /**
-     * Populate JTable with faculty list
+     * Populate JTable with registrar list
      */
-    private void populateTable(List<FacultyProfile> facultyList) {
-        DefaultTableModel model = (DefaultTableModel) tblStudent.getModel();
-        model.setRowCount(0);  // Clear existing rows
+    private void populateTable(List<RegistrarProfile> registrarList) {
+        DefaultTableModel model = (DefaultTableModel) tblRegister.getModel();
+        model.setRowCount(0);
         
-        for (FacultyProfile faculty : facultyList) {
+        for (RegistrarProfile registrar : registrarList) {
             Object[] row = new Object[5];
-            row[0] = faculty.getFacultyId();
-            row[1] = faculty.getFacultyName();
-            row[2] = faculty.getEmail();
-            row[3] = faculty.getDepartment() != null ? faculty.getDepartment() : "";
-            row[4] = faculty.getPhone();
+            row[0] = registrar.getRegistrarId();
+            row[1] = registrar.getPerson().toString();  // Name from Person
+            row[2] = registrar.getEmail() != null ? registrar.getEmail() : "";
+            row[3] = registrar.getOfficeLocation() != null ? registrar.getOfficeLocation() : "";
+            row[4] = registrar.getPhone() != null ? registrar.getPhone() : "";
             
             model.addRow(row);
         }
     }
     
     /**
-     * Get selected faculty from table
+     * Get selected registrar from table
      */
-    private FacultyProfile getSelectedFaculty() {
-        int selectedRow = tblStudent.getSelectedRow();
+    private RegistrarProfile getSelectedRegistrar() {
+        int selectedRow = tblRegister.getSelectedRow();
         
         if (selectedRow < 0) {
             return null;
         }
         
-        // Get faculty ID from selected row (column 0)
-        String facultyID = (String) tblStudent.getValueAt(selectedRow, 0);
+        // Get registrar ID from selected row (column 0 based on table)
+        String registrarID = (String) tblRegister.getValueAt(selectedRow, 0);
         
-        // Find faculty by ID
-        return findFacultyByID(facultyID);
+        return findRegistrarByID(registrarID);
     }
     
     /**
-     * Find faculty by ID
+     * Find registrar by ID
      */
-    private FacultyProfile findFacultyByID(String facultyID) {
-        if (Admin.isEmpty(facultyID)) {
+    private RegistrarProfile findRegistrarByID(String registrarID) {
+        if (Admin.isEmpty(registrarID)) {
             return null;
         }
         
-        FacultyDirectory facultyDir = business.getFacultyDirectory();
-        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
-            if (faculty.getFacultyId() != null && 
-                faculty.getFacultyId().equals(facultyID)) {
-                return faculty;
+        RegistrarDirectory regDir = business.getRegistrarDirectory();
+        for (RegistrarProfile rp : regDir.getRegistrarList()) {
+            if (rp.getRegistrarId() != null && rp.getRegistrarId().equals(registrarID)) {
+                return rp;
             }
         }
         return null;
     }
     
-    /**
-     * Display faculty details in the detail fields
+     /**
+     * Display registrar details
      */
-    private void displayFacultyDetails(FacultyProfile faculty) {
-        if (faculty == null) {
+    private void displayRegistrarDetails(RegistrarProfile registrar) {
+        if (registrar == null) {
             clearDetailFields();
             return;
         }
         
-        txtID.setText(faculty.getFacultyId());
-        txtName.setText(faculty.getFacultyName());
-        txtEmail.setText(faculty.getEmail() != null ? faculty.getEmail() : "");
-        txtPhone.setText(faculty.getPhone() != null ? faculty.getPhone() : "");
-        txtDepartment.setText(faculty.getDepartment() != null ? faculty.getDepartment() : "");
+        txtID.setText(registrar.getRegistrarId());
+        txtName.setText(registrar.getPerson().toString());
+        txtEmail.setText(registrar.getEmail() != null ? registrar.getEmail() : "");
+        txtPhone.setText(registrar.getPhone() != null ? registrar.getPhone() : "");
+        txtHour.setText(registrar.getOfficeHours() != null ? registrar.getOfficeHours() : "");
+        txtLoc.setText(registrar.getOfficeLocation() != null ? registrar.getOfficeLocation() : "");
     }
     
     /**
@@ -527,167 +520,144 @@ public class AdminManageFacultyJPanel extends javax.swing.JPanel {
         txtName.setText("");
         txtEmail.setText("");
         txtPhone.setText("");
-        txtDepartment.setText("");
+        txtHour.setText("");
+        txtLoc.setText("");
     }
     
     /**
-     * Set detail fields editable or not
+     * Set detail fields editable
      */
     private void setDetailFieldsEditable(boolean editable) {
-        // Name is read-only (comes from Person)
+        // ID and Name are always read-only
+        txtID.setEditable(false);
+        txtID.setBackground(new java.awt.Color(240, 240, 240));
         txtName.setEditable(false);
         txtName.setBackground(new java.awt.Color(240, 240, 240));
         
-        // ID is always read-only
-        txtID.setEditable(false);
-        txtID.setBackground(new java.awt.Color(240, 240, 240));
-        
-        // Email, Phone, Department can be edited
+        // Other fields can be edited
         txtEmail.setEditable(editable);
         txtPhone.setEditable(editable);
-        txtDepartment.setEditable(editable);
+        txtHour.setEditable(editable);
+        txtLoc.setEditable(editable);
         
         if (!editable) {
             txtEmail.setBackground(new java.awt.Color(240, 240, 240));
             txtPhone.setBackground(new java.awt.Color(240, 240, 240));
-            txtDepartment.setBackground(new java.awt.Color(240, 240, 240));
+            txtHour.setBackground(new java.awt.Color(240, 240, 240));
+            txtLoc.setBackground(new java.awt.Color(240, 240, 240));
         } else {
             txtEmail.setBackground(java.awt.Color.WHITE);
             txtPhone.setBackground(java.awt.Color.WHITE);
-            txtDepartment.setBackground(java.awt.Color.WHITE);
+            txtHour.setBackground(java.awt.Color.WHITE);
+            txtLoc.setBackground(java.awt.Color.WHITE);
         }
     }
     
     /**
-     * SEARCH METHOD 1: Search faculty by name
+     * SEARCH METHOD 1: By name
      */
-    private List<FacultyProfile> searchFacultyByName(String name) {
-        List<FacultyProfile> results = new ArrayList<>();
+    private List<RegistrarProfile> searchRegistrarsByName(String name) {
+        List<RegistrarProfile> results = new ArrayList<>();
         if (Admin.isEmpty(name)) return results;
         
-        String searchTerm = name.toLowerCase().trim();
-        FacultyDirectory facultyDir = business.getFacultyDirectory();
-        
-        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
-            String facultyName = faculty.getFacultyName().toLowerCase();
-            if (facultyName.contains(searchTerm)) {
-                results.add(faculty);
+        String searchTerm = name.toLowerCase();
+        for (RegistrarProfile rp : business.getRegistrarDirectory().getRegistrarList()) {
+            String regName = rp.getPerson().toString().toLowerCase();
+            if (regName.contains(searchTerm)) {
+                results.add(rp);
             }
         }
-        
         return results;
     }
     
     /**
-     * SEARCH METHOD 2: Search faculty by ID
+     * SEARCH METHOD 2: By ID
      */
-    private List<FacultyProfile> searchFacultyByID(String id) {
-        List<FacultyProfile> results = new ArrayList<>();
+    private List<RegistrarProfile> searchRegistrarsByID(String id) {
+        List<RegistrarProfile> results = new ArrayList<>();
         if (Admin.isEmpty(id)) return results;
         
-        String searchTerm = id.trim();
-        FacultyDirectory facultyDir = business.getFacultyDirectory();
-        
-        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
-            if (faculty.getFacultyId() != null && 
-                faculty.getFacultyId().contains(searchTerm)) {
-                results.add(faculty);
+        for (RegistrarProfile rp : business.getRegistrarDirectory().getRegistrarList()) {
+            if (rp.getRegistrarId() != null && rp.getRegistrarId().contains(id)) {
+                results.add(rp);
             }
         }
-        
         return results;
     }
     
     /**
-     * SEARCH METHOD 3: Search faculty by department
+     * SEARCH METHOD 3: By email
      */
-    private List<FacultyProfile> searchFacultyByDepartment(String department) {
-        List<FacultyProfile> results = new ArrayList<>();
-        if (Admin.isEmpty(department)) return results;
+    private List<RegistrarProfile> searchRegistrarsByEmail(String email) {
+        List<RegistrarProfile> results = new ArrayList<>();
+        if (Admin.isEmpty(email)) return results;
         
-        String searchTerm = department.toLowerCase().trim();
-        FacultyDirectory facultyDir = business.getFacultyDirectory();
-        
-        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
-            String facultyDept = faculty.getDepartment();
-            if (facultyDept != null && facultyDept.toLowerCase().contains(searchTerm)) {
-                results.add(faculty);
+        String searchTerm = email.toLowerCase();
+        for (RegistrarProfile rp : business.getRegistrarDirectory().getRegistrarList()) {
+            if (rp.getEmail() != null && rp.getEmail().toLowerCase().contains(searchTerm)) {
+                results.add(rp);
             }
         }
-        
         return results;
     }
     
     /**
-     * Save faculty changes
+     * Save registrar changes
      */
-    private boolean saveFacultyChanges() {
-        FacultyProfile faculty = getSelectedFaculty();
-        
-        if (faculty == null) {
-            Admin.showError(this, "No faculty selected!");
-            return false;
-        }
+    private boolean saveRegistrarChanges() {
+        RegistrarProfile registrar = getSelectedRegistrar();
+        if (registrar == null) return false;
         
         String newEmail = txtEmail.getText().trim();
         String newPhone = txtPhone.getText().trim();
-        String newDepartment = txtDepartment.getText().trim();
+        String newOfficeHours = txtHour.getText().trim();
+        String newOfficeLocation = txtLoc.getText().trim();
         
-        // Validate email
+        // Validate
         if (!Admin.isValidEmail(newEmail)) {
-            Admin.showError(this, "Invalid email format!");
+            Admin.showError(this, "Invalid email!");
             return false;
         }
         
-        // Validate phone
         if (!Admin.isValidPhone(newPhone)) {
-            Admin.showError(this, "Invalid phone number! Must be 10 digits.");
+            Admin.showError(this, "Invalid phone!");
             return false;
         }
         
-        // Check email conflict with other faculty
-        if (!newEmail.equalsIgnoreCase(faculty.getEmail())) {
-            if (isEmailUsedByOther(newEmail, faculty.getFacultyId())) {
-                Admin.showError(this, "Email already used by another faculty member!");
+        // Check email conflict
+        if (!newEmail.equalsIgnoreCase(registrar.getEmail())) {
+            if (isEmailUsedByOther(newEmail, registrar.getRegistrarId())) {
+                Admin.showError(this, "Email already used!");
                 return false;
             }
         }
         
         try {
-            // Update faculty information
-            faculty.setEmail(newEmail);
-            faculty.setPhone(newPhone);
-            faculty.setDepartment(newDepartment);
+            registrar.setEmail(newEmail);
+            registrar.setPhone(newPhone);
+            registrar.setOfficeHours(newOfficeHours);
+            registrar.setOfficeLocation(newOfficeLocation);
             
             return true;
-            
         } catch (Exception e) {
-            Admin.showError(this, "Error saving changes: " + e.getMessage());
-            e.printStackTrace();
+            Admin.showError(this, "Error: " + e.getMessage());
             return false;
         }
     }
     
     /**
-     * Check if email is used by another faculty member
+     * Check if email used by other registrar
      */
-    private boolean isEmailUsedByOther(String email, String currentFacultyID) {
-        if (Admin.isEmpty(email)) {
-            return false;
-        }
+    private boolean isEmailUsedByOther(String email, String currentID) {
+        String emailLower = email.toLowerCase();
         
-        String emailLower = email.toLowerCase().trim();
-        FacultyDirectory facultyDir = business.getFacultyDirectory();
-        
-        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
-            if (!faculty.getFacultyId().equals(currentFacultyID)) {
-                String facultyEmail = faculty.getEmail();
-                if (facultyEmail != null && facultyEmail.toLowerCase().equals(emailLower)) {
+        for (RegistrarProfile rp : business.getRegistrarDirectory().getRegistrarList()) {
+            if (!rp.getRegistrarId().equals(currentID)) {
+                if (rp.getEmail() != null && rp.getEmail().toLowerCase().equals(emailLower)) {
                     return true;
                 }
             }
         }
-        
         return false;
     }
 }

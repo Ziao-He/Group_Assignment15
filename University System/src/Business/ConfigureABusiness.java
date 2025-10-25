@@ -142,15 +142,6 @@ class ConfigureABusiness {
         faprofile4.setPhone("617-555-2005");
         faprofile4.setDepartment("Computer Science");
 
-        faprofile0.setFacultyId("Gina Montana");
-        FacultyProfile faprofile1 =fadirectory.newFacultyDirectory(person011);
-        faprofile1.setFacultyId("Dr. Adams");
-        FacultyProfile faprofile2 =fadirectory.newFacultyDirectory(person012);
-        faprofile2.setFacultyId("Dr. Brown");
-        FacultyProfile faprofile3 =fadirectory.newFacultyDirectory(person013);
-        faprofile3.setFacultyId("Lu qiang");
-        FacultyProfile faprofile4 =fadirectory.newFacultyDirectory(person010);
-        faprofile4.setFacultyId("Lin");
         //添加Registrar
         RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
         RegistrarProfile registrarProfile = registrarDirectory.newRegistrarProfile(

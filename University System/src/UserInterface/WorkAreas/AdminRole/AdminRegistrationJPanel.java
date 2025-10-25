@@ -139,9 +139,7 @@ private void setupInputArea() {
         
         AdminStudentJPanel studentPanel = new AdminStudentJPanel(business, CardSequencePanel);
         AdminFacultyJPanel facultyPanel = new AdminFacultyJPanel(business, CardSequencePanel);
-        
-        JPanel registrarPanel = new JPanel();
-        registrarPanel.add(new javax.swing.JLabel("Registrar Registration (Coming Soon)"));
+        AdminRegisterJPanel registrarPanel = new AdminRegisterJPanel(business, CardSequencePanel);
         
         InputArea.add(studentPanel, CARD_STUDENT);
         InputArea.add(facultyPanel, CARD_FACULTY);

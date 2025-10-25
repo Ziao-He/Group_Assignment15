@@ -34,9 +34,9 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblSearchDepartment" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="33" max="32767" attributes="0"/>
-                              <Component id="txtSearchDepartment" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="lblSearchEmail" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="72" max="32767" attributes="0"/>
+                              <Component id="txtSearchEmail" min="-2" pref="160" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
@@ -45,7 +45,8 @@
                                   <Component id="lblID" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblEmail" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblPhone" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDepartment" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblHours" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblLoc" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -53,7 +54,8 @@
                                   <Component id="txtName" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="txtEmail" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="txtPhone" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="txtDepartment" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="txtHour" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="txtLoc" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -62,7 +64,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnSearchID" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSearchDepartment" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSearchEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -103,9 +105,9 @@
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSearchDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtSearchDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSearchDepartment" alignment="3" max="32767" attributes="0"/>
+                  <Component id="btnSearchEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSearchEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSearchEmail" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -129,10 +131,15 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHours" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtHour" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblLoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtLoc" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnView" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -145,45 +152,21 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnSearchDepartment">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Search"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchDepartmentActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEmail">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Email:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblPhone">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Phone:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtID">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtName">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPhone">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Name:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblID">
       <Properties>
-        <Property name="text" type="java.lang.String" value="FacultyID:"/>
+        <Property name="text" type="java.lang.String" value="Registrar ID:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDepartment">
+    <Component class="javax.swing.JTextField" name="txtSearchID">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblHours">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Department:"/>
+        <Property name="text" type="java.lang.String" value="Office Hours:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSearchEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Search by Email:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -193,14 +176,14 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblStudent">
+        <Component class="javax.swing.JTable" name="tblRegister">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="4">
-                <Column editable="true" title="Faculty ID" type="java.lang.Object"/>
+                <Column editable="true" title="Register ID" type="java.lang.Object"/>
                 <Column editable="true" title="Name" type="java.lang.Object"/>
                 <Column editable="true" title="Email         " type="java.lang.Object"/>
-                <Column editable="true" title="Department" type="java.lang.Object"/>
+                <Column editable="true" title="Location" type="java.lang.Object"/>
                 <Column editable="true" title="Phone" type="java.lang.Object"/>
               </Table>
             </Property>
@@ -240,7 +223,25 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtDepartment">
+    <Component class="javax.swing.JTextField" name="txtSearchEmail">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSearchName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Search"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchNameActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtHour">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSearchID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Search"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchIDActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnView">
       <Properties>
@@ -248,6 +249,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBack">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&gt;&gt; Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSearchName">
@@ -263,10 +272,23 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="btnSearchEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Search"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchEmailActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JTextField" name="txtSearchName">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSearchNameActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Email:"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnDelete">
       <Properties>
@@ -276,43 +298,35 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="lblPhone">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Phone:"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblSearchID">
       <Properties>
         <Property name="text" type="java.lang.String" value="Search by ID:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSearchID">
+    <Component class="javax.swing.JTextField" name="txtID">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblSearchDepartment">
+    <Component class="javax.swing.JTextField" name="txtName">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEmail">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPhone">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Search by Department:"/>
+        <Property name="text" type="java.lang.String" value="Name:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSearchDepartment">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnSearchName">
+    <Component class="javax.swing.JLabel" name="lblLoc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Search"/>
+        <Property name="text" type="java.lang.String" value="Office Loc:"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchNameActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSearchID">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Search"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchIDActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnBack">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&gt;&gt; Back"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
-      </Events>
+    <Component class="javax.swing.JTextField" name="txtLoc">
     </Component>
   </SubComponents>
 </Form>
