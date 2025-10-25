@@ -7,11 +7,13 @@ package UserInterface.WorkAreas.FacultyRole;
 import Business.Business;
 import Business.Course.CourseGrade;
 import Business.Course.CourseOffering;
+import Business.Person.AssignmentSubmission;
 import Business.Person.Student;
 import Business.Person.StudentDirectory;
 import Business.UserAccounts.UserAccount;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -35,6 +37,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
     ArrayList<CourseOffering> facultyCourse;
     CourseOffering courseOffering;
     ArrayList<Student> studentDirectory;
+    Student selectedStudent;
 
     public StudentManagementJPanel(Business b, JPanel clp, UserAccount ua) {
 
@@ -84,6 +87,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                     for(CourseGrade cg : s.getTranscript())
                     {   double grade = cg.getGradeByCourse(courseOffering.getCourse());
                         if(grade >= 0){
+                        //double percentGreade = (grade / 4.0) *100;
                         Object row[]= new Object[2];   
                         row[0] = Double.toString(grade);
                         row[1] = s.getName();
@@ -93,20 +97,20 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                } 
                TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGPA.getModel());
                tblGPA.setRowSorter(sorter);
-//               sorter.toggleSortOrder(1); 
-//               sorter.setSortKeys(List.of(new RowSorter.SortKey(1, SortOrder.DESCENDING)));
 
                
                double ClassGPA = Math.round(TotalGrade/studentDirectory.size() * 100.0)/100.0;
                txtClassGPA.setText(Double.toString(ClassGPA));
-            }
-        
-        
-        
-        
+            }      
         }
     }
     
+    public void refreshBoxAssignment(){
+        String AssignmentName = (String) boxAssignment.getSelectedItem();
+        for(AssignmentSubmission as : selectedStudent.getSubmissions())
+            if(as.getCoursework().getCourse().getName().equals(courseOffering.getCourse().getName()) && as.getCoursework().getTitle().equals(AssignmentName))
+                txtContent.setText(as.getContent());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,6 +146,12 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel1.setText("Student Management");
 
+        boxCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCourseActionPerformed(evt);
+            }
+        });
+
         tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -165,6 +175,12 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
 
         txtTranscript.setEditable(false);
 
+        boxAssignment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxAssignmentActionPerformed(evt);
+            }
+        });
+
         lblContent.setText("Assignment Content");
 
         txtContent.setEditable(false);
@@ -177,6 +193,11 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
         btnGrade.setText("Grade");
 
         btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         tblGPA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -281,6 +302,56 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblStudent.getSelectedRow();
+        
+        if (selectedRow >= 0) {
+          
+            selectedStudent = (Student) tblStudent.getValueAt(selectedRow, 0);
+            
+            int submssionNum = 0;
+            for(AssignmentSubmission as : selectedStudent.getSubmissions()){
+                if(as.IsSubmissionThisCourseAssignment(courseOffering.getCourse()))
+                    submssionNum++;
+                    }
+            
+            double Progress = ((double)submssionNum / courseOffering.getCourse().getCourseWorkNum()) *100;
+            txtProgressReport.setText(Double.toString(Progress) + "%");          
+            
+            for(CourseGrade cg : selectedStudent.getTranscript())
+                    {   double grade = cg.getGradeByCourse(courseOffering.getCourse());
+                        if(grade >= 0){
+                            txtTranscript.setText(Double.toString(grade));
+                            break;
+                        }}
+            
+            UpdateBoxAssignment();        
+            refreshBoxAssignment();
+            
+            
+        
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select an Student from the list",  "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void boxAssignmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAssignmentActionPerformed
+        // TODO add your handling code here:
+        refreshBoxAssignment();
+    }//GEN-LAST:event_boxAssignmentActionPerformed
+
+    private void boxCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCourseActionPerformed
+        // TODO add your handling code here:
+        refreshTable();
+    }//GEN-LAST:event_boxCourseActionPerformed
+
+    public void UpdateBoxAssignment(){
+        for(AssignmentSubmission as : selectedStudent.getSubmissions()){
+            if(as.getCoursework().getCourse().getName().equals(courseOffering.getCourse().getName()))
+                boxAssignment.addItem(as.getCoursework().getTitle());
+        }       
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxAssignment;

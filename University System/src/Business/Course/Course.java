@@ -66,6 +66,10 @@ public class Course {
     public void setCourseWorkNum(int courseWorkNum) {
         this.courseWorkNum = courseWorkNum;
     }
+
+    public int getCourseWorkNum() {
+        return courseWorkNum;
+    }
     
     
     
