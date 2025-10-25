@@ -142,6 +142,15 @@ class ConfigureABusiness {
         faprofile4.setPhone("617-555-2005");
         faprofile4.setDepartment("Computer Science");
 
+        faprofile0.setFacultyId("Gina Montana");
+        FacultyProfile faprofile1 =fadirectory.newFacultyDirectory(person011);
+        faprofile1.setFacultyId("Dr. Adams");
+        FacultyProfile faprofile2 =fadirectory.newFacultyDirectory(person012);
+        faprofile2.setFacultyId("Dr. Brown");
+        FacultyProfile faprofile3 =fadirectory.newFacultyDirectory(person013);
+        faprofile3.setFacultyId("Lu qiang");
+        FacultyProfile faprofile4 =fadirectory.newFacultyDirectory(person010);
+        faprofile4.setFacultyId("Lin");
         //添加Registrar
         RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
         RegistrarProfile registrarProfile = registrarDirectory.newRegistrarProfile(
@@ -152,6 +161,10 @@ class ConfigureABusiness {
             "Mon-Fri 9:00-17:00", 
             "Admin Building Room 101"
         );
+        
+        
+
+       
  
 
 
@@ -165,10 +178,10 @@ class ConfigureABusiness {
         CourseDirectory coursedirectory = business.getCourseDirectory();
     
         Course c1 = new Course("INFO 5100", "Application Engineering and Development", 4);
-        Course c2 = new Course("CS 5200", "Algorithms", 12);
-        Course c3 = new Course("DS 5300", "Data Science", 6);
-        Course c4 = new Course("DS 5500", "Infomation Science", 14);
-        Course c5 = new Course("DS 5600", "Computer Science", 28);
+        Course c2 = new Course("CS 5200", "Algorithms", 4);
+        Course c3 = new Course("DS 5300", "Data Science", 4);
+        Course c4 = new Course("DS 5500", "Infomation Science", 4);
+        Course c5 = new Course("DS 5600", "Computer Science", 4);
         
         //add Schedule
         Schedule sch1 = new Schedule("Fall 2025", "9:00AM", "10:30AM", "Ell Hall 103");
@@ -208,7 +221,7 @@ class ConfigureABusiness {
         sD1.getStudent().addCourseGrade(c1, "Fall 2025","B");
         sD1.getStudent().payTuition(1200);
         //添加Registrar账户
-        UserAccount uaRegistrar = uadirectory.newUserAccount(registrarProfile, "registrar", "registrar123");
+        UserAccount uaRegistrar = uadirectory.newUserAccount(registrarProfile, "Registrar", "****");
         return business;
 
     }
