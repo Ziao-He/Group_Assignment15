@@ -6,8 +6,22 @@
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
 import Business.Business;
+import Business.Person.Admin;
+import Business.Person.Person;
+import Business.Person.PersonDirectory;
+import Business.Person.Student;
+import Business.Person.StudentDirectory;
+import Business.Profiles.EmployeeDirectory;
+import Business.Profiles.EmployeeProfile;
+import Business.Profiles.FacultyDirectory;
+import Business.Profiles.FacultyProfile;
+import Business.Profiles.Profile;
+import Business.Profiles.StudentProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 
 import javax.swing.JPanel;
@@ -22,45 +36,25 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageSuppliersJPanel
      */
-    JPanel CardSequencePanel;
-    Business business;
-    UserAccount selecteduseraccount;
-
+    private Business business;
+    private JPanel cardSequencePanel;
+    private boolean isCreateMode = false;
+    private boolean isModifyMode = false;
+    private UserAccount selectedUserAccount;
 
     public ManageUserAccountsJPanel(Business bz, JPanel jp) {
-        CardSequencePanel = jp;
+        cardSequencePanel = jp;
         this.business = bz;
         initComponents();
-        refreshTable();
+        
+        // Load all user accounts
+        loadAllUserAccounts();
+        
+        // Make fields non-editable initially
+        setFieldsEditable(false);
 
     }
 
-    public void refreshTable() {
-
-//clear supplier table
-        int rc = UserAccountTable.getRowCount();
-        int i;
-        for (i = rc - 1; i >= 0; i--) {
-            ((DefaultTableModel) UserAccountTable.getModel()).removeRow(i);
-        }
-
-
-
-        UserAccountDirectory uad = business.getUserAccountDirectory();
-
-       
-
-        for (UserAccount ua : uad.getUserAccountList()) {
-
-            Object[] row = new Object[5];
-            row[0] = ua;
-
-            ((DefaultTableModel) UserAccountTable.getModel()).addRow(row);
-        }
-
-    }
-
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,11 +65,20 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Back = new javax.swing.JButton();
-        Next = new javax.swing.JButton();
+        Create = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         UserAccountTable = new javax.swing.JTable();
+        Modify = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        View = new javax.swing.JButton();
+        lblName = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        lblRole = new javax.swing.JLabel();
+        txtRole = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -87,16 +90,16 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 76, 32);
+        Back.setBounds(540, 20, 80, 23);
 
-        Next.setText("Next >>");
-        Next.addActionListener(new java.awt.event.ActionListener() {
+        Create.setText("Create");
+        Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextActionPerformed(evt);
+                CreateActionPerformed(evt);
             }
         });
-        add(Next);
-        Next.setBounds(500, 300, 80, 32);
+        add(Create);
+        Create.setBounds(30, 250, 80, 23);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("User Accounts");
@@ -106,17 +109,17 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
 
         UserAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "User Name", "Status", "Last Activity", "Last Updated"
+                "User Name", "Role"
             }
         ));
         UserAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,51 +131,517 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(30, 110, 550, 130);
+
+        Modify.setText("Modify");
+        Modify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifyActionPerformed(evt);
+            }
+        });
+        add(Modify);
+        Modify.setBounds(200, 250, 72, 23);
+
+        Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+        add(Delete);
+        Delete.setBounds(280, 250, 78, 23);
+
+        View.setText("View");
+        View.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewActionPerformed(evt);
+            }
+        });
+        add(View);
+        View.setBounds(120, 250, 72, 23);
+
+        lblName.setText("User Name:");
+        add(lblName);
+        lblName.setBounds(30, 290, 70, 17);
+
+        lblPassword.setText("Password:");
+        add(lblPassword);
+        lblPassword.setBounds(30, 320, 70, 17);
+
+        lblRole.setText("Role:");
+        add(lblRole);
+        lblRole.setBounds(30, 350, 29, 17);
+        add(txtRole);
+        txtRole.setBounds(120, 350, 150, 23);
+        add(txtPassword);
+        txtPassword.setBounds(120, 320, 150, 23);
+        add(txtName);
+        txtName.setBounds(120, 290, 150, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        cardSequencePanel.remove(this);
+        ((java.awt.CardLayout) cardSequencePanel.getLayout()).next(cardSequencePanel);
  //       ((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
 
     }//GEN-LAST:event_BackActionPerformed
 
-    private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
+    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
-        if(selecteduseraccount==null) return;
-        AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel);
-        CardSequencePanel.add(mppd);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
-    }//GEN-LAST:event_NextActionPerformed
+        if (!isCreateMode) {
+            // Enter create mode
+            isCreateMode = true;
+            clearFields();
+            setFieldsEditable(true);
+            txtRole.setEditable(true);  // Can set role when creating
+            Create.setText("Save");
+            View.setEnabled(false);
+            Modify.setEnabled(false);
+            Delete.setEnabled(false);
+            
+        } 
+        else {
+            // Save new user account
+            if (createNewUserAccount()) {
+                isCreateMode = false;
+                setFieldsEditable(false);
+                Create.setText("Create");
+                View.setEnabled(true);
+                Modify.setEnabled(true);
+                Delete.setEnabled(true);
+                loadAllUserAccounts();
+            }
+        }
+    }//GEN-LAST:event_CreateActionPerformed
 
     private void UserAccountTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserAccountTableMousePressed
         // Extracts the row (uaser account) in the table that is selected by the user
-        int size = UserAccountTable.getRowCount();
-        int selectedrow = UserAccountTable.getSelectionModel().getLeadSelectionIndex();
+        selectedUserAccount = getSelectedUserAccount();
+        
+    }//GEN-LAST:event_UserAccountTableMousePressed
 
-        if (selectedrow < 0 || selectedrow > size - 1) {
+    private void ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewActionPerformed
+        // TODO add your handling code here:
+        UserAccount ua = getSelectedUserAccount();
+        
+        if (ua == null) {
+            Admin.showWarning(this, "Please select a user account!");
             return;
         }
-        selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(selectedrow, 0);
-        if (selecteduseraccount == null) {
-            return;
         
+        displayUserAccountDetails(ua);
         
+        Admin.showInfo(this, 
+            "User Account:\n\n" +
+            "Username: " + ua.getUserLoginName() + "\n" +
+            "Role: " + ua.getRole() + "\n" +
+            "Password: ****"
+        );
+    }//GEN-LAST:event_ViewActionPerformed
+
+    private void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
+        // TODO add your handling code here:
+        if (!isModifyMode) {
+            UserAccount ua = getSelectedUserAccount();
             
-    }//GEN-LAST:event_UserAccountTableMousePressed
+            if (ua == null) {
+                Admin.showWarning(this, "Please select a user account!");
+                return;
+            }
+            
+            displayUserAccountDetails(ua);
+            setFieldsEditable(true);
+            
+            isModifyMode = true;
+            Modify.setText("Save");
+            Create.setEnabled(false);
+            View.setEnabled(false);
+            Delete.setEnabled(false);
+            
+        } 
+        else {
+            if (saveUserAccountChanges()) {
+                isModifyMode = false;
+                setFieldsEditable(false);
+                Modify.setText("Modify");
+                Create.setEnabled(true);
+                View.setEnabled(true);
+                Delete.setEnabled(true);
+                loadAllUserAccounts();
+                Admin.showSuccess(this, "Account updated!");
+            }
+        }
+    }//GEN-LAST:event_ModifyActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        // TODO add your handling code here:
+        UserAccount ua = getSelectedUserAccount();
+        
+        if (ua == null) {
+            Admin.showWarning(this, "Please select a user account!");
+            return;
+        }
+        
+        String msg = String.format(
+            "Delete account?\n\nUsername: %s\nRole: %s\n\nCannot be undone!",
+            ua.getUserLoginName(),
+            ua.getRole()
+        );
+        
+        if (!Admin.showConfirmation(this, msg)) {
+            return;
+        }
+        
+        try {
+            UserAccountDirectory uaDir = business.getUserAccountDirectory();
+            uaDir.getUserAccountList().remove(ua);
+            
+            Admin.showSuccess(this, "Account deleted!");
+            clearFields();
+            loadAllUserAccounts();
+            
+            
+        } catch (Exception e) {
+            Admin.showError(this, "Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_DeleteActionPerformed
     
-    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JButton Next;
+    private javax.swing.JButton Create;
+    private javax.swing.JButton Delete;
+    private javax.swing.JButton Modify;
     private javax.swing.JTable UserAccountTable;
+    private javax.swing.JButton View;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblRole;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtRole;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Load all user accounts into table
+     */
+    private void loadAllUserAccounts() {
+        UserAccountDirectory uaDir = business.getUserAccountDirectory();
+        List<UserAccount> accounts = uaDir.getUserAccountList();
+        
+        DefaultTableModel model = (DefaultTableModel) UserAccountTable.getModel();
+        model.setRowCount(0);  // Clear rows
+        
+        for (UserAccount ua : accounts) {
+            Object[] row = new Object[2];
+            row[0] = ua.getUserLoginName();
+            row[1] = ua.getRole();
+            model.addRow(row);
+        }
+        
+    }
+    
+    /**
+     * Get selected user account from table
+     */
+    private UserAccount getSelectedUserAccount() {
+        int selectedRow = UserAccountTable.getSelectedRow();
+        
+        if (selectedRow < 0) {
+            return null;
+        }
+        
+        String username = (String) UserAccountTable.getValueAt(selectedRow, 0);
+        
+        // Find UserAccount by username
+        UserAccountDirectory uaDir = business.getUserAccountDirectory();
+        for (UserAccount ua : uaDir.getUserAccountList()) {
+            if (ua.getUserLoginName().equals(username)) {
+                return ua;
+            }
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Display user account details
+     */
+    private void displayUserAccountDetails(UserAccount ua) {
+        if (ua == null) {
+            clearFields();
+            return;
+        }
+        
+        txtName.setText(ua.getUserLoginName());
+        txtPassword.setText(ua.password);
+        txtRole.setText(ua.getRole());
+        
+    }
+    
+    /**
+     * Clear all fields
+     */
+    private void clearFields() {
+        txtName.setText("");
+        txtPassword.setText("");
+        txtRole.setText("");
+    }
+    
+    /**
+     * Set fields editable or not
+     */
+    private void setFieldsEditable(boolean editable) {
+        txtName.setEditable(editable);
+        txtPassword.setEditable(editable);
+        txtRole.setEditable(false);  // Role is read-only
+        
+        if (!editable) {
+            txtName.setBackground(new java.awt.Color(240, 240, 240));
+            txtPassword.setBackground(new java.awt.Color(240, 240, 240));
+            txtRole.setBackground(new java.awt.Color(240, 240, 240));
+        } else {
+            txtName.setBackground(java.awt.Color.WHITE);
+            txtPassword.setBackground(java.awt.Color.WHITE);
+        }
+    }
+    
+    /**
+     * Create new user account
+     */
+    private boolean createNewUserAccount() {
+        String username = txtName.getText().trim();
+        String password = txtPassword.getText().trim();
+        String role = txtRole.getText().trim();
+        
+        // Validate inputs
+        if (Admin.isEmpty(username)) {
+            Admin.showError(this, "Username cannot be empty!");
+            return false;
+        }
+        
+        if (Admin.isEmpty(password)) {
+            Admin.showError(this, "Password cannot be empty!");
+            return false;
+        }
+        
+        if (password.length() < 4) {
+            Admin.showError(this, "Password must be at least 4 characters!");
+            return false;
+        }
+        
+        if (Admin.isEmpty(role)) {
+            Admin.showError(this, "Role cannot be empty!\nEnter: Student, Faculty, or Admin");
+            return false;
+        }
+        
+        // Check if username already exists
+        UserAccountDirectory uaDir = business.getUserAccountDirectory();
+        if (!uaDir.checkUserAccount(username)) {
+            Admin.showError(this, "Username already exists!");
+            return false;
+        }
+        
+        // Select profile based on role
+        Profile selectedProfile = selectProfileForAccount(role);
+        
+        if (selectedProfile == null) {
+            return false;
+        }
+        
+        try {
+            // Create user account
+            UserAccount newAccount = uaDir.newUserAccount(selectedProfile, username, password);
+            
+            Admin.showSuccess(this, "User account created!");
+            
+            clearFields();
+            return true;
+            
+        } catch (Exception e) {
+            Admin.showError(this, "Error: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Show dialog to select profile for account
+     */
+    private Profile selectProfileForAccount(String role) {
+        List<String> options = new ArrayList<>();
+        List<Profile> profiles = new ArrayList<>();
+        
+        // Get persons without accounts based on role
+        if ("Student".equalsIgnoreCase(role)) {
+            StudentDirectory sDir = business.getStudentDirectory();
+            
+            for (Student s : sDir.getStudentList()) {
+                // Check if already has account
+                if (hasUserAccount(s.getStudentId(), "Student")) {
+                    continue;
+                }
+                
+                options.add(s.getStudentId() + " - " + s.getName());
+                profiles.add(new StudentProfile(s, s));
+            }
+        }
+        else if ("Faculty".equalsIgnoreCase(role)) {
+            FacultyDirectory fDir = business.getFacultyDirectory();
+            
+            for (FacultyProfile fp : fDir.getFacultylist()) {
+                if (hasUserAccountForProfile(fp)) {
+                    continue;
+                }
+                
+                options.add(fp.getFacultyId() + " - " + fp.getFacultyName());
+                profiles.add(fp);
+            }
+        }
+        else if ("Admin".equalsIgnoreCase(role)) {
+            // Get admins without accounts
+            for (Admin admin : business.getAdminDirectory().getAdminList()) {
+                // Check if already has account
+                boolean hasAccount = false;
+                for (EmployeeProfile ep : business.getEmployeeDirectory().getEmployeeList()) {
+                    if (ep.getAdmin() == admin && hasUserAccountForProfile(ep)) {
+                        hasAccount = true;
+                        break;
+                    }
+                }
+                
+                if (!hasAccount) {
+                    options.add(admin.getAdminID() + " - " + admin.getFullName());
+                    EmployeeProfile employeeProfile = findOrCreateEmployeeProfile(admin);
+                    profiles.add(employeeProfile);
+                }
+            }
+        }
+        else {
+            Admin.showError(this, "Invalid role!\nValid roles: Student, Faculty, Admin");
+            return null;
+        }
+        
+        if (options.isEmpty()) {
+            Admin.showWarning(this, "No available " + role + "s without accounts!");
+            return null;
+        }
+        
+        // Show selection dialog
+        String selected = (String) JOptionPane.showInputDialog(
+            this,
+            "Select a person to create account for:",
+            "Select Person - " + role,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options.toArray(),
+            options.get(0)
+        );
+        
+        if (selected == null) {
+            return null;
+        }
+        
+        int index = options.indexOf(selected);
+        return profiles.get(index);
+    }
+    
+    /**
+     * Check if person already has a user account
+     */
+    private boolean hasUserAccount(String personId, String role) {
+        UserAccountDirectory uaDir = business.getUserAccountDirectory();
+        
+        for (UserAccount ua : uaDir.getUserAccountList()) {
+            if (ua.getRole().equals(role)) {
+                Profile profile = ua.getProfile();
+                
+                if (profile instanceof StudentProfile) {
+                    StudentProfile sp = (StudentProfile) profile;
+                    if (sp.getStudent().getStudentId().equals(personId)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check if profile already has a user account
+     */
+    private boolean hasUserAccountForProfile(Profile profile) {
+        UserAccountDirectory uaDir = business.getUserAccountDirectory();
+        
+        for (UserAccount ua : uaDir.getUserAccountList()) {
+            if (ua.getProfile() == profile) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Save user account changes
+     */
+    private boolean saveUserAccountChanges() {
+        UserAccount ua = getSelectedUserAccount();
+        if (ua == null) return false;
+        
+        String newUsername = txtName.getText().trim();
+        String newPassword = txtPassword.getText().trim();
+        
+        if (Admin.isEmpty(newUsername) || Admin.isEmpty(newPassword)) {
+            Admin.showError(this, "Username and password cannot be empty!");
+            return false;
+        }
+        
+        if (newPassword.length() < 4) {
+            Admin.showError(this, "Password must be at least 4 characters!");
+            return false;
+        }
+        
+        // Check username conflict
+        if (!newUsername.equals(ua.getUserLoginName())) {
+            UserAccountDirectory uaDir = business.getUserAccountDirectory();
+            if (!uaDir.checkUserAccount(newUsername)) {
+                Admin.showError(this, "Username already exists!");
+                return false;
+            }
+        }
+        
+        ua.setUsername(newUsername);
+        ua.setPassword(newPassword);
+        
+        return true;
+    }
+    
+    /**
+    * Find existing EmployeeProfile for admin or create a new one
+    */
+    private EmployeeProfile findOrCreateEmployeeProfile(Admin admin) {
+        EmployeeDirectory empDir = business.getEmployeeDirectory();
+    
+        // First, try to find existing EmployeeProfile for this admin
+        for (EmployeeProfile ep : empDir.getEmployeeList()) {
+            if (ep.getAdmin() == admin) {
+                return ep;
+            }
+        }
+    
+        // Create a Person for this admin (if needed)
+        PersonDirectory personDir = business.getPersonDirectory();
+        Person adminPerson = personDir.newPerson(admin.getFullName());
+    
+        // Create EmployeeProfile linking Person and Admin
+        EmployeeProfile newEmployeeProfile = empDir.newEmployeeProfile(adminPerson, admin);
+    
+        return newEmployeeProfile;
+    }
 }

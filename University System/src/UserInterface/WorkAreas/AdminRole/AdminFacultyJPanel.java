@@ -26,11 +26,14 @@ public class AdminFacultyJPanel extends javax.swing.JPanel {
     private Business business;
     private JPanel cardSequencePanel;
     private static int facultyCounter = 1;
+    private String currentFacultyID;
     public AdminFacultyJPanel(Business b, JPanel c) {
         this.business = b;
         this.cardSequencePanel = c;
         initComponents();
-        generateAndDisplayFacultyID();
+        syncCounterWithExistingData();
+        currentFacultyID = String.format("%04d", facultyCounter);
+        txtID.setText(currentFacultyID);
         txtID.setEditable(false);
         txtID.setBackground(new java.awt.Color(240, 240, 240));
     }
@@ -52,7 +55,7 @@ public class AdminFacultyJPanel extends javax.swing.JPanel {
         txtName = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
+        btnSaveFaculty = new javax.swing.JButton();
 
         lblID.setText("FacultyId: ");
 
@@ -62,10 +65,10 @@ public class AdminFacultyJPanel extends javax.swing.JPanel {
 
         lblName.setText("Name: ");
 
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveFaculty.setText("Save");
+        btnSaveFaculty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnSaveFacultyActionPerformed(evt);
             }
         });
 
@@ -82,7 +85,7 @@ public class AdminFacultyJPanel extends javax.swing.JPanel {
                     .addComponent(lblEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSave)
+                    .addComponent(btnSaveFaculty)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,66 +112,56 @@ public class AdminFacultyJPanel extends javax.swing.JPanel {
                     .addComponent(lblPhone)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
-                .addComponent(btnSave)
+                .addComponent(btnSaveFaculty)
                 .addGap(65, 65, 65))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void btnSaveFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFacultyActionPerformed
         // TODO add your handling code here:
-        // Get input values
         String facultyID = txtID.getText().trim();
         String name = txtName.getText().trim();
         String email = txtEmail.getText().trim();
         String phone = txtPhone.getText().trim();
         
-        // Validate inputs
         if (!validateInputs(name, email, phone)) {
             return;
         }
         
-        // Check for duplicate Faculty ID
         if (isDuplicateFacultyID(facultyID)) {
-            Admin.showError(this, "Faculty ID already exists!\nGenerating new ID...");
-            generateAndDisplayFacultyID();
+            Admin.showError(this, "Faculty ID already exists!");
             return;
         }
         
-        // Check for duplicate email
         if (isDuplicateEmail(email)) {
-            Admin.showError(this, "Email already exists in the system!\nPlease use a different email.");
+            Admin.showError(this, "Email already exists in the system!");
             return;
         }
         
         try {
-            // Create Person object for Faculty
             PersonDirectory personDir = business.getPersonDirectory();
             Person facultyPerson = personDir.newPerson(name);
             
-            // Create FacultyProfile with ID, email, and phone
             FacultyProfile newFaculty = new FacultyProfile(facultyID, email, phone, facultyPerson);
             
-            // Add to FacultyDirectory
             FacultyDirectory facultyDir = business.getFacultyDirectory();
             facultyDir.getFacultylist().add(newFaculty);
             
-            // Success message
-            String successMsg = "All done.";
+            Admin.showSuccess(this, "Faculty registered successfully!\n\nFaculty ID: " + facultyID);
             
-            Admin.showSuccess(this, successMsg);
+            facultyCounter++;
             
-            // Reset form for next registration
             resetForm();
             
         } catch (Exception e) {
-            Admin.showError(this, "Error registering faculty: " + e.getMessage());
+            Admin.showError(this, "Error: " + e.getMessage());
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }//GEN-LAST:event_btnSaveFacultyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSaveFaculty;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
@@ -315,11 +308,33 @@ public class AdminFacultyJPanel extends javax.swing.JPanel {
         txtEmail.setText("");
         txtPhone.setText("");
         
-        // Generate new Faculty ID for next registration
-        generateAndDisplayFacultyID();
+        currentFacultyID = String.format("%04d", facultyCounter);
+        txtID.setText(currentFacultyID);
         
         // Set focus to name field
         txtName.requestFocus();
     }
+    
+    private void syncCounterWithExistingData() {
+        FacultyDirectory facultyDir = business.getFacultyDirectory();
+        int maxID = 0;
+    
+        for (FacultyProfile faculty : facultyDir.getFacultylist()) {
+            if (faculty.getFacultyId() != null) {
+                try {
+                    int id = Integer.parseInt(faculty.getFacultyId());
+                    if (id > maxID) {
+                        maxID = id;
+                    }
+                } catch (NumberFormatException e) {
+                }
+            }
+        }
+    
+        if (maxID > 0) {
+            facultyCounter = maxID + 1;
+        }
+    }
+
     
 }

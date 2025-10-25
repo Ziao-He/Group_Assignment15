@@ -117,15 +117,31 @@ class ConfigureABusiness {
         // Create User accounts that link to specific profiles
         FacultyDirectory fadirectory = business.getFacultyDirectory(); 
         FacultyProfile faprofile0 =fadirectory.newFacultyDirectory(person002);
-        faprofile0.setFacultyId("Gina Montana");
-        FacultyProfile faprofile1 =fadirectory.newFacultyDirectory(person011);
-        faprofile1.setFacultyId("Dr. Adams");
-        FacultyProfile faprofile2 =fadirectory.newFacultyDirectory(person012);
-        faprofile2.setFacultyId("Dr. Brown");
-        FacultyProfile faprofile3 =fadirectory.newFacultyDirectory(person013);
-        faprofile3.setFacultyId("Lu qiang");
-        FacultyProfile faprofile4 =fadirectory.newFacultyDirectory(person010);
-        faprofile4.setFacultyId("Lin");
+        faprofile0.setFacultyId("0001");
+        faprofile0.setEmail("gina.montana@northeastern.edu");
+        faprofile0.setPhone("617-555-2001");
+        faprofile0.setDepartment("Information Systems");
+        FacultyProfile faprofile1 =fadirectory.newFacultyDirectory(person010);
+        faprofile1.setFacultyId("0002");
+        faprofile1.setEmail("lin@northeastern.edu");
+        faprofile1.setPhone("617-555-2002");
+        faprofile1.setDepartment("Computer Science");
+        FacultyProfile faprofile2 =fadirectory.newFacultyDirectory(person011);
+        faprofile2.setFacultyId("0003");
+        faprofile2.setEmail("dr.adams@northeastern.edu");
+        faprofile2.setPhone("617-555-2003");
+        faprofile2.setDepartment("Data Science");
+        FacultyProfile faprofile3 =fadirectory.newFacultyDirectory(person012);
+        faprofile3.setFacultyId("0004");
+        faprofile3.setEmail("dr.brown@northeastern.edu");
+        faprofile3.setPhone("617-555-2004");
+        faprofile3.setDepartment("Information Systems");
+        FacultyProfile faprofile4 =fadirectory.newFacultyDirectory(person013);
+        faprofile4.setFacultyId("0005");
+        faprofile4.setEmail("lu.qiang@northeastern.edu");
+        faprofile4.setPhone("617-555-2005");
+        faprofile4.setDepartment("Computer Science");
+
         //添加Registrar
         RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
         RegistrarProfile registrarProfile = registrarDirectory.newRegistrarProfile(
