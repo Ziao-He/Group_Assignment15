@@ -59,5 +59,9 @@ public class CourseOffering {
     public void setFaculty(FacultyProfile faculty) {
         this.faculty = faculty;
     }
-    
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+        
 }
