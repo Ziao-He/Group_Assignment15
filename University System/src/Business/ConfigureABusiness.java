@@ -50,17 +50,13 @@ class ConfigureABusiness {
         Person person006 = persondirectory.newPerson("Anna Shnider");
         Person person007 = persondirectory.newPerson("Laura Brown");
         Person person008 = persondirectory.newPerson("Jack While");
-        Person person009 = persondirectory.newPerson("Fidelity"); 
+        Person person009 = persondirectory.newPerson("Fidelity"); //we use this as customer
         
         Person person010 = persondirectory.newPerson("Lin");
         Person person011 = persondirectory.newPerson("Dr. Adams");
         Person person012 = persondirectory.newPerson("Dr. Brown");
         Person person013 = persondirectory.newPerson("Lu qiang");
-<<<<<<< HEAD
-        Person person014 = persondirectory.newPerson("Registrar Cyrus");
-=======
         Person person014 = persondirectory.newPerson("Registrar Cryus");
->>>>>>> main
 
 // Create Admins to manage the business
         AdminDirectory adminDirectory = business.getAdminDirectory();
@@ -120,25 +116,6 @@ class ConfigureABusiness {
 
         // Create User accounts that link to specific profiles
         FacultyDirectory fadirectory = business.getFacultyDirectory(); 
-<<<<<<< HEAD
-        FacultyProfile faprofile0 = fadirectory.newFacultyDirectory(person002);
-        FacultyProfile faprofile1 = fadirectory.newFacultyDirectory(person010);
-        FacultyProfile faprofile2 = fadirectory.newFacultyDirectory(person011);
-        FacultyProfile faprofile3 = fadirectory.newFacultyDirectory(person012);
-        FacultyProfile faprofile4 = fadirectory.newFacultyDirectory(person013);
-        
-        
-        
-        RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
-        RegistrarProfile registrarProfile = registrarDirectory.newRegistrarProfile(
-            person014, 
-            "Register001", 
-            "registrar@university.edu", 
-            "123-456-7890", 
-            "Mon-Fri 9:00-17:00", 
-            "LandMark"
-        );
-=======
         FacultyProfile faprofile0 =fadirectory.newFacultyDirectory(person002);
         faprofile0.setFacultyId("0001");
         faprofile0.setEmail("gina.montana@northeastern.edu");
@@ -179,7 +156,6 @@ class ConfigureABusiness {
         
 
        
->>>>>>> main
  
 
 
@@ -187,16 +163,9 @@ class ConfigureABusiness {
 // Create User accounts that link to specific profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); /// order products for one of the customers and performed by a sales person
-<<<<<<< HEAD
-        UserAccount ua4 = uadirectory.newUserAccount(sD, "adam", "****"); /// order products for one of the customers and performed by a sales person
-        UserAccount fua =uadirectory.newUserAccount(faprofile3, "fua", "****");
-        UserAccount uaRegistrar = uadirectory.newUserAccount(registrarProfile, "Registrar", "****");
-        UserAccount f =uadirectory.newUserAccount(faprofile1, "f", "****");
-=======
         UserAccount ua4 = uadirectory.newUserAccount(sD1, "adam", "****"); /// order products for one of the customers and performed by a sales person
         UserAccount fua = uadirectory.newUserAccount(faprofile0, "fua", "****");
         UserAccount f = uadirectory.newUserAccount(faprofile1, "f", "****");
->>>>>>> main
         
         CourseDirectory coursedirectory = business.getCourseDirectory();
     
