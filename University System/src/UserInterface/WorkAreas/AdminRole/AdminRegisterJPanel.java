@@ -175,7 +175,7 @@ public class AdminRegisterJPanel extends javax.swing.JPanel {
         String officeLocation = txtLoc.getText().trim();
         
         // Validate inputs
-        if (!validateInputs(name, email, phone)) {
+        if (!validateInputs(name, email, phone, officeHours)) {
             return;
         }
         
@@ -288,7 +288,7 @@ public class AdminRegisterJPanel extends javax.swing.JPanel {
     /**
      * Validate inputs
      */
-    private boolean validateInputs(String name, String email, String phone) {
+    private boolean validateInputs(String name, String email, String phone, String hour) {
         // Validate name
         if (Admin.isEmpty(name)) {
             Admin.showError(this, "Name cannot be empty!");
@@ -324,6 +324,12 @@ public class AdminRegisterJPanel extends javax.swing.JPanel {
         
         if (!Admin.isValidPhone(phone)) {
             Admin.showError(this, "Invalid phone number!\nMust be 10 digits.");
+            txtPhone.requestFocus();
+            return false;
+        }
+        
+        if (!this.isValidTimeFormat(hour)) {
+            Admin.showError(this, "Invalid TIME \n\"^(1[0-2]|0?[1-9]):[0-5][0-9](AM|PM)$\") || (\"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$\"");
             txtPhone.requestFocus();
             return false;
         }
@@ -400,5 +406,9 @@ public class AdminRegisterJPanel extends javax.swing.JPanel {
         generateAndDisplayRegistrarID();
         
         txtName.requestFocus();
+    }
+    
+    private boolean isValidTimeFormat(String time) {
+        return time.matches("^(1[0-2]|0?[1-9]):[0-5][0-9](AM|PM)$") || time.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
     }
 }
