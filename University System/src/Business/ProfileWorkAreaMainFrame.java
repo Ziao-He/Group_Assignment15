@@ -5,6 +5,7 @@
  */
 package Business;
 
+import Business.Course.CourseOffering;
 import Business.Profiles.EmployeeProfile;
 import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
@@ -22,6 +23,8 @@ import UserInterface.WorkAreas.StudentRole.StudentMangementDialog;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -159,6 +162,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         RegistrarWorkAreaJPanel registrarworkarea;
         String r = useraccount.getRole();
         Profile profile = useraccount.getAssociatedPersonProfile();
+        ArrayList<CourseOffering> facultyCourse;
 
 
         if (profile instanceof EmployeeProfile) {
@@ -181,6 +185,11 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         }
 
       if (profile instanceof FacultyProfile) {
+          facultyCourse = business.getCourseDirectory().findByFacultyName(useraccount.getPersonId());
+          if(facultyCourse == null){
+              JOptionPane.showMessageDialog(this, "You didn't assign a course.", "Information", JOptionPane.INFORMATION_MESSAGE);
+              return;
+          }
             facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel, useraccount);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
