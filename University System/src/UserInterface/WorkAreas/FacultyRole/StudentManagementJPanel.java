@@ -41,6 +41,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
     ArrayList<Student> studentDirectory;
     Student selectedStudent;
     AssignmentSubmission assignmentSubmission = null;
+    int submssionGradeNum = 0;
     int submssionNum = 0;
 
     public StudentManagementJPanel(Business b, JPanel clp, UserAccount ua) {
@@ -83,7 +84,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                     row[0] = s;
                     model.addRow(row);
                } 
-                
+                //refresh Table Gpa
                 DefaultTableModel model2 =(DefaultTableModel) tblGPA.getModel();
                 model2.setRowCount(0);
                 double TotalGrade = 0;
@@ -350,8 +351,11 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
             selectedStudent = (Student) tblStudent.getValueAt(selectedRow, 0);
             
             for(AssignmentSubmission as : selectedStudent.getSubmissions()){
-                if(as.IsSubmissionThisCourseAssignment(courseOffering.getCourse()))
+                if(as.IsSubmissionThisCourseAssignment(courseOffering.getCourse())){
                     submssionNum++;
+                    if(!as.getGrade().equals("Pending"))
+                        submssionGradeNum ++;
+                    }
                     }
             
             double Progress = ((double)submssionNum / courseOffering.getCourse().getCourseWorkNum()) *100;
@@ -404,8 +408,9 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                         courseGrade = cg;
                         break;}
                     }
-             Oldgrade = Oldgrade * submssionNum;
-             double newGPA = Math.round((Oldgrade+ grade)/(submssionNum + 1) * 100.0) / 100.0;
+             Oldgrade = Oldgrade * submssionGradeNum;
+             // update new gpa to courseGrade
+             double newGPA = Math.round((Oldgrade+ grade)/ (submssionGradeNum + 1) * 100.0) / 100.0;
              String newgradeLetter = courseGrade.getLetterGrade(newGPA);
              courseGrade.setGpa(newGPA);
              courseGrade.setGrade(newgradeLetter);

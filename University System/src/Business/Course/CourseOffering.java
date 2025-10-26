@@ -8,7 +8,7 @@ import Business.Profiles.FacultyProfile;
 
 /**
  *
- * @author Administrator
+ * @author Yiyang Lin and Yujie Liang
  */
 public class CourseOffering {
     private Course course;
