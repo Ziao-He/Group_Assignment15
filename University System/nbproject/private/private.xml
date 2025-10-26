@@ -3,16 +3,50 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentGraduateDialog.java</file>
             <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminManageRegisterJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/EmployeeDirectory.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Course/CourseGrade.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Person/Admin.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/StudentAccount.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Person/Person.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/RegistrarDirectory.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/RegistrarRole/RegistrarWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/ProfileWorkAreaMainFrame.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminAnalyticsDashboardPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/FacultyProfile.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentFranscriptDialog.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/RegistrarRole/RegistrarCourseManagementJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentCourseRegistrationJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/FacultyRole/ManageFacultyProfilesJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/EmployeeProfile.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Person/AssignmentSubmission.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdministerUserAccountsWorkResp/ManageUserAccountsJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Course/Course.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Course/CourseDirectory.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminFacultyJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminManageStudentsJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/ManagePersonnelWorkResp/AdministerPersonJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminRegistrationJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdministerUserAccountsWorkResp/AdminUserAccount.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/StudentProfile.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminManageFacultyJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Person/AdminDirectory.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Course/CourseOffering.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/FacultyRole/PerformanceReportJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Course/Schedule.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/RegistrarRole/RegistrarTuitionJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Person/Student.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/ConfigureABusiness.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentFinancialJPanel.java</file>
             <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminRegisterJPanel.java</file>
             <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentMangementDialog.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminAnalyticsDashboardPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Profiles/FacultyDirectory.java</file>
             <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentRegisterAreaJPanel.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminFacultyJPanel.java</file>
             <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminRoleWorkAreaJPanel.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/Business/Course/Schedule.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminRegistrationJPanel.java</file>
-            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/StudentRole/StudentWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/AdminRole/AdminStudentJPanel.java</file>
+            <file>file:/C:/Users/bob-h/Documents/GitHub/Group_Assignment15/University%20System/src/UserInterface/WorkAreas/FacultyRole/FacultyWorkAreaJPanel.java</file>
         </group>
     </open-files>
 </project-private>
