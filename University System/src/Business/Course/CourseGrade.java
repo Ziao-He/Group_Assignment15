@@ -11,14 +11,19 @@ package Business.Course;
 public class CourseGrade {
     private Course course;
     private String term; 
-    private String grade;
-    private double gpa;
+    private String grade= "F";
+    private double gpa = 0.00;
 
     public CourseGrade(Course course, String term, String grade, double gpa){
         this.course = course;
         this.term = term;
         this.grade = grade;
         this.gpa = gpa;
+    }
+    
+       public CourseGrade(Course course, String term){
+        this.course = course;
+        this.term = term;
     }
 
     public Course getCourse() {
