@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kal
+ * @author Yiyang Lin
  */
 public class StudentCourseRegistrationJPanel extends javax.swing.JPanel {
 

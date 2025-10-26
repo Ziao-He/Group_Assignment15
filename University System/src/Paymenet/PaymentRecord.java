@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  *
- * @author Administrator
+ * @author Yiyang Lin
  */
 public class PaymentRecord {
     private Date date;

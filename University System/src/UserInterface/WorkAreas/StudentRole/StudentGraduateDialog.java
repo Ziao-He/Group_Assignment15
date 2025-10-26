@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Administrator
+ * @author Linyiang
  */
 public class StudentGraduateDialog extends javax.swing.JDialog {
 
@@ -61,7 +61,6 @@ try {
                 }
             }
 
-            // 构建成绩单文本
             transcriptText.append(String.format("%s - %s | Grade: %s | Submitted: %d/%d (%.0f%%)%n",
                     courseId, courseName, gradeLetter, submissionCount, totalAssignments, progress));
         }

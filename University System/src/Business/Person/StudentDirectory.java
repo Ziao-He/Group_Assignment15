@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Administrator
+ * @author Yiyang Lin
  */
 public class StudentDirectory {
     private ArrayList<Student> studentList = new ArrayList<>();
