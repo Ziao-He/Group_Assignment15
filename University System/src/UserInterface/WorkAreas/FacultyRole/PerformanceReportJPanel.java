@@ -81,6 +81,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
     public void refresh(){
         String Semester = (String) boxSemester.getSelectedItem();
         String Course = (String) boxCourse.getSelectedItem();
+        //find courseOffering
         for(CourseOffering co : facultyCourse)
             if(co.getCourse().getName().equals(Course) && co.getSemester().equals(Semester)){
                 courseOffering = co;
@@ -89,6 +90,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
         
         studentDirectory = business.getStudentDirectory().findEnrollStudent(courseOffering);
         double SumGPA =0;
+        // use Map store grade-letter count
         if(studentDirectory != null){
             for (Student s : studentDirectory) 
                 for(CourseGrade cg : s.getTranscript()){
@@ -105,6 +107,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
             txtAverageGrade.setText(Double.toString(average));
             txtCount.setText(Integer.toString(studentDirectory.size()));
             
+            //refresh table GRADE
             DefaultTableModel model =(DefaultTableModel) tblGrade.getModel();
             model.setRowCount(0);
             
@@ -165,7 +168,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
         tblGrade = new javax.swing.JTable();
         lblCount = new javax.swing.JLabel();
         txtCount = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -209,10 +212,10 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
 
         lblCount.setText("Enrollment count");
 
-        jButton1.setText("Export");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnExport.setText("Export");
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnExportActionPerformed(evt);
             }
         });
 
@@ -259,7 +262,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(333, 333, 333)
-                        .addComponent(jButton1)))
+                        .addComponent(btnExport)))
                 .addContainerGap(157, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -288,7 +291,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnExport)
                 .addContainerGap(367, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -304,7 +307,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_boxCourseActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
         // TODO add your handling code here:
         String Semester = (String) boxSemester.getSelectedItem();
         String Course = (String) boxCourse.getSelectedItem();
@@ -318,6 +321,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
 
             try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
                 
+                // wirte Semester Course Grade
                 writer.println("Semester: "+Semester);
                 writer.println("Course: "+ Course);
                 writer.println("Average Grade: " + txtAverageGrade.getText());
@@ -348,7 +352,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "export failed：" + ex.getMessage());
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnExportActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -362,7 +366,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> boxCourse;
     private javax.swing.JComboBox<String> boxSemester;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnExport;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAverageGrade;
     private javax.swing.JLabel lblCount;
