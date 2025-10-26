@@ -14,6 +14,7 @@ public class FacultyProfile extends Profile{
     private String facultyId;
     private String email;
     private String Phone; 
+    private String department; 
     
     public FacultyProfile(Person p){
         super(p);
@@ -51,6 +52,14 @@ public class FacultyProfile extends Profile{
     }
     public String getFacultyName() {
         return this.getPerson().getPersonRole();
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
     
     @Override

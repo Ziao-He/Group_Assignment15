@@ -6,6 +6,7 @@
 package Business.Profiles;
 
 import Business.Business;
+import Business.Person.Admin;
 import Business.Person.Person;
 
 import java.util.ArrayList;
@@ -32,6 +33,25 @@ public class EmployeeDirectory {
         employeelist.add(sp);
         return sp;
     }
+    
+    public EmployeeProfile newEmployeeProfile(Person p, Admin a) {
+        EmployeeProfile sp = new EmployeeProfile(p, a);
+        employeelist.add(sp);
+        return sp;
+    }
+    
+    public EmployeeProfile findByAdmin(Admin admin) {
+        if (admin == null) {
+            return null;
+        }
+        
+        for (EmployeeProfile ep : employeelist) {
+            if (ep.getAdmin() == admin) {
+                return ep;
+            }
+        }
+        return null;
+    }
 
     public EmployeeProfile findEmployee(String id) {
 
@@ -43,5 +63,9 @@ public class EmployeeDirectory {
         }
             return null; //not found after going through the whole list
          }
+    
+    public ArrayList<EmployeeProfile> getEmployeeList() {
+        return employeelist;
+    }
     
 }

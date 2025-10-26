@@ -22,6 +22,7 @@ public class Student extends Person {
     private String email;
     private String Phone;        
     private double balance = 0.0; 
+    private String department = null;
     private ArrayList<CourseOffering> enrolledOfferings = new ArrayList<>();
     private ArrayList<CourseGrade> transcript = new ArrayList<>();
     private ArrayList<PaymentRecord> payments = new ArrayList<>();
@@ -84,6 +85,31 @@ public class Student extends Person {
     public double getBalance() {
         return balance;
     }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String Phone) {
+        this.Phone = Phone;
+    }
+
 
     public ArrayList<AssignmentSubmission> getSubmissions() {
         return submissions;
