@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import static java.time.Clock.system;
 import static java.time.InstantSource.system;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kal
+ * @author Yiyang Lin
  */
 public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
 
@@ -123,6 +125,12 @@ public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
             tblCourseWork.getColumnModel().getColumn(3).setPreferredWidth(0);
             tblCourseWork.getColumnModel().getColumn(3).setMaxWidth(0);
         }
+
+        cmbCourseID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCourseIDActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Coures Wrok:");
 
@@ -250,28 +258,43 @@ public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
     }
     }//GEN-LAST:event_btnSumbitActionPerformed
 
+    private void cmbCourseIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCourseIDActionPerformed
+
     private void refreshCourseID() {
-        cmbCourseID.removeAllItems();
-        cmbCourseID.addItem("Select Course");
-        for (CourseOffering c : student.getEnrolledOfferings()) {
-            cmbCourseID.addItem(c.getCourse().getCourseId());
+    cmbCourseID.removeAllItems();
+    cmbCourseID.addItem("Select Course");
+
+    Set<String> addedCourseIds = new HashSet<>();
+
+    for (CourseOffering c : student.getEnrolledOfferings()) {
+        String courseId = c.getCourse().getCourseId().trim().toUpperCase(); 
+        if (addedCourseIds.add(courseId)) { 
+            cmbCourseID.addItem(courseId);
         }
+    }
     }
     
     private void refreshCourseWork(String selectedCourseID) {
-        cmbCourseWork.removeAllItems();
-        
-        if(selectedCourseID==null || selectedCourseID.isEmpty()){
-           return; 
-            
-        }
-        for (CourseOffering offering : student.getEnrolledOfferings()) {
-            for (CourseWork cw : business.getCourseWorkDirectory().getCourseWorkDirectory()) {
-                if (cw.getCourse().getCourseId().equalsIgnoreCase(selectedCourseID)) {
-                    cmbCourseWork.addItem( cw.getTitle());
-                }
+     cmbCourseWork.removeAllItems();
+    cmbCourseWork.addItem("Select Coursework");
+
+    if (selectedCourseID == null || selectedCourseID.isEmpty()) {
+        return;
+    }
+
+    Set<String> addedTitles = new HashSet<>();
+
+    for (CourseWork cw : business.getCourseWorkDirectory().getCourseWorkDirectory()) {
+        String courseId = cw.getCourse().getCourseId().trim().toUpperCase();
+        if (courseId.equals(selectedCourseID.trim().toUpperCase())) {
+            String title = cw.getTitle().trim();
+            if (addedTitles.add(title)) { 
+                cmbCourseWork.addItem(title);
             }
-        }    
+        }
+    }
     }
     
     private boolean containsItem(JComboBox<String> comboBox, String item) {

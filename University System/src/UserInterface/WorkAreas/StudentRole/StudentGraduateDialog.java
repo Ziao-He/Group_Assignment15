@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Administrator
+ * @author Linyiang
  */
 public class StudentGraduateDialog extends javax.swing.JDialog {
 
@@ -29,43 +29,56 @@ public class StudentGraduateDialog extends javax.swing.JDialog {
      */
     public StudentGraduateDialog(java.awt.Frame parent, boolean modal,Business b,StudentProfile studentAccount) {
         super(parent, modal);
-        this.business = b;
-        this.studentAccount = studentAccount;
-        this.student=(Student) studentAccount.getStudent();
-        
-        initComponents();
-                try {
-            int earnedCredits = 0;
-            boolean hasCore = false;
-            
-            for (CourseGrade cg : student.getTranscript()) {
-                if (cg.getGrade() != null && !cg.getGrade().equalsIgnoreCase("F")) {
-                    earnedCredits += cg.getCourse().getCredits();
-                    if ("INFO 5100".equalsIgnoreCase(cg.getCourse().getCourseId())) {
-                        hasCore = true;
-                    }
+this.business = b;
+this.studentAccount = studentAccount;
+this.student = (Student) studentAccount.getStudent();
+
+initComponents();
+
+try {
+        int earnedCredits = 0;
+        boolean hasCore = false;
+
+        StringBuilder transcriptText = new StringBuilder();
+
+        for (CourseGrade cg : student.getTranscript()) {
+            String courseId = cg.getCourse().getCourseId();
+            String courseName = cg.getCourse().getName();
+            String gradeLetter = cg.getGrade() != null ? cg.getGrade() : "N/A";
+
+            long submissionCount = student.getSubmissions().stream()
+                    .filter(as -> as.IsSubmissionThisCourseAssignment(cg.getCourse()))
+                    .count();
+
+            int totalAssignments = cg.getCourse().getCourseWorkNum(); 
+            double progress = totalAssignments > 0 ? ((double) submissionCount / totalAssignments) * 100 : 0;
+
+            if (cg.getGrade() != null && !cg.getGrade().equalsIgnoreCase("F") && submissionCount >= 10) {
+                earnedCredits += cg.getCourse().getCredits();
+
+                if ("INFO 5100".equalsIgnoreCase(courseId)) {
+                    hasCore = true;
                 }
             }
 
-            double overallGPA = student.calculateOverallGPA();
-            boolean ready = earnedCredits >= 32 && hasCore && overallGPA >= 3.0;
-
-            lblTotalCredits.setText(earnedCredits + " / 32 credits");
-            lblComplete.setText(hasCore ? "✅ Completed" : "❌ Not Completed");
-            lblGPA.setText(String.format("%.2f", overallGPA));
-
-            if (ready) {
-                lblStatus.setText(" READY TO GRADUATE!");
-            } else {
-                lblStatus.setText("IN PROGRESS – Requirements not yet met");
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, 
-                    "❌ Error performing graduation audit: " + ex.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
+            transcriptText.append(String.format("%s - %s | Grade: %s | Submitted: %d/%d (%.0f%%)%n",
+                    courseId, courseName, gradeLetter, submissionCount, totalAssignments, progress));
         }
+        
+        double overallGPA = student.calculateOverallGPA();
+
+        boolean ready = earnedCredits >= 32 && hasCore && overallGPA >= 3.0;
+
+        lblTotalCredits.setText(earnedCredits + " / 32 credits");
+        lblComplete.setText(hasCore ? "✅ Completed" : "❌ Not Completed");
+        lblGPA.setText(String.format("%.2f", overallGPA));
+        lblStatus.setText(ready ? "🎓 READY TO GRADUATE!" : "📘 IN PROGRESS – Requirements not yet met");
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(this,
+            "❌ Error performing graduation audit: " + ex.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    ex.printStackTrace();
+}  
     }
 
     /**

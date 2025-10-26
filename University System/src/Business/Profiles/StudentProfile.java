@@ -11,7 +11,7 @@ import Business.Person.StudentDirectory;
 
 /**
  *
- * @author kal bugrara
+ * @author Yiyang Lin
  */
 public class StudentProfile extends Profile {
 

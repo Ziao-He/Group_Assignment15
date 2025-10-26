@@ -12,7 +12,7 @@ import Business.Profiles.Profile;
 
 /**
  *
- * @author kal bugrara
+ * @author Yiyang Lin
  */
 public class UserAccount {
     

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author kal bugrara
+ * @author Yiyang Lin
  */
 public class StudentProfileDirectory {
 

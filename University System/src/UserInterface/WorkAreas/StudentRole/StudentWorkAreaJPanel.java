@@ -22,7 +22,7 @@ import static jdk.internal.org.jline.utils.Colors.s;
 
 /**
  *
- * @author kal
+ * @author Yiyang Lin
  */
 public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
@@ -48,7 +48,6 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
         this.useraccount = useraccount;
         
         initComponents();
-        refreshBalance();
         
     }
 
@@ -67,9 +66,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
         btnRegister = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         btnFinancial = new javax.swing.JButton();
-        lblBalance = new javax.swing.JLabel();
 
         setForeground(new java.awt.Color(51, 51, 51));
 
@@ -146,9 +143,6 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel2.setText("Balance:");
-
         btnFinancial.setBackground(new java.awt.Color(102, 153, 255));
         btnFinancial.setFont(getFont());
         btnFinancial.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,21 +157,14 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblBalance.setText("0.00*");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblBalance, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
@@ -194,11 +181,8 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBalance))
-                .addGap(48, 48, 48)
+                .addComponent(jLabel1)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCourseWork, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -266,9 +250,6 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);  
     }//GEN-LAST:event_btnFinancialActionPerformed
 
-   private void refreshBalance(){
-      lblBalance.setText(String.format("Balance: $%.2f",studentAccount.getStudent().getBalance()));
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCourseWork;
     private javax.swing.JButton btnFinancial;
@@ -277,8 +258,6 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lblBalance;
     // End of variables declaration//GEN-END:variables
 
 }

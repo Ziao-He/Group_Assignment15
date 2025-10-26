@@ -62,8 +62,17 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
     public void initializationBoxSemester(){ 
         boxSemester.removeAllItems();
         if(facultyCourse != null)
-            for(CourseOffering co : facultyCourse)
-                boxSemester.addItem(co.getSemester());
+            for(CourseOffering co : facultyCourse){
+                boolean NOexists = true;
+                for (int i = 0; i < boxSemester.getItemCount(); i++) 
+                    if (boxSemester.getItemAt(i).equals(co.getSemester())) {
+                        NOexists = false;
+                        break;
+                    }
+                if(NOexists)
+                    boxSemester.addItem(co.getSemester());
+                
+            }
   
         
     }
@@ -89,48 +98,48 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
             }
         
         studentDirectory = business.getStudentDirectory().findEnrollStudent(courseOffering);
-        double SumGPA =0;
-        // use Map store grade-letter count
         if(studentDirectory != null){
-            for (Student s : studentDirectory) 
-                for(CourseGrade cg : s.getTranscript()){
-                String gletter = cg.getGradeLetterByCourse(courseOffering.getCourse());
-                SumGPA = SumGPA + cg.getGpaByCourse(courseOffering.getCourse());
-                if(!gradeCount.containsKey(gletter))
-                    gradeCount.put(gletter, 1);
-                else 
-                    gradeCount.put(gletter, gradeCount.get(gletter) + 1);
-            
+            double SumGPA =0;
+            // use Map store grade-letter count
+                for (Student s : studentDirectory) 
+                    for(CourseGrade cg : s.getTranscript()){
+                    String gletter = cg.getGradeLetterByCourse(courseOffering.getCourse());
+                    SumGPA = SumGPA + cg.getGpaByCourse(courseOffering.getCourse());
+                    if(!gradeCount.containsKey(gletter))
+                        gradeCount.put(gletter, 1);
+                    else 
+                        gradeCount.put(gletter, gradeCount.get(gletter) + 1);
+
+                }
+
+                double average = Math.round(SumGPA / studentDirectory.size() * 100.0) / 100.0;
+                txtAverageGrade.setText(Double.toString(average));
+                txtCount.setText(Integer.toString(studentDirectory.size()));
+
+                //refresh table GRADE
+                DefaultTableModel model =(DefaultTableModel) tblGrade.getModel();
+                model.setRowCount(0);
+
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGrade.getModel());
+                sorter.setComparator(2, Comparator.comparingDouble(o -> ((Number) o).doubleValue()));
+                List<RowSorter.SortKey> sortKeys = new ArrayList<>();;
+                sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
+                sorter.setSortKeys(sortKeys);
+                sorter.sort();
+
+                tblGrade.setRowSorter(sorter);
+                    for(Map.Entry<String, Integer> entry : gradeCount.entrySet())
+                        { 
+                            Object row[]= new Object[3];   
+                            row[0] = entry.getKey();
+                            row[1] = entry.getValue();                     
+                            row[2] = getGradePoint(entry.getKey());
+                            model.addRow(row);
+                        }
+
             }
             
-            double average = Math.round(SumGPA / studentDirectory.size() * 100.0) / 100.0;
-            txtAverageGrade.setText(Double.toString(average));
-            txtCount.setText(Integer.toString(studentDirectory.size()));
-            
-            //refresh table GRADE
-            DefaultTableModel model =(DefaultTableModel) tblGrade.getModel();
-            model.setRowCount(0);
-            
-            TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGrade.getModel());
-            sorter.setComparator(2, Comparator.comparingDouble(o -> ((Number) o).doubleValue()));
-            List<RowSorter.SortKey> sortKeys = new ArrayList<>();;
-            sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
-            sorter.setSortKeys(sortKeys);
-            sorter.sort();
-            
-            tblGrade.setRowSorter(sorter);
-                for(Map.Entry<String, Integer> entry : gradeCount.entrySet())
-                    { 
-                        Object row[]= new Object[3];   
-                        row[0] = entry.getKey();
-                        row[1] = entry.getValue();                     
-                        row[2] = getGradePoint(entry.getKey());
-                        model.addRow(row);
-                    }
-            
-     
-            
-        }
+        
             
         
     }
