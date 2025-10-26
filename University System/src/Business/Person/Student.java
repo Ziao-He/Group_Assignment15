@@ -323,6 +323,19 @@ public class Student extends Person {
         
     }
     
+    public double getStudentPaymentForCourse(CourseOffering courseOffering){
+        if(balance > 0)
+            return 0.0;
+        else{
+            for(CourseOffering co : enrolledOfferings)
+                if(co.getFaculty().getFacultyName().equals(courseOffering.getFaculty().getFacultyName()) && co.getCourse().getName().equals(courseOffering.getCourse().getName()))
+                {
+                    return co.getTuitionForCourse();
+                }
+        }
+        return 0.0;
+    }
+    
     @Override
     public String toString() {
         return studentId + " - " + name;

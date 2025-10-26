@@ -46,8 +46,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         for(CourseOffering co : facultyCourse){
             studentDirectory = business.getStudentDirectory().findEnrollStudent(co);
             for(Student s : studentDirectory)
-                for(PaymentRecord p : s.getPayments())
-                    totalTuition = totalTuition + p.getRecievePayment(co);
+                    totalTuition = totalTuition + s.getStudentPaymentForCourse(co);
              }
         txtTuition.setText(Double.toString(totalTuition));
             
