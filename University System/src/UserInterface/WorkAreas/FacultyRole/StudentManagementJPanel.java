@@ -13,6 +13,7 @@ import Business.Person.StudentDirectory;
 import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -92,15 +93,20 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                         if(grade >= 0){
                         //double percentGreade = (grade / 4.0) *100;
                         Object row[]= new Object[2];   
-                        row[0] = Double.toString(grade);
+                        row[0] = grade;
                         row[1] = s.getName();
                         model2.addRow(row);}
                         TotalGrade = TotalGrade + grade;
                     }
                } 
-               TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGPA.getModel());
+               TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGPA.getModel());               
+               sorter.setComparator(0, Comparator.comparingDouble(o -> ((Number) o).doubleValue()));
+               List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+               sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+               sorter.setSortKeys(sortKeys);
+               sorter.sort();
                tblGPA.setRowSorter(sorter);
-
+               
                
                double ClassGPA = Math.round(TotalGrade/studentDirectory.size() * 100.0)/100.0;
                txtClassGPA.setText(Double.toString(ClassGPA));
