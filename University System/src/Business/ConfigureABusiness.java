@@ -42,21 +42,36 @@ class ConfigureABusiness {
 // Create Persons
         PersonDirectory persondirectory = business.getPersonDirectory();
 // person representing sales organization        
-        Person person001 = persondirectory.newPerson("John Smith");
-        Person person002 = persondirectory.newPerson("Gina Montana");
-        Person person003 = persondirectory.newPerson("Adam Rollen");
- 
-        Person person005 = persondirectory.newPerson("Jim Dellon");
-        Person person006 = persondirectory.newPerson("Anna Shnider");
-        Person person007 = persondirectory.newPerson("Laura Brown");
-        Person person008 = persondirectory.newPerson("Jack While");
-        Person person009 = persondirectory.newPerson("Fidelity"); //we use this as customer
-        
-        Person person010 = persondirectory.newPerson("Lin");
-        Person person011 = persondirectory.newPerson("Dr. Adams");
-        Person person012 = persondirectory.newPerson("Dr. Brown");
-        Person person013 = persondirectory.newPerson("Lu qiang");
-        Person person014 = persondirectory.newPerson("Registrar Cryus");
+        Person person001 = persondirectory.newPerson("Alice Johnson");
+        Person person002 = persondirectory.newPerson("Bob Smith");
+        Person person003 = persondirectory.newPerson("Cyrus Brown");
+        Person person004 = persondirectory.newPerson("Diana Taylor");
+        Person person005 = persondirectory.newPerson("Evan Lee");
+        Person person006 = persondirectory.newPerson("Fiona Wilson");
+        Person person007 = persondirectory.newPerson("George Clark");
+        Person person008 = persondirectory.newPerson("Hannah Hall");
+        Person person009 = persondirectory.newPerson("Ian Adams");
+        Person person010 = persondirectory.newPerson("Jane King");
+        Person person011 = persondirectory.newPerson("Kevin Wright");
+        Person person012 = persondirectory.newPerson("Laura Green");
+        Person person013 = persondirectory.newPerson("Mike Harris");
+        Person person014 = persondirectory.newPerson("Nina Lewis");
+        Person person015 = persondirectory.newPerson("Oscar Roberts");
+        Person person016 = persondirectory.newPerson("Paula Walker");
+        Person person017 = persondirectory.newPerson("Quinn Young");
+        Person person018 = persondirectory.newPerson("Rachel Allen");
+        Person person019 = persondirectory.newPerson("Steve Scott");
+        Person person020 = persondirectory.newPerson("Tina Hill");
+        Person person021 = persondirectory.newPerson("Victor Martin");
+        Person person022 = persondirectory.newPerson("Wendy Moore");
+        Person person023 = persondirectory.newPerson("Xavier Clark");
+        Person person024 = persondirectory.newPerson("Yolanda Baker");
+        Person person025 = persondirectory.newPerson("Zachary Hall");
+        Person person026 = persondirectory.newPerson("Amber Collins");
+        Person person027 = persondirectory.newPerson("Brian Foster");
+        Person person028 = persondirectory.newPerson("Chloe Simmons");
+        Person person029 = persondirectory.newPerson("David Turner");
+        Person person030 = persondirectory.newPerson("Emily Morgan");
 
 // Create Admins to manage the business
         AdminDirectory adminDirectory = business.getAdminDirectory();
@@ -113,6 +128,51 @@ class ConfigureABusiness {
         StudentProfile sD5 = new StudentProfile(s5, s5);
         sPD.newStudentProfile(sD5);
         
+        Student s6 =new Student("0006", "Linyiyang", "Student");
+        s6.setEmail("lin.yiyang@northeastern.edu");
+        s6.setPhone("617-535-1045");
+        s6.setDepartment("Computer Science");
+        business.getStudentDirectory().addStudent(s6);
+        
+        StudentProfile sD6 = new StudentProfile(s6, s6);
+        sPD.newStudentProfile(sD6);
+        
+        Student s7 =new Student("0007", "Liang yujie", "Student");
+        s6.setEmail("Liang.yujie@northeastern.edu");
+        s6.setPhone("517-535-1445");
+        s6.setDepartment("Computer Science");
+        business.getStudentDirectory().addStudent(s7);
+        
+        StudentProfile sD7 = new StudentProfile(s7, s7);
+        sPD.newStudentProfile(sD7);
+        
+        Student s8 =new Student("0008", "Tim oven", "Student");
+        s6.setEmail("Tim.owven@northeastern.edu");
+        s6.setPhone("817-538-2445");
+        s6.setDepartment("Computer Science");
+        business.getStudentDirectory().addStudent(s8);
+        
+        StudentProfile sD8 = new StudentProfile(s8, s8);
+        sPD.newStudentProfile(sD8);
+        
+        Student s9 =new Student("0009", "Jerry heavy", "Student");
+        s6.setEmail("jerry.heavy@northeastern.edu");
+        s6.setPhone("217-545-9445");
+        s6.setDepartment("Computer Science");
+        business.getStudentDirectory().addStudent(s9);
+        
+        StudentProfile sD9 = new StudentProfile(s9, s9);
+        sPD.newStudentProfile(sD9);
+        
+        Student s10 =new Student("0010", "Curry tim", "Student");
+        s6.setEmail("Curry.tim@northeastern.edu");
+        s6.setPhone("517-935-7863");
+        s6.setDepartment("Computer Science");
+        business.getStudentDirectory().addStudent(s10);
+        
+        StudentProfile sD10 = new StudentProfile(s10, s10);
+        sPD.newStudentProfile(sD10);
+        
 
         // Create User accounts that link to specific profiles
         FacultyDirectory fadirectory = business.getFacultyDirectory(); 
@@ -141,6 +201,31 @@ class ConfigureABusiness {
         faprofile4.setEmail("lu.qiang@northeastern.edu");
         faprofile4.setPhone("617-555-2005");
         faprofile4.setDepartment("Computer Science");
+        FacultyProfile faprofile5 =fadirectory.newFacultyDirectory(person015);
+        faprofile5.setFacultyId("0006");
+        faprofile5.setEmail("steven@northeastern.edu");
+        faprofile5.setPhone("617-515-2405");
+        faprofile5.setDepartment("Computer Science");
+        FacultyProfile faprofile6 =fadirectory.newFacultyDirectory(person016);
+        faprofile6.setFacultyId("0007");
+        faprofile6.setEmail("person16@northeastern.edu");
+        faprofile6.setPhone("617-656-2305");
+        faprofile6.setDepartment("Computer Science");
+        FacultyProfile faprofile7 =fadirectory.newFacultyDirectory(person017);
+        faprofile7.setFacultyId("0008");
+        faprofile7.setEmail("person17@northeastern.edu");
+        faprofile7.setPhone("917-156-2307");
+        faprofile7.setDepartment("Computer Science");
+        FacultyProfile faprofile8 =fadirectory.newFacultyDirectory(person018);
+        faprofile8.setFacultyId("0009");
+        faprofile8.setEmail("person18@northeastern.edu");
+        faprofile8.setPhone("917-651-9305");
+        faprofile8.setDepartment("Computer Science");
+        FacultyProfile faprofile9 =fadirectory.newFacultyDirectory(person019);
+        faprofile9.setFacultyId("0010");
+        faprofile9.setEmail("person19@northeastern.edu");
+        faprofile9.setPhone("157-256-9305");
+        faprofile9.setDepartment("Computer Science");
 
         //添加Registrar
         RegistrarDirectory registrarDirectory = business.getRegistrarDirectory();
@@ -185,12 +270,12 @@ class ConfigureABusiness {
         Schedule sch7 = new Schedule("Fall 2025", "3:00PM", "5:30PM", "Ell Hall 601");
 
         // add CourseOffering
-        CourseOffering o1 = new CourseOffering(c1, faprofile1, sch1, 30);
-        CourseOffering o2 = new CourseOffering(c2, faprofile2, sch2, 25);
-        CourseOffering o3 = new CourseOffering(c3, faprofile3, sch3, 25);
-        CourseOffering o4 = new CourseOffering(c3, faprofile3, sch4, 25);
-        CourseOffering o5 = new CourseOffering(c4, faprofile2, sch5, 25);
-        CourseOffering o6 = new CourseOffering(c5, faprofile3, sch6, 25);
+        CourseOffering o1 = new CourseOffering(c1, faprofile1, sch1, 300);
+        CourseOffering o2 = new CourseOffering(c2, faprofile1, sch2, 250);
+        CourseOffering o3 = new CourseOffering(c3, faprofile2, sch3, 250);
+        CourseOffering o4 = new CourseOffering(c3, faprofile3, sch4, 250);
+        CourseOffering o5 = new CourseOffering(c4, faprofile4, sch5, 250);
+        CourseOffering o6 = new CourseOffering(c5, faprofile5, sch6, 250);
         
         // add to business
         coursedirectory.addOffering(o1);
@@ -200,10 +285,10 @@ class ConfigureABusiness {
         coursedirectory.addOffering(o5);
         coursedirectory.addOffering(o6);
         
-//        sD1.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
-        sD2.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
-        sD3.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
-        sD4.getStudent().enrollCourse(new CourseOffering(c3,faprofile1,sch3,25));
+        sD1.getStudent().enrollCourse(o1);
+        sD2.getStudent().enrollCourse(o1);
+        sD3.getStudent().enrollCourse(o1);
+
         
         //create course work
         CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();
@@ -225,10 +310,10 @@ class ConfigureABusiness {
 //        sD1.getStudent().addCourseGrade(c1, "Fall 2025","B",3.1);
 //        sD1.getStudent().payTuition(1200);
         
-        //sD2.getStudent().addCourseGrade(c1, "Fall 2025","A",3.8);
-        //sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+",3.5);
-        
-        //sD4.getStudent().addCourseGrade(c3, "Spring 2025","B+",3.5);
+//        sD2.getStudent().addCourseGrade(c1, "Fall 2025","A",3.8);
+//        sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+",3.5);
+//        
+//        sD4.getStudent().addCourseGrade(c3, "Spring 2025","B+",3.5);
         //添加Registrar账户
         UserAccount uaRegistrar = uadirectory.newUserAccount(registrarProfile, "Registrar", "****");
         return business;
