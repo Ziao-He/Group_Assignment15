@@ -5,6 +5,8 @@
 package Paymenet;
 
 import Business.Course.Course;
+import Business.Course.CourseOffering;
+import Business.Person.Student;
 import java.util.Date;
 
 /**
@@ -72,6 +74,14 @@ public class PaymentRecord {
     public void setStatus(String status) {
         this.status = status;
     }
+
     
+    public Double getRecievePayment(CourseOffering co){
+        if(co.getCourse().getCourseId().equals(this.getCourseID()) && status.equals("PAID")){
+                return amout;
+         }       
+        return 0.0;
+            
+    }
     
 }

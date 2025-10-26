@@ -4,6 +4,7 @@
  */
 package Business.Person;
 
+import Business.Course.Course;
 import java.util.Date;
 
 /**
@@ -58,5 +59,10 @@ public class AssignmentSubmission {
         this.grade = grade;
     }
 
+    public boolean IsSubmissionThisCourseAssignment(Course c){
+        if(c.getName().equals(this.coursework.getCourse().getName()))
+            return true;
+        return false;
+    }
     
 }

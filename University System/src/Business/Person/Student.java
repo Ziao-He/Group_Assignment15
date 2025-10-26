@@ -312,16 +312,30 @@ public class Student extends Person {
         }
     }
     
-    public void addCourseGrade(Course course,String term,String grade){
+    public void addCourseGrade(Course course,String term,String grade, Double gpa){
         if(course == null || term == null || grade == null){
             System.out.println("ERRO GRADE INPUT FOR STUDENT");
             return;
         }
         
-        CourseGrade cg = new CourseGrade(course,term,grade);
+        CourseGrade cg = new CourseGrade(course,term,grade,gpa);
         transcript.add(cg);
         
     }
+    
+    public double getStudentPaymentForCourse(CourseOffering courseOffering){
+        if(balance > 0)
+            return 0.0;
+        else{
+            for(CourseOffering co : enrolledOfferings)
+                if(co.getFaculty().getFacultyName().equals(courseOffering.getFaculty().getFacultyName()) && co.getCourse().getName().equals(courseOffering.getCourse().getName()))
+                {
+                    return co.getTuitionForCourse();
+                }
+        }
+        return 0.0;
+    }
+    
     @Override
     public String toString() {
         return studentId + " - " + name;

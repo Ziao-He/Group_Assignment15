@@ -1,0 +1,469 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package UserInterface.WorkAreas.FacultyRole;
+
+import Business.Business;
+import Business.Course.CourseGrade;
+import Business.Course.CourseOffering;
+import Business.Person.AssignmentSubmission;
+import Business.Person.Student;
+import Business.Person.StudentDirectory;
+import Business.UserAccounts.UserAccount;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
+/**
+ *
+ * @author yujie-liang
+ */
+public class StudentManagementJPanel extends javax.swing.JPanel {
+
+    /**
+     * Creates new form StudentManagementJPanel
+     */
+    
+    javax.swing.JPanel CardSequencePanel;
+    Business business;
+    UserAccount useraccount;
+    ArrayList<CourseOffering> facultyCourse;
+    CourseOffering courseOffering;
+    ArrayList<Student> studentDirectory;
+    Student selectedStudent;
+    AssignmentSubmission assignmentSubmission = null;
+    int submssionNum = 0;
+
+    public StudentManagementJPanel(Business b, JPanel clp, UserAccount ua) {
+
+        business = b;
+        this.CardSequencePanel = clp;
+        useraccount = ua;
+        initComponents();
+        initialization();
+        refreshTable();
+    }
+    public void initialization(){
+        // find which course faculty teach
+        facultyCourse = business.getCourseDirectory().findByFacultyName(useraccount.getPersonId());
+        
+        // show the course on boxCourse
+        boxCourse.removeAllItems();
+        if(facultyCourse != null)
+            for(CourseOffering co : facultyCourse)
+                boxCourse.addItem(co.getCourse().getName());
+    }
+    
+    public void refreshTable(){
+        if(facultyCourse != null){
+            String courseName = (String) boxCourse.getSelectedItem();
+
+            for(CourseOffering co : facultyCourse)
+                if(co.getCourse().getName().equals(courseName))
+                    courseOffering = co;
+            
+            //find enroll the student who enroll this course
+            studentDirectory = business.getStudentDirectory().findEnrollStudent(courseOffering);
+            
+            // refresh Table Student
+            if(studentDirectory != null){
+                DefaultTableModel model =(DefaultTableModel) tblStudent.getModel();
+                model.setRowCount(0);
+                for(Student s : studentDirectory){
+                    Object row[]= new Object[1];   
+                    row[0] = s;
+                    model.addRow(row);
+               } 
+                
+                DefaultTableModel model2 =(DefaultTableModel) tblGPA.getModel();
+                model2.setRowCount(0);
+                double TotalGrade = 0;
+                for(Student s : studentDirectory){
+                    for(CourseGrade cg : s.getTranscript())
+                    {   double grade = cg.getGpaByCourse(courseOffering.getCourse());
+                        if(grade >= 0){
+                        //double percentGreade = (grade / 4.0) *100;
+                        Object row[]= new Object[2];   
+                        row[0] = grade;
+                        row[1] = s.getName();
+                        model2.addRow(row);}
+                        TotalGrade = TotalGrade + grade;
+                    }
+               } 
+               TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGPA.getModel());               
+               sorter.setComparator(0, Comparator.comparingDouble(o -> ((Number) o).doubleValue()));
+               List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+               sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+               sorter.setSortKeys(sortKeys);
+               sorter.sort();
+               tblGPA.setRowSorter(sorter);
+               
+               
+               double ClassGPA = Math.round(TotalGrade/studentDirectory.size() * 100.0)/100.0;
+               txtClassGPA.setText(Double.toString(ClassGPA));
+            }      
+        }
+    }
+    
+    public void refreshBoxAssignment(){
+        String AssignmentName = (String) boxAssignment.getSelectedItem();
+        int count = 0;
+        for(AssignmentSubmission as : selectedStudent.getSubmissions())
+            if(as.getCoursework().getCourse().getName().equals(courseOffering.getCourse().getName()) && as.getCoursework().getTitle().equals(AssignmentName))
+                    {txtContent.setText(as.getContent());
+                    assignmentSubmission = as;
+                    count ++;
+                    }
+        if (count == 0)
+            assignmentSubmission = null;
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        boxCourse = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStudent = new javax.swing.JTable();
+        lblProgressReport = new javax.swing.JLabel();
+        lblTranscript = new javax.swing.JLabel();
+        lblAssignment = new javax.swing.JLabel();
+        txtProgressReport = new javax.swing.JTextField();
+        txtTranscript = new javax.swing.JTextField();
+        boxAssignment = new javax.swing.JComboBox<>();
+        lblContent = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtContent = new javax.swing.JTextArea();
+        lblGrade = new javax.swing.JLabel();
+        txtGrade = new javax.swing.JTextField();
+        btnGrade = new javax.swing.JButton();
+        btnView = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblGPA = new javax.swing.JTable();
+        lblClassGPA = new javax.swing.JLabel();
+        txtClassGPA = new javax.swing.JTextField();
+        btnBack = new javax.swing.JButton();
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel1.setText("Student Management");
+
+        boxCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCourseActionPerformed(evt);
+            }
+        });
+
+        tblStudent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Enroll Student"
+            }
+        ));
+        jScrollPane1.setViewportView(tblStudent);
+
+        lblProgressReport.setText("Student Progress Report");
+
+        lblTranscript.setText("Transcript");
+
+        lblAssignment.setText("Assignment");
+
+        txtProgressReport.setEditable(false);
+
+        txtTranscript.setEditable(false);
+
+        boxAssignment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxAssignmentActionPerformed(evt);
+            }
+        });
+
+        lblContent.setText("Assignment Content");
+
+        txtContent.setEditable(false);
+        txtContent.setColumns(20);
+        txtContent.setRows(5);
+        jScrollPane2.setViewportView(txtContent);
+
+        lblGrade.setText("Grade Assignment");
+
+        btnGrade.setText("Grade");
+        btnGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGradeActionPerformed(evt);
+            }
+        });
+
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+
+        tblGPA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Grade", "Student"
+            }
+        ));
+        jScrollPane3.setViewportView(tblGPA);
+
+        lblClassGPA.setText("Class GPA");
+
+        txtClassGPA.setEditable(false);
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(boxCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnView, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(65, 65, 65)
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(79, 79, 79)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblProgressReport)
+                                            .addComponent(lblAssignment)
+                                            .addComponent(lblTranscript)
+                                            .addComponent(lblContent)
+                                            .addComponent(lblGrade))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnGrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtProgressReport)
+                                            .addComponent(txtTranscript, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                            .addComponent(boxAssignment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jScrollPane2)
+                                            .addComponent(txtGrade)))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(lblClassGPA)
+                        .addGap(39, 39, 39)
+                        .addComponent(txtClassGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(boxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblProgressReport)
+                            .addComponent(txtProgressReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTranscript)
+                            .addComponent(txtTranscript, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAssignment)
+                            .addComponent(boxAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblContent)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGrade)
+                            .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGrade)
+                    .addComponent(btnView))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblClassGPA)
+                    .addComponent(txtClassGPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        txtProgressReport.setText("");
+        txtTranscript.setText("");
+        boxAssignment.removeAllItems();
+        txtContent.setText("");
+        txtGrade.setText("");
+        
+        
+        int selectedRow = tblStudent.getSelectedRow();
+        
+        if (selectedRow >= 0) {
+          
+            selectedStudent = (Student) tblStudent.getValueAt(selectedRow, 0);
+            
+            for(AssignmentSubmission as : selectedStudent.getSubmissions()){
+                if(as.IsSubmissionThisCourseAssignment(courseOffering.getCourse()))
+                    submssionNum++;
+                    }
+            
+            double Progress = ((double)submssionNum / courseOffering.getCourse().getCourseWorkNum()) *100;
+            txtProgressReport.setText(Double.toString(Progress) + "%");          
+            
+            for(CourseGrade cg : selectedStudent.getTranscript())
+                    {   String grade = cg.getGradeLetterByCourse(courseOffering.getCourse());
+                        if(!grade.equals("")){
+                            txtTranscript.setText(grade);
+                            break;
+                        }}
+            
+            UpdateBoxAssignment();        
+            refreshBoxAssignment();
+            
+            
+        
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select an Student from the list",  "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void boxAssignmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAssignmentActionPerformed
+        // TODO add your handling code here:
+        refreshBoxAssignment();
+    }//GEN-LAST:event_boxAssignmentActionPerformed
+
+    private void boxCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCourseActionPerformed
+        // TODO add your handling code here:
+        refreshTable();
+    }//GEN-LAST:event_boxCourseActionPerformed
+
+    private void btnGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGradeActionPerformed
+        // TODO add your handling code here:
+        String assignmentGrade = txtGrade.getText();
+        
+        if(assignmentSubmission == null || assignmentGrade.isBlank()){
+            return;}
+  
+         try{
+             double grade = Double.valueOf(assignmentGrade);
+             if(grade < 0 || grade >100)
+                 throw new Exception();
+             grade = grade / 100 * 4.0; 
+             double  Oldgrade  = 0;
+             CourseGrade courseGrade = null;
+             for(CourseGrade cg : selectedStudent.getTranscript()){   
+                    Oldgrade = cg.getGpaByCourse(courseOffering.getCourse());
+                    if(Oldgrade >=0){
+                        courseGrade = cg;
+                        break;}
+                    }
+             Oldgrade = Oldgrade * submssionNum;
+             double newGPA = Math.round((Oldgrade+ grade)/(submssionNum + 1) * 100.0) / 100.0;
+             String newgradeLetter = courseGrade.getLetterGrade(newGPA);
+             courseGrade.setGpa(newGPA);
+             courseGrade.setGrade(newgradeLetter);
+             
+             assignmentSubmission.setGrade(assignmentGrade);
+             
+             txtTranscript.setText(newgradeLetter);
+             refreshTable();
+             UpdateBoxAssignment();           
+             txtContent.setText("");
+             txtGrade.setText("");
+             refreshBoxAssignment();
+            JOptionPane.showMessageDialog(this, "Assignment successfully grade", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "please check the Grade input. Grade should be between 0- 100","Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGradeActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    public void UpdateBoxAssignment(){
+        boxAssignment.removeAllItems();
+        for(AssignmentSubmission as : selectedStudent.getSubmissions()){
+            if(as.getCoursework().getCourse().getName().equals(courseOffering.getCourse().getName()))
+                if(as.getGrade().equals("Pending"))
+                    boxAssignment.addItem(as.getCoursework().getTitle());
+           
+        }       
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxAssignment;
+    private javax.swing.JComboBox<String> boxCourse;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnGrade;
+    private javax.swing.JButton btnView;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblAssignment;
+    private javax.swing.JLabel lblClassGPA;
+    private javax.swing.JLabel lblContent;
+    private javax.swing.JLabel lblGrade;
+    private javax.swing.JLabel lblProgressReport;
+    private javax.swing.JLabel lblTranscript;
+    private javax.swing.JTable tblGPA;
+    private javax.swing.JTable tblStudent;
+    private javax.swing.JTextField txtClassGPA;
+    private javax.swing.JTextArea txtContent;
+    private javax.swing.JTextField txtGrade;
+    private javax.swing.JTextField txtProgressReport;
+    private javax.swing.JTextField txtTranscript;
+    // End of variables declaration//GEN-END:variables
+}

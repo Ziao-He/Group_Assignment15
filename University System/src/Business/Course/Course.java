@@ -12,7 +12,9 @@ public class Course {
     private String courseId;
     private String name;
     private int credits;
+    private String description;
     private String syllabus;
+    private int courseWorkNum = 10;
 
     public Course(String courseId, String name, int credits){
         this.courseId = courseId;
@@ -47,5 +49,28 @@ public class Course {
     public void setSyllabus(String syllabus) {
         this.syllabus = syllabus;
     }
+
+    public String getSyllabus() {
+        return syllabus;
+    }
+
+    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCourseWorkNum(int courseWorkNum) {
+        this.courseWorkNum = courseWorkNum;
+    }
+
+    public int getCourseWorkNum() {
+        return courseWorkNum;
+    }
+    
+    
     
 }

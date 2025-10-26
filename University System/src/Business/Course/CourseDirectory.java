@@ -44,7 +44,10 @@ public class CourseDirectory {
                 res.add(o);
                 }
         }
-        return res;
+        if(!res.isEmpty())
+            return res;
+        else
+            return null;
     }
 
     public ArrayList<CourseOffering> findBySemester(String semester) {
