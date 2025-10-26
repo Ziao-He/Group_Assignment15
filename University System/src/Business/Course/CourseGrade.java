@@ -6,7 +6,7 @@ package Business.Course;
 
 /**
  *
- * @author Administrator
+ * @author Yiyang Lin and Yujie Liang
  */
 public class CourseGrade {
     private Course course;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Administrator
+ * @author Yiyang Lin and Yujie Liang
  */
 public class CourseDirectory {
     private ArrayList<CourseOffering> offerList;

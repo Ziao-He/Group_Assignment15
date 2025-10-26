@@ -62,6 +62,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 if(co.getCourse().getName().equals(courseName))
                     courseOffering = co;
 
+            txtCourse.setText(courseName);
             txtDescription.setText(courseOffering.getCourse().getDescription());
             txtSchedule.setText(courseOffering.getSchedule().getStartTime());
             txtSchedule2.setText(courseOffering.getSchedule().getEndTime());
@@ -76,6 +77,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
     }
     public void SetViewMode(){
+        txtCourse.setEditable(false);
         txtDescription.setEditable(false);
         txtSchedule.setEditable(false);
         txtSchedule2.setEditable(false);
@@ -90,6 +92,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     }
     
      public void SetUpdateMode(){
+        txtCourse.setEditable(true);
         txtDescription.setEditable(true);
         txtSchedule.setEditable(true);
         txtSchedule2.setEditable(true);
@@ -133,6 +136,8 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         txtSchedule2 = new javax.swing.JTextField();
         lblClassRoom = new javax.swing.JLabel();
         txtClassRoom = new javax.swing.JTextField();
+        lblCourse = new javax.swing.JLabel();
+        txtCourse = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(800, 450));
         setMinimumSize(new java.awt.Dimension(800, 450));
@@ -220,6 +225,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
         txtClassRoom.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
+        lblCourse.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblCourse.setText("Title");
+
+        txtCourse.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,7 +251,8 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                                     .addComponent(lblSysllabus)
                                     .addComponent(lblStatus)
                                     .addComponent(lblSchedule)
-                                    .addComponent(lblClassRoom))
+                                    .addComponent(lblClassRoom)
+                                    .addComponent(lblCourse))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
@@ -254,7 +265,8 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtSchedule2))
-                                    .addComponent(txtClassRoom)))
+                                    .addComponent(txtClassRoom)
+                                    .addComponent(txtCourse)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(boxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +286,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                     .addComponent(lblTitle)
                     .addComponent(boxCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack))
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCourse)
+                    .addComponent(txtCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescription)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -305,7 +321,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnSave))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -362,6 +378,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         if(facultyCourse != null){
+        String courseName = txtCourse.getText();
         String description = txtDescription.getText();
         String scheduleStart = txtSchedule.getText();
         String scheduleEnd = txtSchedule2.getText();
@@ -370,13 +387,14 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         String syllabus = txtSyllabus.getText();
         String status = (String) boxStatus.getSelectedItem();
         
-        if(description.isBlank() || scheduleStart.isBlank() || scheduleEnd.isBlank() || classRoom.isBlank() || capacity.isBlank() || syllabus.isBlank())
+        if(courseName.isBlank() || description.isBlank() || scheduleStart.isBlank() || scheduleEnd.isBlank() || classRoom.isBlank() || capacity.isBlank() || syllabus.isBlank())
         {
             JOptionPane. showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE) ;
             // pause until the user closes the dialog.
             return;
         }else{
             try{
+                courseOffering.getCourse().setName(courseName);
                 courseOffering.getCourse().setDescription(description);
                 courseOffering.getSchedule().setStartTime(scheduleStart);
                 courseOffering.getSchedule().setEndTime(scheduleEnd);
@@ -389,6 +407,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 else
                     courseOffering.setEnrollmentStatus(false);              
             JOptionPane.showMessageDialog(this, "Course Information successfully Update", "Information", JOptionPane.INFORMATION_MESSAGE);
+            initialization();
             SetViewMode();
             } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "please check the capcity input.","Warning", JOptionPane.WARNING_MESSAGE);
@@ -410,6 +429,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCapacity;
     private javax.swing.JLabel lblClassRoom;
+    private javax.swing.JLabel lblCourse;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblSchedule;
     private javax.swing.JLabel lblStatus;
@@ -417,6 +437,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtCapacity;
     private javax.swing.JTextField txtClassRoom;
+    private javax.swing.JTextField txtCourse;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtSchedule;
     private javax.swing.JTextField txtSchedule2;

@@ -8,7 +8,7 @@ import Business.Person.Person;
 
 /**
  *
- * @author Administrator
+ * @author Yujie Liang
  */
 public class FacultyProfile extends Profile{
     private String facultyId;
