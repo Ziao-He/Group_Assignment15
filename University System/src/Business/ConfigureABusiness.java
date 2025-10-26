@@ -200,7 +200,7 @@ class ConfigureABusiness {
         coursedirectory.addOffering(o5);
         coursedirectory.addOffering(o6);
         
-        sD1.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
+//        sD1.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
         sD2.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
         sD3.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
         sD4.getStudent().enrollCourse(new CourseOffering(c3,faprofile1,sch3,25));
@@ -209,13 +209,21 @@ class ConfigureABusiness {
         CourseWorkDirectory CourseWorkdirectory = business.getCourseWorkDirectory();
         CourseWorkdirectory.addCourseWork(c1, "Lab 01");
         CourseWorkdirectory.addCourseWork(c1, "Lab 02");
-        CourseWorkdirectory.addCourseWork(c2, "Lab 03");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 03");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 04");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 05");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 06");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 07");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 08");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 09");
+        CourseWorkdirectory.addCourseWork(c1, "Lab 10");
+
         
-        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
-        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(1), "This is Lab 02 report");
+//        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
+//        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(1), "This is Lab 02 report");
         
-        sD1.getStudent().addCourseGrade(c1, "Fall 2025","B",3.1);
-        sD1.getStudent().payTuition(1200);
+//        sD1.getStudent().addCourseGrade(c1, "Fall 2025","B",3.1);
+//        sD1.getStudent().payTuition(1200);
         
         sD2.getStudent().addCourseGrade(c1, "Fall 2025","A",3.8);
         sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+",3.5);
