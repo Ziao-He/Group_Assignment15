@@ -118,10 +118,11 @@ class ConfigureABusiness {
         // add CourseOffering
         CourseOffering o1 = new CourseOffering(c1, faprofile1, sch1, 30);
         CourseOffering o2 = new CourseOffering(c2, faprofile2, sch2, 25);
-        CourseOffering o3 = new CourseOffering(c3, faprofile3, sch3, 25);
+        CourseOffering o3 = new CourseOffering(c3, faprofile1, sch3, 25);
         CourseOffering o4 = new CourseOffering(c3, faprofile3, sch4, 25);
         CourseOffering o5 = new CourseOffering(c4, faprofile2, sch5, 25);
         CourseOffering o6 = new CourseOffering(c5, faprofile3, sch6, 25);
+
         
         // add to business
         coursedirectory.addOffering(o1);
@@ -135,7 +136,8 @@ class ConfigureABusiness {
         sD2.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
         sD3.getStudent().enrollCourse(new CourseOffering(c1,faprofile1,sch1,30));
         
-        sD4.getStudent().enrollCourse(new CourseOffering(c3,faprofile3,sch3,25));
+        sD4.getStudent().enrollCourse(new CourseOffering(c3,faprofile1,sch3,25));
+
 
         
         //create course work
@@ -152,6 +154,8 @@ class ConfigureABusiness {
         
         sD2.getStudent().addCourseGrade(c1, "Fall 2025","A",3.8);
         sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+",3.5);
+        
+        sD4.getStudent().addCourseGrade(c3, "Spring 2025","B+",3.5);
         
         return business;
 
