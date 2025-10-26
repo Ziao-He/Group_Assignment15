@@ -225,10 +225,10 @@ class ConfigureABusiness {
 //        sD1.getStudent().addCourseGrade(c1, "Fall 2025","B",3.1);
 //        sD1.getStudent().payTuition(1200);
         
-        sD2.getStudent().addCourseGrade(c1, "Fall 2025","A",3.8);
-        sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+",3.5);
+        //sD2.getStudent().addCourseGrade(c1, "Fall 2025","A",3.8);
+        //sD3.getStudent().addCourseGrade(c1, "Fall 2025","B+",3.5);
         
-        sD4.getStudent().addCourseGrade(c3, "Spring 2025","B+",3.5);
+        //sD4.getStudent().addCourseGrade(c3, "Spring 2025","B+",3.5);
         //添加Registrar账户
         UserAccount uaRegistrar = uadirectory.newUserAccount(registrarProfile, "Registrar", "****");
         return business;
