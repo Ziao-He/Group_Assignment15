@@ -15,9 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * 
+ * @author bob-h
  * Admin panel for managing students
  * Implements 3 search methods and CRUD operations
- * @author bob-h
  */
 public class AdminManageStudentsJPanel extends javax.swing.JPanel {
 
