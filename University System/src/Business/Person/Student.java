@@ -121,6 +121,8 @@ public class Student extends Person {
         Course course = offering.getCourse();
         String courseId = course.getCourseId();
         String semester = offering.getSemester();
+        
+        addCourseGradeWithoutGPA(offering.getCourse(),offering.getSemester());
 
         for (CourseOffering o : enrolledOfferings) {
             if (o.getCourse().getCourseId().equalsIgnoreCase(courseId)) {
@@ -170,6 +172,11 @@ public class Student extends Person {
         if (target == null) return "Not enrolled in " + course.getCourseId();
 
         enrolledOfferings.remove(target);
+        transcript.removeIf(cg -> 
+            cg.getCourse().getCourseId().equalsIgnoreCase(course.getCourseId()) &&
+            cg.getTerm().equalsIgnoreCase(offering.getSemester())
+        );
+        
         balance -= target.getTuitionForCourse();
         payments.add(new PaymentRecord(new Date(), -target.getTuitionForCourse(),
                 "Refund for " + course.getCourseId(), "REFUNDED",course));
@@ -319,6 +326,19 @@ public class Student extends Person {
         }
         
         CourseGrade cg = new CourseGrade(course,term,grade,gpa);
+        transcript.add(cg);
+        
+    }
+    
+
+    
+        public void addCourseGradeWithoutGPA(Course course,String term){
+        if(course == null || term == null){
+            System.out.println("ERRO GRADE INPUT FOR STUDENT");
+            return;
+        }
+        
+        CourseGrade cg = new CourseGrade(course,term);
         transcript.add(cg);
         
     }
