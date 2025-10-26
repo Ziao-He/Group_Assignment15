@@ -222,55 +222,52 @@ public class RegistrarTuitionJPanel extends javax.swing.JPanel {
 
     private void generateFinancialReport(String selectedSemester) {
         DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
-        model.setRowCount(0); // 清空表格
+        model.setRowCount(0);
 
-        // 初始化统计变量
         double totalTuition = 0.0;
         double totalPaid = 0.0;
         double infoSystemsRevenue = 0.0;
         double dataScienceRevenue = 0.0;
         double computerScienceRevenue = 0.0;
 
-        // 遍历所有学生
         for (Student student : business.getStudentDirectory().getStudentList()) {
-            // 遍历学生的支付记录
+            String department = student.getDepartment();
+            double studentPaid = 0.0;
+            double studentCharged = 0.0;
+
             for (PaymentRecord payment : student.getPayments()) {
-                // 通过courseID找到对应的CourseOffering
                 CourseOffering offering = findCourseOfferingByCourseId(payment.getCourseID());
                 if (offering != null && offering.getSemester().equals(selectedSemester)) {
-
-                    // 统计总应收学费 (CHARGED状态)
                     if ("CHARGED".equals(payment.getStatus())) {
-                        totalTuition += payment.getAmout();
+                        studentCharged += payment.getAmout();
                     }
-
-                    // 统计实收学费 (PAID状态)
                     if ("PAID".equals(payment.getStatus())) {
-                        totalPaid += payment.getAmout();
-
-                        // 按部门统计收入
-                        String department = student.getDepartment();
-                        if (department != null) {
-                            switch (department.toLowerCase()) {
-                                case "information systems":
-                                    infoSystemsRevenue += payment.getAmout();
-                                    break;
-                                case "data science":
-                                    dataScienceRevenue += payment.getAmout();
-                                    break;
-                                case "computer science":
-                                    computerScienceRevenue += payment.getAmout();
-                                    break;
-                            }
-                        }
+                        studentPaid += payment.getAmout();
                     }
+                }
+            }
+
+            totalTuition += studentCharged;
+            totalPaid += studentPaid;
+
+            // 部门收入基于CHARGED金额（应收学费）
+            if (department != null) {
+                switch (department.toLowerCase()) {
+                    case "information systems":
+                        infoSystemsRevenue += studentCharged;  // studentCharged
+                        break;
+                    case "data science":
+                        dataScienceRevenue += studentCharged;  // studentCharged
+                        break;
+                    case "computer science":
+                        computerScienceRevenue += studentCharged;  // studentCharged
+                        break;
                 }
             }
         }
 
         double unpaidTuition = totalTuition - totalPaid;
 
-        // 添加数据到表格
         Object[] row = {
             String.format("$%.2f", totalTuition),
             String.format("$%.2f", unpaidTuition),
@@ -281,8 +278,8 @@ public class RegistrarTuitionJPanel extends javax.swing.JPanel {
         model.addRow(row);
 
         JOptionPane.showMessageDialog(this, 
-            selectedSemester + " 学期财务报告生成完成", 
-            "成功", JOptionPane.INFORMATION_MESSAGE);
+            selectedSemester + " Financial Report Generated", 
+            "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private CourseOffering findCourseOfferingByCourseId(String courseID) {
