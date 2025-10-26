@@ -317,7 +317,6 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
             File file = chooser.getSelectedFile();
 
             try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
-                TableModel model = tblGrade.getModel();
                 
                 writer.println("Semester: "+Semester);
                 writer.println("Course: "+ Course);
