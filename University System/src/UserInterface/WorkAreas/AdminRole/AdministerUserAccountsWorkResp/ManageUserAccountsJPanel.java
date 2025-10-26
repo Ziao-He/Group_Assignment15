@@ -16,6 +16,8 @@ import Business.Profiles.EmployeeProfile;
 import Business.Profiles.FacultyDirectory;
 import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
+import Business.Profiles.RegistrarDirectory;
+import Business.Profiles.RegistrarProfile;
 import Business.Profiles.StudentProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
@@ -475,45 +477,45 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     private Profile selectProfileForAccount(String role) {
         List<String> options = new ArrayList<>();
         List<Profile> profiles = new ArrayList<>();
-        
-        // Get persons without accounts based on role
+    
+        // ==================== STUDENT ====================
         if ("Student".equalsIgnoreCase(role)) {
             StudentDirectory sDir = business.getStudentDirectory();
-            
+        
             for (Student s : sDir.getStudentList()) {
-                // Check if already has account
                 if (hasUserAccount(s.getStudentId(), "Student")) {
                     continue;
                 }
-                
+            
                 options.add(s.getStudentId() + " - " + s.getName());
                 profiles.add(new StudentProfile(s, s));
             }
         }
+        // ==================== FACULTY ====================
         else if ("Faculty".equalsIgnoreCase(role)) {
             FacultyDirectory fDir = business.getFacultyDirectory();
-            
+        
             for (FacultyProfile fp : fDir.getFacultylist()) {
                 if (hasUserAccountForProfile(fp)) {
                     continue;
                 }
-                
+            
                 options.add(fp.getFacultyId() + " - " + fp.getFacultyName());
                 profiles.add(fp);
             }
         }
+        // ==================== ADMIN ====================
         else if ("Admin".equalsIgnoreCase(role)) {
-            // Get admins without accounts
             for (Admin admin : business.getAdminDirectory().getAdminList()) {
-                // Check if already has account
                 boolean hasAccount = false;
+            
                 for (EmployeeProfile ep : business.getEmployeeDirectory().getEmployeeList()) {
                     if (ep.getAdmin() == admin && hasUserAccountForProfile(ep)) {
                         hasAccount = true;
                         break;
                     }
                 }
-                
+            
                 if (!hasAccount) {
                     options.add(admin.getAdminID() + " - " + admin.getFullName());
                     EmployeeProfile employeeProfile = findOrCreateEmployeeProfile(admin);
@@ -521,16 +523,30 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
                 }
             }
         }
+        // ==================== REGISTRAR ==================== 
+        else if ("Registrar".equalsIgnoreCase(role)) {
+            RegistrarDirectory regDir = business.getRegistrarDirectory();
+        
+            for (RegistrarProfile rp : regDir.getRegistrarList()) {
+                if (hasUserAccountForProfile(rp)) {
+                    continue;
+                }
+            
+                options.add(rp.getRegistrarId() + " - " + rp.getPerson().toString());
+                profiles.add(rp);
+            }
+        }
+        // ==================== INVALID ROLE ====================
         else {
-            Admin.showError(this, "Invalid role!\nValid roles: Student, Faculty, Admin");
+            Admin.showError(this, "Invalid role!\nValid roles: Student, Faculty, Admin, Registrar");
             return null;
         }
-        
+    
         if (options.isEmpty()) {
             Admin.showWarning(this, "No available " + role + "s without accounts!");
             return null;
         }
-        
+    
         // Show selection dialog
         String selected = (String) JOptionPane.showInputDialog(
             this,
@@ -545,7 +561,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         if (selected == null) {
             return null;
         }
-        
+    
         int index = options.indexOf(selected);
         return profiles.get(index);
     }
