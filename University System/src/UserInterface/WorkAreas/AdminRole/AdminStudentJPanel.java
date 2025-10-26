@@ -13,9 +13,10 @@ import Business.Profiles.FacultyProfile;
 import javax.swing.JPanel;
 
 /**
- * Panel for registering new students
+ * 
  * 
  * @author bob-h
+ * Panel for registering new students
  */
 public class AdminStudentJPanel extends javax.swing.JPanel {
 
