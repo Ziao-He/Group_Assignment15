@@ -83,7 +83,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                     row[0] = s;
                     model.addRow(row);
                } 
-                
+                //refresh Table Gpa
                 DefaultTableModel model2 =(DefaultTableModel) tblGPA.getModel();
                 model2.setRowCount(0);
                 double TotalGrade = 0;
@@ -405,6 +405,7 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                         break;}
                     }
              Oldgrade = Oldgrade * submssionNum;
+             // update new gpa to courseGrade
              double newGPA = Math.round((Oldgrade+ grade)/(submssionNum + 1) * 100.0) / 100.0;
              String newgradeLetter = courseGrade.getLetterGrade(newGPA);
              courseGrade.setGpa(newGPA);

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Administrator
+ * @author Yiyang Lin and Yujie Liang
  */
 public class Student extends Person {
     private String studentId;

@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author kal
+ * @author Yujie Liang
  */
 public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
@@ -42,6 +42,8 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         
         ArrayList<Student> studentDirectory;
         ArrayList<CourseOffering> facultyCourse = business.getCourseDirectory().findByFacultyName(useraccount.getPersonId());
+        
+        // get Total Tuition
         double totalTuition = 0;
         for(CourseOffering co : facultyCourse){
             studentDirectory = business.getStudentDirectory().findEnrollStudent(co);
@@ -50,10 +52,6 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
              }
         txtTuition.setText(Double.toString(totalTuition));
             
-            
-            
-        
-
     }
 
     /**
