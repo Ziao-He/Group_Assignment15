@@ -145,56 +145,49 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCourseID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCourseName)
-                                    .addComponent(lblClassroom))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCourseID, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                    .addComponent(txtCourseName)
-                                    .addComponent(txtClassroom))
-                                .addGap(76, 76, 76)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSemester)
-                                    .addComponent(lblStartTime)
-                                    .addComponent(lblEndTime)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(293, 293, 293)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtEndTime, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                .addComponent(txtStartTime))
-                            .addComponent(txtSemester, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCourseID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCourseName)
+                    .addComponent(lblClassroom))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCourseID, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(txtCourseName)
+                    .addComponent(txtClassroom))
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(232, 232, 232))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTeacher)
-                            .addComponent(lblCredits)
-                            .addComponent(lblCapacity))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbTeacher, 0, 120, Short.MAX_VALUE)
-                            .addComponent(txtCredits)
-                            .addComponent(txtCapacity))
-                        .addGap(92, 92, 92))))
+                    .addComponent(lblSemester)
+                    .addComponent(lblStartTime)
+                    .addComponent(lblEndTime))
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtEndTime, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addComponent(txtStartTime))
+                    .addComponent(txtSemester, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTeacher)
+                    .addComponent(lblCredits)
+                    .addComponent(lblCapacity))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jcbTeacher, 0, 120, Short.MAX_VALUE)
+                    .addComponent(txtCredits)
+                    .addComponent(txtCapacity))
+                .addGap(92, 92, 92))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 827, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,12 +224,12 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
                             .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCapacity)
                             .addComponent(txtCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(56, 56, 56)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
                     .addComponent(btnUpdate)
                     .addComponent(btnSave))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -305,21 +298,21 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
             String classroom = txtClassroom.getText();
             String startTime = txtStartTime.getText();
             String endTime = txtEndTime.getText();
-            String teacherId = (String) jcbTeacher.getSelectedItem();
+            String teacherName = (String) jcbTeacher.getSelectedItem();
             int credits = Integer.parseInt(txtCredits.getText());
             int capacity =Integer.parseInt(txtCapacity.getText());
             // 验证必填字段
             if (courseId.isEmpty() || courseName.isEmpty() || semester.isEmpty() || 
-                classroom.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || teacherId == null) {
+                classroom.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || teacherName == null) {
                 JOptionPane.showMessageDialog(this, "请填写所有字段", "错误", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             // 根据模式执行不同的保存逻辑
             if (isCreateMode) {
-                createNewCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherId,credits,capacity);
+                createNewCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherName,credits,capacity);
             } else if (isUpdateMode) {
-                updateExistingCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherId,credits,capacity);
+                updateExistingCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherName,credits,capacity);
             }
 
             // 保存完成后切换回查看模式
@@ -405,7 +398,7 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
             row[3] = offering.getSchedule().getClassRoom();    // Classroom
             row[4] = offering.getSchedule().getStartTime();    // Start Time
             row[5] = offering.getSchedule().getEndTime();      // End Time
-            row[6] = offering.getFaculty().getFacultyId(); // Teacher
+            row[6] = offering.getFaculty().getFacultyName(); // Teacher
 
             model.addRow(row);
         }
@@ -421,8 +414,8 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
     
         // 从FacultyDirectory获取所有教师
         for (FacultyProfile faculty : business.getFacultyDirectory().getFacultylist()) {
-            
-            jcbTeacher.addItem(faculty.getFacultyId());
+            // 改为使用教师姓名
+            jcbTeacher.addItem(faculty.getFacultyName());
         }
 
         // 如果没有教师，显示提示
@@ -475,13 +468,13 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
        txtCapacity.setEnabled(true);
     }
 
-    private void createNewCourseOffering(String courseId, String courseName, String semester, String classroom, String startTime, String endTime, String teacherId,int credits,int capacity) {
+    private void createNewCourseOffering(String courseId, String courseName, String semester, String classroom, String startTime, String endTime, String teacherName,int credits,int capacity) {
         try {
             // 1. 创建Course对象
             Course newCourse = new Course(courseId, courseName, credits); 
 
             // 2. 查找对应的教师
-            FacultyProfile faculty = findFacultyById(teacherId);
+            FacultyProfile faculty = findFacultyByName(teacherName);
             if (faculty == null) {
                 throw new Exception("找不到对应的教师");
             }
@@ -502,35 +495,35 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
         }
     }
 
-    private void updateExistingCourseOffering(String courseId, String courseName, String semester, String classroom, String startTime, String endTime, String teacherId,int credits,int capacity) {
+    private void updateExistingCourseOffering(String courseId, String courseName, String semester, 
+                                        String classroom, String startTime, String endTime, 
+                                        String teacherName, int credits, int capacity) {
         try {
-        // 1. 查找要更新的CourseOffering
+            // 1. 查找要更新的CourseOffering
             CourseOffering offeringToUpdate = findCourseOfferingById(courseId);
-           
+
             if (offeringToUpdate == null) {
                 throw new Exception("找不到要更新的课程");
             }
 
             // 2. 查找对应的教师
-            FacultyProfile faculty = findFacultyById(teacherId);
+            FacultyProfile faculty = findFacultyByName(teacherName);
             if (faculty == null) {
                 throw new Exception("找不到对应的教师");
             }
 
-            // 3. 更新Course信息
-            offeringToUpdate.getCourse().setCourseId(courseId);
-            offeringToUpdate.getCourse().setName(courseName);
-            offeringToUpdate.getCourse().setCredits(credits);
-            offeringToUpdate.setCapacity(capacity); 
-            // 4. 更新Schedule信息
-            Schedule schedule = offeringToUpdate.getSchedule();
-            schedule.setSemester(semester);
-            schedule.setClassRoom(classroom);
-            schedule.setStartTime(startTime);
-            schedule.setEndTime(endTime);
+            // 3. 创建更新后的Course对象
+            Course updatedCourse = new Course(courseId, courseName, credits);
 
-            // 5. 更新教师
-            offeringToUpdate.setFaculty(faculty); 
+            // 4. 创建更新后的Schedule对象
+            Schedule updatedSchedule = new Schedule(semester, startTime, endTime, classroom);
+
+            // 5. 创建新的CourseOffering对象（包含新的教师）
+            CourseOffering updatedOffering = new CourseOffering(updatedCourse, faculty, updatedSchedule, capacity);
+
+            // 6. 替换旧的CourseOffering
+            business.getCourseDirectory().getCourseOfferingList().remove(offeringToUpdate);
+            business.getCourseDirectory().addOffering(updatedOffering);
 
             JOptionPane.showMessageDialog(this, "课程更新成功", "成功", JOptionPane.INFORMATION_MESSAGE);
 
@@ -564,9 +557,9 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
         return null;
     }
 
-    private FacultyProfile findFacultyById(String teacherId) {
+    private FacultyProfile findFacultyByName(String teacherName) {
         for (FacultyProfile faculty : business.getFacultyDirectory().getFacultylist()) {
-            if (faculty.getFacultyId().equals(teacherId)) {
+            if (faculty.getFacultyName().equals(teacherName)) {
                 return faculty;
             }
         }
