@@ -138,36 +138,36 @@ class ConfigureABusiness {
         sPD.newStudentProfile(sD6);
         
         Student s7 =new Student("0007", "Liang yujie", "Student");
-        s6.setEmail("Liang.yujie@northeastern.edu");
-        s6.setPhone("517-535-1445");
-        s6.setDepartment("Computer Science");
+        s7.setEmail("Liang.yujie@northeastern.edu");
+        s7.setPhone("517-535-1445");
+        s7.setDepartment("Computer Science");
         business.getStudentDirectory().addStudent(s7);
         
         StudentProfile sD7 = new StudentProfile(s7, s7);
         sPD.newStudentProfile(sD7);
         
         Student s8 =new Student("0008", "Tim oven", "Student");
-        s6.setEmail("Tim.owven@northeastern.edu");
-        s6.setPhone("817-538-2445");
-        s6.setDepartment("Computer Science");
+        s8.setEmail("Tim.owven@northeastern.edu");
+        s8.setPhone("817-538-2445");
+        s8.setDepartment("Computer Science");
         business.getStudentDirectory().addStudent(s8);
         
         StudentProfile sD8 = new StudentProfile(s8, s8);
         sPD.newStudentProfile(sD8);
         
         Student s9 =new Student("0009", "Jerry heavy", "Student");
-        s6.setEmail("jerry.heavy@northeastern.edu");
-        s6.setPhone("217-545-9445");
-        s6.setDepartment("Computer Science");
+        s9.setEmail("jerry.heavy@northeastern.edu");
+        s9.setPhone("217-545-9445");
+        s9.setDepartment("Computer Science");
         business.getStudentDirectory().addStudent(s9);
         
         StudentProfile sD9 = new StudentProfile(s9, s9);
         sPD.newStudentProfile(sD9);
         
         Student s10 =new Student("0010", "Curry tim", "Student");
-        s6.setEmail("Curry.tim@northeastern.edu");
-        s6.setPhone("517-935-7863");
-        s6.setDepartment("Computer Science");
+        s10.setEmail("Curry.tim@northeastern.edu");
+        s10.setPhone("517-935-7863");
+        s10.setDepartment("Computer Science");
         business.getStudentDirectory().addStudent(s10);
         
         StudentProfile sD10 = new StudentProfile(s10, s10);
