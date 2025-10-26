@@ -269,8 +269,8 @@ public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
     Set<String> addedCourseIds = new HashSet<>();
 
     for (CourseOffering c : student.getEnrolledOfferings()) {
-        String courseId = c.getCourse().getCourseId().trim().toUpperCase(); // 去空格并统一大小写
-        if (addedCourseIds.add(courseId)) { // add() 返回 true 表示是新元素
+        String courseId = c.getCourse().getCourseId().trim().toUpperCase(); 
+        if (addedCourseIds.add(courseId)) { 
             cmbCourseID.addItem(courseId);
         }
     }
@@ -290,7 +290,7 @@ public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
         String courseId = cw.getCourse().getCourseId().trim().toUpperCase();
         if (courseId.equals(selectedCourseID.trim().toUpperCase())) {
             String title = cw.getTitle().trim();
-            if (addedTitles.add(title)) { // add 返回 true 表示新元素
+            if (addedTitles.add(title)) { 
                 cmbCourseWork.addItem(title);
             }
         }
