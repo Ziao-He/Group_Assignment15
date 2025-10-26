@@ -624,6 +624,11 @@ public class AdminManageRegisterJPanel extends javax.swing.JPanel {
             return false;
         }
         
+        if (!this.isValidTimeFormat(newOfficeHours)) {
+            Admin.showError(this, "Invalid hours!");
+            return false;
+        }
+        
         // Check email conflict
         if (!newEmail.equalsIgnoreCase(registrar.getEmail())) {
             if (isEmailUsedByOther(newEmail, registrar.getRegistrarId())) {
@@ -631,6 +636,7 @@ public class AdminManageRegisterJPanel extends javax.swing.JPanel {
                 return false;
             }
         }
+
         
         try {
             registrar.setEmail(newEmail);
@@ -659,5 +665,9 @@ public class AdminManageRegisterJPanel extends javax.swing.JPanel {
             }
         }
         return false;
+    }
+    
+    private boolean isValidTimeFormat(String time) {
+        return time.matches("^(1[0-2]|0?[1-9]):[0-5][0-9](AM|PM)$") || time.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
     }
 }
