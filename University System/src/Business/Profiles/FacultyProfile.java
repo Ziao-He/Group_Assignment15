@@ -53,6 +53,12 @@ public class FacultyProfile extends Profile{
     public String getFacultyName() {
         return this.getPerson().getPersonRole();
     }
+    
+    
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public String getDepartment() {
         return department;

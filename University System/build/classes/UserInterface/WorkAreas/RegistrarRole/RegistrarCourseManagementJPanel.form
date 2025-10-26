@@ -23,67 +23,43 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="btnCreate" min="-2" pref="130" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblCourseID" alignment="0" min="-2" pref="68" max="-2" attributes="0"/>
-                                  <Component id="lblCourseName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblClassroom" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtCourseID" pref="120" max="32767" attributes="0"/>
-                                  <Component id="txtCourseName" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtClassroom" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblSemester" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblStartTime" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEndTime" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
-                              <Component id="btnUpdate" min="-2" pref="130" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtEndTime" pref="120" max="32767" attributes="0"/>
-                              <Component id="txtStartTime" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="txtSemester" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="lblCourseID" alignment="0" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="lblCourseName" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblClassroom" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="txtCourseID" pref="120" max="32767" attributes="0"/>
+                  <Component id="txtCourseName" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtClassroom" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnSave" min="-2" pref="130" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblTeacher" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCredits" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCapacity" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jcbTeacher" pref="120" max="32767" attributes="0"/>
-                          <Component id="txtCredits" max="32767" attributes="0"/>
-                          <Component id="txtCapacity" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblSemester" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblStartTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEndTime" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtEndTime" pref="120" max="32767" attributes="0"/>
+                      <Component id="txtStartTime" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="txtSemester" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="78" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblTeacher" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCredits" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCapacity" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jcbTeacher" pref="120" max="32767" attributes="0"/>
+                  <Component id="txtCredits" max="32767" attributes="0"/>
+                  <Component id="txtCapacity" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
@@ -91,6 +67,15 @@
                   <Component id="btnBack" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Component id="btnCreate" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+              <Component id="btnUpdate" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+              <Component id="btnSave" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,13 +121,13 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <EmptySpace pref="82" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

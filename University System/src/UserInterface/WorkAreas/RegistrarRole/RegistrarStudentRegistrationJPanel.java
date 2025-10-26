@@ -327,7 +327,7 @@ public class RegistrarStudentRegistrationJPanel extends javax.swing.JPanel {
             Object[] row = new Object[7];
             row[0] = offering.getCourse().getCourseId();        // 课程ID
             row[1] = offering.getCourse().getName();           // 课程名字
-            row[2] = offering.getFaculty().getFacultyId();     // 教师ID
+            row[2] = offering.getFaculty().getFacultyName(); // Teacher
             row[3] = offering.getCourse().getCredits();        // 学分
             row[4] = offering.getSemester();                   // 学期
             row[5] = offering.getSchedule().getStartTime();    // 开始时间

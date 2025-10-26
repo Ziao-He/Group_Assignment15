@@ -379,7 +379,7 @@ public class StudentCourseRegistrationJPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{
                 c.getCourse().getCourseId(),
                 c.getCourse().getName(),
-                c.getFaculty(),
+                c.getFaculty().getFacultyName(),
                 c.getCourse().getCredits(),
                 c.getSemester(),
                 String.format("$%.2f", c.getTuitionForCourse()),
@@ -395,7 +395,7 @@ public class StudentCourseRegistrationJPanel extends javax.swing.JPanel {
             model.addRow(new Object[]{
                 c.getCourse().getCourseId(),
                 c.getCourse().getName(),
-                c.getFaculty(),
+                c.getFaculty().getFacultyName(),
                 c.getCourse().getCredits(),
                 c.getSemester(),
                 String.format("$%.2f", c.getTuitionForCourse()),

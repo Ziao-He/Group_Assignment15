@@ -62,7 +62,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         UserNameTextField = new javax.swing.JTextField();
         PasswordTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btnRigster = new javax.swing.JButton();
         CardSequencePanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -96,13 +95,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        btnRigster.setText("Rigster");
-        btnRigster.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRigsterLoginButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout actionsidejpanelLayout = new javax.swing.GroupLayout(actionsidejpanel);
         actionsidejpanel.setLayout(actionsidejpanelLayout);
         actionsidejpanelLayout.setHorizontalGroup(
@@ -114,9 +106,8 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
                     .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnRigster, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,9 +122,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
                 .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRigster, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(378, 378, 378))
         );
 
         SplitHomeArea.setLeftComponent(actionsidejpanel);
@@ -212,19 +201,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
-    private void btnRigsterLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRigsterLoginButtonActionPerformed
-        // TODO add your handling code here:
-//            StudentRegisterAreaJPanel registerworkarea;
-//        
-//            registerworkarea = new StudentRegisterAreaJPanel(business, CardSequencePanel);
-//            CardSequencePanel.removeAll();
-//            CardSequencePanel.add("Admin", registerworkarea);
-//            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-//             StudentRegisterDialog dialog = new StudentRegisterDialog(this,true,business);
-//             dialog.setLocationRelativeTo(this);
-//             dialog.setVisible(true);
-    }//GEN-LAST:event_btnRigsterLoginButtonActionPerformed
-
     private void UserNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserNameTextFieldActionPerformed
@@ -273,7 +249,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane SplitHomeArea;
     private javax.swing.JTextField UserNameTextField;
     private javax.swing.JPanel actionsidejpanel;
-    private javax.swing.JButton btnRigster;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
