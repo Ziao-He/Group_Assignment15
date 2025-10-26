@@ -211,8 +211,8 @@ class ConfigureABusiness {
         CourseWorkdirectory.addCourseWork(c1, "Lab 02");
         CourseWorkdirectory.addCourseWork(c2, "Lab 03");
         
-        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
-        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(1), "This is Lab 02 report");
+//        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
+//        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(1), "This is Lab 02 report");
         
 //        sD1.getStudent().addCourseGrade(c1, "Fall 2025","B",3.1);
         sD1.getStudent().payTuition(1200);
