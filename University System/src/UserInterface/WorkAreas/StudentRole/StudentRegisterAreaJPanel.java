@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author kal
+ * @author Yiyang Lin
  */
 public class StudentRegisterAreaJPanel extends javax.swing.JPanel {
 

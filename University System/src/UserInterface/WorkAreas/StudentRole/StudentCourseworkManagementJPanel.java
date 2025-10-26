@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kal
+ * @author Yiyang Lin
  */
 public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
 

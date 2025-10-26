@@ -22,7 +22,7 @@ import static jdk.internal.org.jline.utils.Colors.s;
 
 /**
  *
- * @author kal
+ * @author Yiyang Lin
  */
 public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
