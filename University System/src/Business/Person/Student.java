@@ -122,8 +122,6 @@ public class Student extends Person {
         String courseId = course.getCourseId();
         String semester = offering.getSemester();
         
-        addCourseGradeWithoutGPA(offering.getCourse(),offering.getSemester());
-
         for (CourseOffering o : enrolledOfferings) {
             if (o.getCourse().getCourseId().equalsIgnoreCase(courseId)) {
                 return "Already enrolled in " + courseId;
@@ -146,6 +144,7 @@ public class Student extends Person {
         if (totalCredits > 32) return "Total credits exceed 32 (degree limit).";
 
         enrolledOfferings.add(offering);
+        addCourseGradeWithoutGPA(offering.getCourse(),offering.getSemester());
         balance += offering.getTuitionForCourse();
         payments.add(new PaymentRecord(new Date(), offering.getTuitionForCourse(),
                 "Tuition charge: " + courseId + " (" + semester + ")", "CHARGED",course));
