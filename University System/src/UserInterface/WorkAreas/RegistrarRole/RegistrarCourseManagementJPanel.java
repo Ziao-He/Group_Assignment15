@@ -291,37 +291,88 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         try {
-            // 获取表单数据
-            String courseId = txtCourseID.getText();
-            String courseName = txtCourseName.getText();
-            String semester = txtSemester.getText();
-            String classroom = txtClassroom.getText();
-            String startTime = txtStartTime.getText();
-            String endTime = txtEndTime.getText();
+            // Get form data
+            String courseId = txtCourseID.getText().trim();
+            String courseName = txtCourseName.getText().trim();
+            String semester = txtSemester.getText().trim();
+            String classroom = txtClassroom.getText().trim();
+            String startTime = txtStartTime.getText().trim();
+            String endTime = txtEndTime.getText().trim();
             String teacherName = (String) jcbTeacher.getSelectedItem();
-            int credits = Integer.parseInt(txtCredits.getText());
-            int capacity =Integer.parseInt(txtCapacity.getText());
-            // 验证必填字段
+
+            // Validate required fields
             if (courseId.isEmpty() || courseName.isEmpty() || semester.isEmpty() || 
                 classroom.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || teacherName == null) {
-                JOptionPane.showMessageDialog(this, "请填写所有字段", "错误", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // 根据模式执行不同的保存逻辑
-            if (isCreateMode) {
-                createNewCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherName,credits,capacity);
-            } else if (isUpdateMode) {
-                updateExistingCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherName,credits,capacity);
+            // Validate credits
+            int credits;
+            try {
+                credits = Integer.parseInt(txtCredits.getText().trim());
+                if (credits <= 0 || credits > 10) {
+                    JOptionPane.showMessageDialog(this, "Credits must be between 1-10", "Error", JOptionPane.ERROR_MESSAGE);
+                    txtCredits.requestFocus();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Credits must be a valid number", "Error", JOptionPane.ERROR_MESSAGE);
+                txtCredits.requestFocus();
+                return;
             }
 
-            // 保存完成后切换回查看模式
+            // Validate capacity
+            int capacity;
+            try {
+                capacity = Integer.parseInt(txtCapacity.getText().trim());
+                if (capacity <= 0 || capacity > 500) {
+                    JOptionPane.showMessageDialog(this, "Course capacity must be between 1-500", "Error", JOptionPane.ERROR_MESSAGE);
+                    txtCapacity.requestFocus();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Capacity must be a valid number", "Error", JOptionPane.ERROR_MESSAGE);
+                txtCapacity.requestFocus();
+                return;
+            }
+
+            // Validate course ID format (e.g., INFO 5100)
+            if (!courseId.matches("[A-Za-z]{2,4} \\d{4}")) {
+                JOptionPane.showMessageDialog(this, "Course ID format is incorrect (e.g., INFO 5100)", "Error", JOptionPane.ERROR_MESSAGE);
+                txtCourseID.requestFocus();
+                return;
+            }
+
+            // Validate time format
+            if (!isValidTimeFormat(startTime) || !isValidTimeFormat(endTime)) {
+                JOptionPane.showMessageDialog(this, "Time format is incorrect (e.g., 9:00AM or 13:30)", "Error", JOptionPane.ERROR_MESSAGE);
+                txtStartTime.requestFocus();
+                return;
+            }
+
+            // Validate semester format (e.g., Fall 2025)
+            if (!semester.matches("(Fall|Spring|Summer|Winter) 20\\d{2}")) {
+                JOptionPane.showMessageDialog(this, "Semester format is incorrect (e.g., Fall 2025)", "Error", JOptionPane.ERROR_MESSAGE);
+                txtSemester.requestFocus();
+                return;
+            }
+
+            // Execute different save logic based on mode
+            if (isCreateMode) {
+                createNewCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherName, credits, capacity);
+            } else if (isUpdateMode) {
+                updateExistingCourseOffering(courseId, courseName, semester, classroom, startTime, endTime, teacherName, credits, capacity);
+            }
+
+            // Switch back to view mode after saving
             setViewMode();
             clearForm();
             refreshCourseTable();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "保存失败: " + ex.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Save failed: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -574,5 +625,15 @@ public class RegistrarCourseManagementJPanel extends javax.swing.JPanel {
             }
         }
         return null;
+    }
+
+    private boolean isValidTimeFormat(String timeStr) {
+        if (timeStr == null || timeStr.trim().isEmpty()) {
+            return false;
+        }
+
+        // Basic time format check (can be enhanced)
+        return timeStr.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9](AM|PM)?$") ||
+               timeStr.matches("^([0-9]|0[0-9]|1[0-2]):[0-5][0-9]\\s?(AM|PM)$");
     }
 }
