@@ -105,6 +105,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         btnSave.setEnabled(true);
         btnUpdate.setEnabled(false);
     }
+     
+    private boolean isValidTimeFormat(String time) {
+        return time.matches("^(1[0-2]|0?[1-9]):[0-5][0-9](AM|PM)$") || 
+           time.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -393,6 +398,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
             // pause until the user closes the dialog.
             return;
         }else{
+            if (!isValidTimeFormat(scheduleStart) || !isValidTimeFormat(scheduleEnd)) {
+            JOptionPane.showMessageDialog(this, "please cheack you time format (12:00AM 13:00)", "error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
             try{
                 courseOffering.getCourse().setName(courseName);
                 courseOffering.getCourse().setDescription(description);
@@ -414,6 +424,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         }
         }
         }
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
