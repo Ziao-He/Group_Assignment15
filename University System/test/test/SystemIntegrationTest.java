@@ -77,7 +77,7 @@ public class SystemIntegrationTest {
     @Test
     @DisplayName("测试认证模块 - 管理员登录成功")
     public void testAuthenticationSuccess() {
-        UserAccount ua = business.getUserAccountDirectory().authenticateUser("admin", "admin123");
+        UserAccount ua = business.getUserAccountDirectory().AuthenticateUser("admin", "admin123");
         assertNotNull(ua, "管理员应能成功登录");
         assertEquals("Admin", ua.getRole(), "角色应为Admin");
     }
@@ -85,7 +85,7 @@ public class SystemIntegrationTest {
     @Test
     @DisplayName("测试认证模块 - 登录失败（错误密码）")
     public void testAuthenticationFail() {
-        UserAccount ua = business.getUserAccountDirectory().authenticateUser("admin", "wrong");
+        UserAccount ua = business.getUserAccountDirectory().AuthenticateUser("admin", "wrong");
         assertNull(ua, "应拒绝错误密码登录");
     }
 

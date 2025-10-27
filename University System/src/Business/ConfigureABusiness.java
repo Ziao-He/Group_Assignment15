@@ -302,6 +302,8 @@ class ConfigureABusiness {
         CourseWorkdirectory.addCourseWork(c1, "Lab 08");
         CourseWorkdirectory.addCourseWork(c1, "Lab 09");
         CourseWorkdirectory.addCourseWork(c1, "Lab 10");
+        
+        CourseWorkdirectory.addCourseWork(c2, "Lab 01");
 
         
 //        sD1.getStudent().submitAssignment(CourseWorkdirectory.getCourseWorkDirectory().get(0), "This is Lab 01 report");
