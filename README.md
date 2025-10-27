@@ -2,9 +2,9 @@
 
 **Course:** INFO 5100 — Application Engineering & Development  
 **Project Type:** Group Assignment (Access-Controlled Digital University)  
-**Repo Folder:** `Group_Assignment15/University System`  
-**Build Tool:** NetBeans Ant project (`build.xml`)  
-**Main Window:** `Business/ProfileWorkAreaMainFrame.java`
+**Repo Folder:** Group\_Assignment15/University System  
+**Build Tool:** NetBeans Ant project (build.xml)  
+**Main Window:** Business/ProfileWorkAreaMainFrame.java
 
 ---
 
@@ -22,7 +22,7 @@ Please replace the example below with your actual team information (members, rol
 | :---- | :---- | :---- | :---- |
 | Ziao He | 002539722 | **Administrator** | User account management, person registration (Student/Faculty/Registrar), student/faculty/registrar records management with 3 search methods each, admin profile management, and an analytics dashboard with 4 statistical reports. |
 | Yujie Liang | 002085359 | **Faculty** | Course Management, Faculty Profile Management, Student Management, Performance Reporting, and Total Tuition collected |
-| Yiyang Lin | 002565394 | **Student** | Student UseCase |
+| Yiyang Lin | 002565394 | **Student** | Course Enrollment and Management，Coursework Tracking and Submission，Coursework Tracking and Submission，Graduation Progress Monitoring，Transcript and Academic Standing，Financial Management，Performance Evaluation |
 | Liyun Li | 002593949 | **Registrar** | Course Create and Management; Own Profile Management; Student Course Registration and Drop; Tuition & Financial Reconciliation; Reporting & Analytics |
 
 ---
