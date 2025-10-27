@@ -96,8 +96,8 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                         Object row[]= new Object[2];   
                         row[0] = grade;
                         row[1] = s.getName();
-                        model2.addRow(row);}
-                        TotalGrade = TotalGrade + grade;
+                        model2.addRow(row);
+                        TotalGrade = TotalGrade + grade;}
                     }
                } 
                TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblGPA.getModel());               
