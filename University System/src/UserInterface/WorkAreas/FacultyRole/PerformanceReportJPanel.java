@@ -137,7 +137,13 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
                             model.addRow(row);
                         }
 
-            }
+            }else{
+            DefaultTableModel model =(DefaultTableModel) tblGrade.getModel();
+            model.setRowCount(0);
+            txtAverageGrade.setText("");
+            txtCount.setText("");
+
+        }
             
         
             
