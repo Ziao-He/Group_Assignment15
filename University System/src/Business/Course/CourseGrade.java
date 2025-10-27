@@ -91,7 +91,7 @@ public class CourseGrade {
     public double getGpaByCourse(Course c){
         if(c.getName().equals(this.course.getName()))
             return gpa;
-        return -1;
+        return -100;
     }
     
     public String getGradeLetterByCourse(Course c){
