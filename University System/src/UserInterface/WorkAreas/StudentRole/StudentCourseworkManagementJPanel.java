@@ -221,7 +221,7 @@ public class StudentCourseworkManagementJPanel extends javax.swing.JPanel {
     private void btnSumbitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumbitActionPerformed
         // TODO add your handling code here:
     try {
-            CourseWork cw = business.getCourseWorkDirectory().findCourseWorkByTitle((String)cmbCourseWork.getSelectedItem());
+            CourseWork cw = business.getCourseWorkDirectory().findCourseWorkByTitle(student.findCourseByid((String)cmbCourseID.getSelectedItem()),(String)cmbCourseWork.getSelectedItem());
             String content = TXTContent.getText().trim();
 
         if (content.isEmpty()) {

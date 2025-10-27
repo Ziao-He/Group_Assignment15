@@ -28,14 +28,16 @@ public class CourseWorkDirectory {
         return cw;
     }  
     
-    public CourseWork findCourseWorkByTitle(String title) {
+    public CourseWork findCourseWorkByTitle(Course course,String title) {
         if (title == null || title.isEmpty()) {
             return null;
         }
-
+            
         for (CourseWork cw : courseWorkDirectory) {
-            if (cw.getTitle() != null && cw.getTitle().equalsIgnoreCase(title)) {
+            if(cw.getCourse() != null && cw.getCourse().equals(course)){
+               if (cw.getTitle() != null && cw.getTitle().equalsIgnoreCase(title)) {
                 return cw;
+            }
             }
         }
 

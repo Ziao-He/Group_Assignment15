@@ -64,5 +64,4 @@ public class CourseOffering {
         this.capacity = capacity;
     }
     
-    
 }
