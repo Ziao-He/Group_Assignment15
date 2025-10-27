@@ -111,7 +111,12 @@ public class StudentManagementJPanel extends javax.swing.JPanel {
                
                double ClassGPA = Math.round(TotalGrade/studentDirectory.size() * 100.0)/100.0;
                txtClassGPA.setText(Double.toString(ClassGPA));
-            }      
+               return;
+            }                
+            DefaultTableModel model =(DefaultTableModel) tblStudent.getModel();
+            model.setRowCount(0);
+            DefaultTableModel model2 =(DefaultTableModel) tblGPA.getModel();
+            model2.setRowCount(0);           
         }
     }
     

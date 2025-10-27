@@ -256,6 +256,17 @@ public class Student extends Person {
         return "OK";
     
 }
+    
+     public Course findCourseByid(String courseID){       
+        if (courseID == null || courseID.isBlank()) return null;
+        for (CourseOffering course : enrolledOfferings) {
+        if (course.getCourse().getCourseId().equalsIgnoreCase(courseID.trim())) {
+            return course.getCourse();
+        }
+    }
+    return null; // 找不到返回 null
+}
+
 
 //Profile
     public String updateProfile(String newName) {
